@@ -133,10 +133,17 @@ helper and already holds a GitHub credential, so **plain `git push` works**. The
 first, which Trevor creates in the browser (empty — no README, no .gitignore, no licence):
 
 ```bash
+bash catalog/tools/push_repo.sh <slug>        # adds the remote, pushes, marks it published
+```
+
+It refuses politely if the repo does not exist yet, and prints the Pages link when it succeeds.
+The equivalent by hand:
+
+```bash
 cd projects/<slug>
 git remote add origin https://github.com/TNRiley/<slug>.git
 git push -u origin main
-python3 ../../catalog/tools/mark_published.py <slug>     # flips the flag, regenerates the catalog
+python3 ../../catalog/tools/mark_published.py <slug>
 ```
 
 Then Trevor turns on Pages: **Settings → Pages → Source: Deploy from a branch → `main` / `/ (root)`**.
