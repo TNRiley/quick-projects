@@ -124,15 +124,41 @@ table — is generated from it.
 
 ---
 
-## 3. Run the four steps
+## 3. Write REBUILD.md
+
+Every project repo carries a `REBUILD.md`: **enough instruction for an LLM with a shell and no
+other context to reproduce the project from scratch.** Not a summary — a recipe. Cover:
+
+1. What is being built, in a paragraph, including the one finding or effect it exists to show.
+2. Data sources with **exact URLs**, sizes, and the quirks that will bite (date formats,
+   multi-valued fields, dead endpoints, quality flags to honour).
+3. Processing decisions and *why* — baselines, trims, encodings, anything non-obvious.
+4. The page: layout, the interactions that matter, the visual identity.
+5. **A verification table of real expected values.** This is the most valuable section. Someone
+   rebuilding it needs to know whether they got it right, and recognisable checkpoints — a famous
+   storm on the right date, the ISS at the right altitude — catch parse errors instantly.
+6. What the page must say about its own limitations.
+
+If a methodological trap was hit during the build, write it down with the wrong answer *and* the
+right one. Still Cited's eligibility trap is the model: it silently inflated every figure, and the
+only defence against repeating it is the note.
+
+---
+
+## 4. Run the steps
 
 ```bash
 cd ~/Development/"Claude Quick Projects"
 
-python3 catalog/tools/wrap_for_pages.py    projects/<slug>/index.html   # standalone document
-python3 catalog/tools/scaffold_project.py  <slug>                       # README, LICENSE, git init, first commit
-python3 catalog/tools/build_catalog.py                                  # regenerate the catalog
+python3 catalog/tools/wrap_for_pages.py     projects/<slug>/index.html   # standalone document
+python3 catalog/tools/add_catalog_link.py   projects/<slug>/index.html   # breadcrumb back to the catalog
+python3 catalog/tools/scaffold_project.py   <slug>                       # README, LICENSE, git init, first commit
+python3 catalog/tools/build_catalog.py                                   # regenerate the catalog
 ```
+
+If the project has an injector in `src/`, make it run `wrap_for_pages.py` and
+`add_catalog_link.py` as its last two steps — otherwise regenerating the page silently drops both.
+The existing injectors do this; copy the pattern.
 
 All idempotent — re-run any of them any time. `scaffold_project.py --all` does every project.
 
@@ -142,7 +168,7 @@ The identity is set **per repo**, not globally.
 
 ---
 
-## 4. Push it
+## 5. Push it
 
 **Ask Trevor before pushing.** A GitHub Pages site is public on the internet even from a private
 repo, and free accounts can only publish Pages from public repos at all — "push it" and "publish
@@ -187,7 +213,7 @@ Pages — but it needs the `gh` CLI, which is not installed yet. Until then, use
 
 ---
 
-## 5. Licensing
+## 6. Licensing
 
 Code is MIT. Data keeps its source's licence, recorded in `meta.json`, repeated in the generated
 README, and aggregated into the catalog's sources table. Retraction Watch (via Crossref) and

@@ -68,7 +68,9 @@ open(out, "w", encoding="utf-8").write(template.replace("__PAYLOAD__", payload))
 root = HERE
 while root != os.path.dirname(root) and not os.path.isdir(os.path.join(root, "projects")):
     root = os.path.dirname(root)
-subprocess.run([sys.executable, os.path.join(root, "catalog", "tools", "wrap_for_pages.py"), out])
+tools = os.path.join(root, "catalog", "tools")
+subprocess.run([sys.executable, os.path.join(tools, "wrap_for_pages.py"), out])
+subprocess.run([sys.executable, os.path.join(tools, "add_catalog_link.py"), out])
 print("wrote", os.path.normpath(out), f"{os.path.getsize(out):,} bytes")
 '''
 

@@ -90,6 +90,12 @@ def readme(m):
         "python3 -m http.server 8000   # then visit http://localhost:8000",
         "```",
         "",
+        "## Rebuilding it from scratch",
+        "",
+        "[REBUILD.md](REBUILD.md) is written for an LLM with a shell and nothing else: the data "
+        "sources and their quirks, the processing decisions, the page's structure and interactions, "
+        "and a table of expected values to check the result against.",
+        "",
         "## Source",
         "",
         src,

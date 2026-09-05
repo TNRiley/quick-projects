@@ -33,7 +33,7 @@
         "typed-array payload"
       ],
       "hasSource": true,
-      "bytes": 12851381,
+      "bytes": 12852301,
       "published": true,
       "repo": "https://github.com/TNRiley/still-cited",
       "live": "https://tnriley.github.io/still-cited/"
@@ -64,7 +64,7 @@
         "hand-written Keplerian propagator"
       ],
       "hasSource": "lost-reproducible",
-      "bytes": 184110,
+      "bytes": 185027,
       "published": false,
       "repo": null,
       "live": null
@@ -95,7 +95,7 @@
         "Web Audio API"
       ],
       "hasSource": true,
-      "bytes": 1036858,
+      "bytes": 1037774,
       "published": false,
       "repo": null,
       "live": null
@@ -119,7 +119,7 @@
         "mermaid.js 10.9.1 (cdnjs)"
       ],
       "hasSource": "html-is-source",
-      "bytes": 23230,
+      "bytes": 24152,
       "published": false,
       "repo": null,
       "live": null
@@ -149,7 +149,7 @@
         "no dependencies"
       ],
       "hasSource": "html-is-source",
-      "bytes": 25458,
+      "bytes": 26381,
       "published": false,
       "repo": null,
       "live": null
