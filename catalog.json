@@ -65,9 +65,9 @@
       ],
       "hasSource": "lost-reproducible",
       "bytes": 185027,
-      "published": false,
-      "repo": null,
-      "live": null
+      "published": true,
+      "repo": "https://github.com/TNRiley/overhead",
+      "live": "https://tnriley.github.io/overhead/"
     },
     {
       "slug": "daybook",
@@ -96,9 +96,9 @@
       ],
       "hasSource": true,
       "bytes": 1037774,
-      "published": false,
-      "repo": null,
-      "live": null
+      "published": true,
+      "repo": "https://github.com/TNRiley/daybook",
+      "live": "https://tnriley.github.io/daybook/"
     },
     {
       "slug": "mermaid-medic",
@@ -120,9 +120,9 @@
       ],
       "hasSource": "html-is-source",
       "bytes": 24152,
-      "published": false,
-      "repo": null,
-      "live": null
+      "published": true,
+      "repo": "https://github.com/TNRiley/mermaid-medic",
+      "live": "https://tnriley.github.io/mermaid-medic/"
     },
     {
       "slug": "goat-synthesis",
@@ -150,9 +150,9 @@
       ],
       "hasSource": "html-is-source",
       "bytes": 26381,
-      "published": false,
-      "repo": null,
-      "live": null
+      "published": true,
+      "repo": "https://github.com/TNRiley/goat-synthesis",
+      "live": "https://tnriley.github.io/goat-synthesis/"
     }
   ]
 }
