@@ -61,10 +61,30 @@ then wrap it again.
 scratchpad but the live one has been found empty. **Overhead and Daybook lost their entire build
 pipelines this way** — only the finished HTML survived.
 
+It is worse than it sounds: on 2026-09-05 the *live* session's scratchpad was found cleaned
+mid-session, keeping only its most recent subdirectory. Do not assume a file you wrote an hour
+ago is still there.
+
 So before you finish: **copy your templates, downloaders and payload builders into
 `projects/<slug>/src/`**, with a short README saying how to re-run them. Do not commit the raw
 downloads — `.gitignore` already excludes `*.csv`, `openalex_*.json`, `payload.json` and friends,
 because the scripts refetch them and some inputs run to hundreds of megabytes.
+
+### Recovering a pipeline that was already lost
+
+Not hopeless. These pages are a template with a large JSON payload spliced in, so the built page
+still contains both. `unsplice.py` pulls them apart, refusing to write unless the two splice back
+into a byte-identical file:
+
+```bash
+python3 catalog/tools/unsplice.py projects/<slug>/index.html --var DATA --out projects/<slug>/src
+```
+
+That returns `template.html`, `payload.json` and an `inject.py`. What it cannot return is the
+script that *fetched and encoded* the data — rewrite that from the LOG entry and any memory notes,
+then verify it by regenerating `payload.json` and diffing against the recovered one. Daybook was
+restored this way on 2026-09-05: the rebuilt fetcher reproduced two of three stations byte for
+byte, the third differing only by a day NOAA had published in the interim.
 
 ---
 

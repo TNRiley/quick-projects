@@ -94,8 +94,8 @@
         "canvas",
         "Web Audio API"
       ],
-      "hasSource": "lost-reproducible",
-      "bytes": 1036859,
+      "hasSource": true,
+      "bytes": 1036858,
       "published": false,
       "repo": null,
       "live": null
