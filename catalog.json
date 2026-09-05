@@ -39,6 +39,38 @@
       "live": "https://tnriley.github.io/still-cited/"
     },
     {
+      "slug": "at-large",
+      "title": "At Large",
+      "favicon": "🦁",
+      "built": "2026-09-05",
+      "published": true,
+      "tagline": "A century of American newspapers reporting animals on the loose.",
+      "blurb": "There is no dataset of animals escaping from zoos, so this builds one out of full-text search over Chronicling America — the Library of Congress archive of digitised American newspapers. 3,413 pages from 20 period phrasings, 1758–1963, filterable by phrase, animal, decade and state, each linking to the scanned page with the term highlighted. The intended plan was to mine the OCR for what escaped and what happened next; that failed, for a reason the page explains and turns into its subject.",
+      "tags": [
+        "newspapers",
+        "archives",
+        "OCR",
+        "screening",
+        "history"
+      ],
+      "sources": [
+        {
+          "name": "Chronicling America, Library of Congress",
+          "url": "https://www.loc.gov/collections/chronicling-america/",
+          "licence": "US Library of Congress — public domain"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "canvas",
+        "Bodoni Moda"
+      ],
+      "hasSource": true,
+      "bytes": 4390482,
+      "repo": "https://github.com/TNRiley/at-large",
+      "live": "https://tnriley.github.io/at-large/"
+    },
+    {
       "slug": "overhead",
       "title": "Overhead",
       "favicon": "🛰️",

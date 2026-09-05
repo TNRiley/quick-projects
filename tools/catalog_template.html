@@ -244,6 +244,31 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "at-large"(g, w, h, t){
+    /* newsprint columns of set type, with one column broken and its lines escaping */
+    const r = rng("at-large"), cols = 5, cw = w / cols;
+    for (let c = 0; c < cols; c++){
+      const broken = c === 2;
+      let y = 10 + r() * 8;
+      while (y < h - 6){
+        const lw = (broken && y > h * 0.42)
+          ? cw * (0.16 + r() * 0.5)
+          : cw * (0.62 + r() * 0.26);
+        let x = c * cw + cw * 0.12;
+        if (broken && y > h * 0.42){
+          const drift = REDUCED ? 1 : (Math.sin(t / 1100 + y * 0.05) + 1) / 2;
+          x += drift * cw * 0.55 * ((y - h * 0.42) / h);
+          g.fillStyle = "rgba(214,168,120," + (0.30 + r() * 0.42) + ")";
+        } else {
+          g.fillStyle = "rgba(206,204,192," + (0.13 + r() * 0.16) + ")";
+        }
+        g.fillRect(x, y, lw, 1.7);
+        y += 4.6;
+      }
+      if (c) { g.strokeStyle = "rgba(255,255,255,.07)"; g.beginPath();
+               g.moveTo(c * cw + .5, 6); g.lineTo(c * cw + .5, h - 6); g.stroke(); }
+    }
+  },
   "still-cited"(g, w, h, t){
     const r = rng("still-cited"), cut = w * 0.62;
     for (let i = 0; i < 900; i++){
