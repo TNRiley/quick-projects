@@ -8,116 +8,139 @@
 <title>Quick Projects</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Archivo:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap">
 <style>
 :root{
-  --ground:#EFECE4; --panel:#FBFAF6; --panel2:#E6E2D7; --sunk:#E2DDD0;
-  --ink:#221F1A; --ink2:#544F45; --ink3:#8A8375; --ink4:#AEA79A;
-  --rule:#D5CFC1; --rule2:#E3DED2;
-  --accent:#2A4C7D; --accent-soft:#DCE4EF; --warn:#8A5A16; --ok:#3F6B45; --on-accent:#FBFAF6;
+  --ground:#EDEBE4; --panel:#FBFAF6; --panel2:#E4E1D6; --sunk:#DFDCD1; --plate-bg:#15171B;
+  --ink:#1B1A16; --ink2:#514E45; --ink3:#847F72; --ink4:#A9A498;
+  --rule:#D2CEC0; --rule2:#E2DFD3;
+  --accent:#1F4B99; --on-accent:#FBFAF6; --warn:#8A5A16; --ok:#3F6B45;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --ground:#15140F; --panel:#1D1B16; --panel2:#26241D; --sunk:#0F0E0A;
-  --ink:#EDEAE1; --ink2:#ADA79A; --ink3:#7E7869; --ink4:#5D584C;
-  --rule:#333027; --rule2:#282520;
-  --accent:#8FB4E0; --accent-soft:#22303F; --warn:#D2A052; --ok:#7FB287; --on-accent:#15140F;
+  --ground:#121319; --panel:#1A1C22; --panel2:#23262E; --sunk:#0C0D11; --plate-bg:#0B0C10;
+  --ink:#ECEAE3; --ink2:#ABA79B; --ink3:#7C776A; --ink4:#5B574C;
+  --rule:#2E313A; --rule2:#24272E;
+  --accent:#82AAF0; --on-accent:#121319; --warn:#D2A052; --ok:#7FB287;
 }}
 :root[data-theme="dark"]{
-  --ground:#15140F; --panel:#1D1B16; --panel2:#26241D; --sunk:#0F0E0A;
-  --ink:#EDEAE1; --ink2:#ADA79A; --ink3:#7E7869; --ink4:#5D584C;
-  --rule:#333027; --rule2:#282520;
-  --accent:#8FB4E0; --accent-soft:#22303F; --warn:#D2A052; --ok:#7FB287; --on-accent:#15140F;
+  --ground:#121319; --panel:#1A1C22; --panel2:#23262E; --sunk:#0C0D11; --plate-bg:#0B0C10;
+  --ink:#ECEAE3; --ink2:#ABA79B; --ink3:#7C776A; --ink4:#5B574C;
+  --rule:#2E313A; --rule2:#24272E;
+  --accent:#82AAF0; --on-accent:#121319; --warn:#D2A052; --ok:#7FB287;
 }
 *{box-sizing:border-box}
-body{background:var(--ground);color:var(--ink);font-family:Archivo,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
-.app{max-width:1660px;margin:0 auto;padding:0 24px 80px}
+body{background:var(--ground);color:var(--ink);font-family:Archivo,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
 h1,h2,h3{margin:0;text-wrap:balance}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.app{max-width:1680px;margin:0 auto;padding:0 26px 90px}
+.disp{font-family:"Bricolage Grotesque",Archivo,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.96}
 .mono{font-family:"Courier Prime",ui-monospace,Menlo,monospace}
+.lbl{font-family:"Courier Prime",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
 
-/* masthead */
-header.mast{display:flex;flex-wrap:wrap;gap:26px 40px;align-items:flex-end;padding:44px 0 24px;border-bottom:2px solid var(--ink)}
-.eyebrow{font-family:"Courier Prime",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:16px}
-h1.t{font-size:clamp(42px,5.4vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1}
-.dek{flex:1 1 400px;max-width:60ch;color:var(--ink2);font-size:16px}
+/* ── hero ─────────────────────────────────────────── */
+header.mast{padding:52px 0 0}
+.mast .lbl{display:block;margin-bottom:20px}
+h1.t{font-size:clamp(56px,9vw,132px)}
+h1.t em{font-style:normal;color:var(--accent)}
+.herorow{display:flex;flex-wrap:wrap;gap:22px 48px;align-items:flex-end;margin-top:22px}
+.dek{flex:1 1 420px;max-width:62ch;color:var(--ink2);font-size:17px}
 .dek b{color:var(--ink);font-weight:600}
-.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.seg3{display:inline-flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
-.seg3 button{border:0;border-radius:0;background:var(--panel);color:var(--ink);padding:7px 12px;font-size:12px;font-family:"Courier Prime",monospace;letter-spacing:.06em;cursor:pointer;text-transform:uppercase}
+.tools{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+.seg3{display:inline-flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.seg3 button{border:0;border-radius:0;background:var(--panel);color:var(--ink);padding:8px 13px;
+  font:400 11.5px/1 "Courier Prime",monospace;letter-spacing:.1em;cursor:pointer;text-transform:uppercase}
 .seg3 button+button{border-left:1px solid var(--rule)}
 .seg3 button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.btn{display:inline-block;padding:9px 15px;border:1px solid var(--rule);border-radius:2px;
+  font-size:13px;font-weight:500;text-decoration:none;color:var(--ink);background:var(--panel)}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.pending{background:transparent;border-style:dashed;color:var(--ink3);cursor:default}
 
-/* stats */
-.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border-bottom:1px solid var(--rule);margin-bottom:38px}
+.band{margin-top:34px;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--plate-bg);position:relative}
+canvas#hero{display:block;width:100%;height:172px}
+@media(min-width:900px){canvas#hero{height:224px}}
+.bandcap{position:absolute;left:14px;bottom:11px;font-family:"Courier Prime",monospace;font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);pointer-events:none}
+
+/* ── stats ────────────────────────────────────────── */
+.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:38px 0 0}
 @media(min-width:900px){.strip{grid-template-columns:repeat(4,1fr)}}
-.strip>div{background:var(--ground);padding:16px 18px 18px}
-.strip .v{font-family:"Courier Prime",monospace;font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
-.strip .k{font-size:12.5px;color:var(--ink2);margin-top:5px;line-height:1.4;max-width:34ch}
+.strip>div{background:var(--ground);padding:18px 20px 20px}
+.strip .v{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:32px;letter-spacing:-.03em;line-height:1.05}
+.strip .k{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.45;max-width:32ch}
 
-/* cards */
-.grid{display:grid;gap:20px;grid-template-columns:1fr}
-@media(min-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(min-width:1240px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.card{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:2px;
-  display:flex;flex-direction:column;min-width:0;transition:border-color .14s, transform .14s}
-.card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.card .hit{position:absolute;inset:0;z-index:1;border-radius:2px}
+/* ── why ──────────────────────────────────────────── */
+.why{margin-top:56px;display:grid;gap:30px 52px;grid-template-columns:1fr}
+@media(min-width:1000px){.why{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+.why h2{font-size:clamp(30px,3.6vw,46px)}
+.lede{font-size:19px;line-height:1.55;color:var(--ink);margin-top:16px;max-width:44ch}
+.lede b{font-weight:600}
+.whycol p{margin:0 0 14px;color:var(--ink2);max-width:58ch}
+.whycol p:first-child{margin-top:6px}
+.whycol strong{color:var(--ink);font-weight:600}
+
+/* ── cards ────────────────────────────────────────── */
+section.blk{margin-top:64px}
+h2.sec{font-size:clamp(28px,3.2vw,40px)}
+.sublede{color:var(--ink2);font-size:16px;max-width:68ch;margin-top:10px}
+.grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:26px}
+@media(min-width:780px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1300px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:3px;
+  display:flex;flex-direction:column;min-width:0;overflow:hidden;transition:border-color .15s,transform .15s,box-shadow .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 26px rgba(0,0,0,.10)}
+.card .hit{position:absolute;inset:0;z-index:1}
 .card a:not(.hit){position:relative;z-index:2}
-.glyph{position:absolute;top:14px;right:16px;font-size:26px;line-height:1;opacity:.9}
-.cbody{padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
-.card h2{font-size:25px;font-weight:700;letter-spacing:-.022em;line-height:1.1;padding-right:42px}
+.plate{position:relative;background:var(--plate-bg);border-bottom:1px solid var(--rule)}
+.plate canvas{display:block;width:100%;height:132px}
+.glyph{position:absolute;top:11px;right:13px;font-size:20px;line-height:1;opacity:.92}
+.cbody{padding:19px 20px 18px;display:flex;flex-direction:column;gap:11px;flex:1}
+.card h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:27px;letter-spacing:-.028em;line-height:1.05}
 .tag-line{margin:0;font-family:"Courier Prime",monospace;font-size:13px;color:var(--accent);line-height:1.45}
-.blurb{margin:0;color:var(--ink2);font-size:14px;line-height:1.6}
+.blurb{margin:0;color:var(--ink2);font-size:14px;line-height:1.62}
 .tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{font-family:"Courier Prime",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+.tag{font-family:"Courier Prime",monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
   padding:3px 7px;border:1px solid var(--rule);border-radius:2px;color:var(--ink3)}
-.meta{border-top:1px solid var(--rule2);padding-top:12px;margin-top:auto}
-.k{font-family:"Courier Prime",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
-.meta dl{margin:0 0 12px;display:grid;gap:3px}
+.meta{border-top:1px solid var(--rule2);padding-top:13px;margin-top:auto}
+.k{font-family:"Courier Prime",monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);margin-bottom:7px}
+.meta dl{margin:0 0 13px;display:grid;gap:3px}
 .meta dl>div{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px;font-size:12.5px}
 .meta dt{color:var(--ink3);font-family:"Courier Prime",monospace;font-size:11.5px}
 .meta dd{margin:0;color:var(--ink2)}
-.meta dd.ok{color:var(--ok)}
-.meta dd.warn{color:var(--warn)}
+.meta dd.ok{color:var(--ok)} .meta dd.warn{color:var(--warn)}
 ul.srcs{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:5px}
 ul.srcs li{font-size:12.5px;line-height:1.45}
 ul.srcs .lic{display:block;font-family:"Courier Prime",monospace;font-size:11px;color:var(--ink3)}
 .none{margin:0;font-size:12.5px;color:var(--ink3)}
-.acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
-.btn{display:inline-block;padding:8px 14px;border:1px solid var(--rule);border-radius:2px;
-  font-size:13px;font-weight:500;text-decoration:none;color:var(--ink);background:var(--panel2)}
-.btn:hover{border-color:var(--ink3)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.btn.pending{background:transparent;border-style:dashed;color:var(--ink3);cursor:default}
+.acts{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}
 .card.unpublished{background:var(--sunk);border-style:dashed}
-.card.unpublished:hover{transform:none;border-color:var(--rule)}
-.card.unpublished h2,.card.unpublished .glyph{opacity:.72}
-.pill.muted{color:var(--ink4);border-style:dashed}
+.card.unpublished:hover{transform:none;border-color:var(--rule);box-shadow:none}
+.card.unpublished h2,.card.unpublished .plate{opacity:.55}
 
-/* sections */
-section.blk{margin-top:52px}
-h2.sec{font-size:31px;font-weight:700;letter-spacing:-.028em;line-height:1.1}
-.sublede{color:var(--ink2);font-size:15px;max-width:70ch;margin-top:8px}
-.scroller{overflow-x:auto;margin-top:18px;border:1px solid var(--rule);border-radius:2px;background:var(--panel)}
+/* ── tables / blocks ──────────────────────────────── */
+.scroller{overflow-x:auto;margin-top:20px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
 table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
-th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule2);vertical-align:top}
-thead th{font-family:"Courier Prime",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:400;border-bottom:1px solid var(--rule)}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--rule2);vertical-align:top}
+thead th{font-family:"Courier Prime",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink3);font-weight:400;border-bottom:1px solid var(--rule)}
 tbody tr:last-child td{border-bottom:0}
 .lic-cell{font-family:"Courier Prime",monospace;font-size:12.5px;color:var(--ink2);white-space:nowrap}
-.pill{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid var(--rule);border-radius:20px;
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border:1px solid var(--rule);border-radius:20px;
   text-decoration:none;margin:0 4px 4px 0;color:var(--ink2)}
 .pill:hover{border-color:var(--accent);color:var(--accent)}
-
-.blocks{display:grid;gap:8px 44px;grid-template-columns:1fr;margin-top:20px;align-items:start}
+.pill.muted{color:var(--ink4);border-style:dashed}
+.blocks{display:grid;gap:10px 48px;grid-template-columns:1fr;margin-top:24px;align-items:start}
 @media(min-width:920px){.blocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1420px){.blocks{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.blocks section{max-width:62ch;min-width:0}
-.blocks h3{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin:14px 0 7px}
-.blocks p{margin:0 0 11px;color:var(--ink2);font-size:14.5px;line-height:1.62}
+.blocks section{max-width:60ch;min-width:0}
+.blocks h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:16px 0 8px}
+.blocks p{margin:0 0 12px;color:var(--ink2);font-size:14.5px;line-height:1.65}
 .blocks code{font-family:"Courier Prime",monospace;font-size:13px;background:var(--panel2);padding:1px 5px;border-radius:2px;color:var(--ink);overflow-wrap:anywhere}
-footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);
-  font-family:"Courier Prime",monospace;font-size:12px;color:var(--ink3);line-height:1.8}
+footer{margin-top:70px;padding-top:22px;border-top:1px solid var(--rule);
+  font-family:"Courier Prime",monospace;font-size:12px;color:var(--ink3);line-height:1.85}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 
@@ -129,24 +152,45 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 <body>
 <div class="app">
 <header class="mast">
-  <div>
-    <span class="eyebrow">A shelf of one-session builds &middot; TNRiley</span>
-    <h1 class="t">Quick&nbsp;Projects</h1>
-  </div>
-  <p class="dek">Each of these was researched, built and finished in a single sitting, and each is <b>one self-contained HTML file</b> &mdash; no build step, no server, nothing fetched while you read it. The data was gathered up front and baked in. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed.</p>
-  <div class="tools">
-    <div class="seg3" id="themeSeg">
-      <button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button>
+  <span class="lbl">TNRiley &middot; one-session builds, dispatched by hand</span>
+  <h1 class="t disp">Quick&nbsp;<em>Projects</em></h1>
+  <div class="herorow">
+    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing &mdash; subject, data, interface &mdash; then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read.</p>
+    <div class="tools">
+      <div class="seg3" id="themeSeg">
+        <button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button>
+      </div>
+      <a class="btn" href="https://github.com/TNRiley/quick-projects">Source</a>
     </div>
-    <a class="btn" href="https://github.com/TNRiley/quick-projects">This catalog on GitHub</a>
+  </div>
+  <div class="band">
+    <canvas id="hero"></canvas>
+    <div class="bandcap">index plate &middot; one motif per project</div>
   </div>
 </header>
 
 <div class="strip"><div><div class="v">5 / 5</div><div class="k">projects published so far, each built end to end in a single session</div></div><div><div class="v">14.1 MB</div><div class="k">of self-contained HTML — no build step, no server, no runtime network</div></div><div><div class="v">5</div><div class="k">public datasets pulled at build time and baked in</div></div><div><div class="v">2026-09 – 2026-09</div><div class="k">first and latest</div></div></div>
 
-<div class="grid"><article class="card">
+<section class="why">
+  <div>
+    <h2 class="disp">Why this exists</h2>
+    <p class="lede">It is not really about the subjects. It is about <b>tools for thinking through data</b>, interfaces I would never have arrived at on my own, and finding out what a model builds when nobody narrows the brief.</p>
+  </div>
+  <div class="whycol">
+    <p>I dispatch these by hand rather than on a schedule &mdash; a nightly habit, not a cron job. The brief is deliberately open: <strong>Claude chooses the subject</strong>, working from what it knows of my day job in research libraries and evidence synthesis, the things I build for fun, and whatever it feels like reaching for instead. Some of the best ones have had nothing to do with any of that.</p>
+    <p>Each build gets a real budget &mdash; a serious share of a usage window &mdash; with a standing instruction to spend part of it wrestling data out of somewhere awkward. <strong>A bold attempt that half works is a good outcome</strong> if it comes back with something learned. Several have.</p>
+    <p>As they arrive I keep notes on what actually landed: an interaction, a way of laying out numbers, a chart that taught me something. Not to bolt onto the next build, but as <strong>a growing palette to draw on when I am building something real</strong>. Feedback goes back in, so the builds and the brief keep sharpening each other.</p>
+    <p>A few are deliberately inward-facing &mdash; tooling that makes the next one better. <strong>This catalog is one of those</strong>: it and the publishing pipeline behind it were themselves a night's work.</p>
+  </div>
+</section>
+
+<section class="blk">
+  <h2 class="sec disp">The shelf</h2>
+  <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed &mdash; that part is not optional.</p>
+  <div class="grid"><article class="card">
   <a class="hit" href="https://tnriley.github.io/still-cited/" aria-label="Open Still Cited"></a>
-  <div class="glyph" aria-hidden="true">📄</div>
+  <div class="plate"><canvas data-plate="still-cited" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">📄</span></div>
   <div class="cbody">
     <h2>Still Cited</h2>
     <p class="tag-line">What the literature did after each paper was withdrawn.</p>
@@ -167,7 +211,8 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </article>
 <article class="card">
   <a class="hit" href="https://tnriley.github.io/overhead/" aria-label="Open Overhead"></a>
-  <div class="glyph" aria-hidden="true">🛰️</div>
+  <div class="plate"><canvas data-plate="overhead" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">🛰️</span></div>
   <div class="cbody">
     <h2>Overhead</h2>
     <p class="tag-line">721 real satellites, propagated live in your browser from their orbital elements.</p>
@@ -188,7 +233,8 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </article>
 <article class="card">
   <a class="hit" href="https://tnriley.github.io/daybook/" aria-label="Open Daybook"></a>
-  <div class="glyph" aria-hidden="true">🌡️</div>
+  <div class="plate"><canvas data-plate="daybook" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">🌡️</span></div>
   <div class="cbody">
     <h2>Daybook</h2>
     <p class="tag-line">Eighty-five years of daily weather, drawn as a strip chart and played as sound.</p>
@@ -209,7 +255,8 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </article>
 <article class="card">
   <a class="hit" href="https://tnriley.github.io/mermaid-medic/" aria-label="Open Mermaid Medic"></a>
-  <div class="glyph" aria-hidden="true">🧜</div>
+  <div class="plate"><canvas data-plate="mermaid-medic" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">🧜</span></div>
   <div class="cbody">
     <h2>Mermaid Medic</h2>
     <p class="tag-line">A linter and live renderer for Mermaid architecture diagrams.</p>
@@ -230,7 +277,8 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </article>
 <article class="card">
   <a class="hit" href="https://tnriley.github.io/goat-synthesis/" aria-label="Open GOAT Synthesis"></a>
-  <div class="glyph" aria-hidden="true">⭐</div>
+  <div class="plate"><canvas data-plate="goat-synthesis" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">⭐</span></div>
   <div class="cbody">
     <h2>GOAT Synthesis</h2>
     <p class="tag-line">The men&#x27;s tennis GOAT debate, run as a systematic review.</p>
@@ -249,6 +297,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/goat-synthesis/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/goat-synthesis">Repository</a></div>
   </div>
 </article></div>
+</section>
 
 <section class="blk">
   <h2 class="sec">Where the data came from</h2>
@@ -260,28 +309,28 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </section>
 
 <section class="blk">
-  <h2 class="sec">How this is put together</h2>
-  <p class="sublede">The workflow, in case it is useful &mdash; or in case you are me, six months from now, wondering how to add another one.</p>
+  <h2 class="sec disp">How it is put together</h2>
+  <p class="sublede">In case it is useful &mdash; or in case it is me, six months from now, wondering how to add another one.</p>
   <div class="blocks">
     <section>
       <h3>One repo per project</h3>
-      <p>Every project is its own repository with its own GitHub Pages site, so it can be shared, forked or read on its own without dragging the rest of the shelf along. This catalog is just an index over them; it holds no project code.</p>
+      <p>Every project is its own repository with its own Pages site, so it can be shared, forked or read on its own without dragging the rest of the shelf along. This catalog is an index over them and holds no project code.</p>
     </section>
     <section>
       <h3>The page is the deliverable</h3>
-      <p>Each build ships as a single <code>index.html</code> with its data already inside it, usually as base64-encoded typed arrays. That constraint comes from where these are first published, and it turns out to be a good one: the page has no backend to rot, no API key to expire, and works offline forever.</p>
+      <p>Each build ships as a single <code>index.html</code> with its data already inside it, usually as base64 typed arrays. The constraint comes from where these are first published, and it turns out to be a good one: no backend to rot, no key to expire, works offline forever.</p>
     </section>
     <section>
       <h3>Data is gathered at build time</h3>
-      <p>A small pipeline pulls from public sources, reshapes and compresses, and splices the payload into a template. Those scripts live in each repo's <code>src/</code> where they were kept. Raw downloads are deliberately not committed &mdash; the scripts refetch them.</p>
+      <p>A small pipeline pulls from public sources, reshapes and compresses, and splices the payload into a template. Those scripts live in each repo's <code>src/</code>. Raw downloads are deliberately not committed &mdash; the scripts refetch them.</p>
     </section>
     <section>
       <h3>Statistics are computed in the page</h3>
-      <p>Almost nothing on these pages is a precomputed number typed into HTML. Filters, aggregates, rankings and charts are recalculated in the browser from the shipped arrays, which is what lets the figures respond to whatever you filter to.</p>
+      <p>Almost nothing here is a precomputed number typed into HTML. Filters, aggregates, rankings and charts are recalculated in the browser from the shipped arrays, which is what lets the figures respond to whatever you filter to.</p>
     </section>
     <section>
-      <h3>Adding one</h3>
-      <p>Drop a <code>meta.json</code> beside the new <code>index.html</code>, run <code>tools/scaffold_project.py</code> to generate the README, licence and first commit, then <code>tools/build_catalog.py</code> to regenerate this page. Nothing here is hand-maintained.</p>
+      <h3>Rebuildable from scratch</h3>
+      <p>Each repo carries a <code>REBUILD.md</code> written for a model with a shell and no other context: sources with exact URLs, the processing decisions and why, and a table of expected values to check the result against.</p>
     </section>
     <section>
       <h3>Licensing</h3>
@@ -298,17 +347,149 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 
 <script>
 "use strict";
+/* ── theme ─────────────────────────────────────────── */
 const seg = document.getElementById("themeSeg");
 function setTheme(t){
   try{ localStorage.setItem("quickprojects.theme", JSON.stringify(t)); }catch(e){}
   if(t === "auto") document.documentElement.removeAttribute("data-theme");
   else document.documentElement.setAttribute("data-theme", t);
   [...seg.children].forEach(b => b.setAttribute("aria-pressed", b.dataset.t === t));
+  draw();
 }
 [...seg.children].forEach(b => b.onclick = () => setTheme(b.dataset.t));
+
+/* ── plates ────────────────────────────────────────────────────────────────
+   One motif per project, echoing the visual language of the real page rather
+   than decorating at random: Still Cited's scatter field, Daybook's strip
+   chart, Overhead's orbits, GOAT's weighted bars, Mermaid Medic's node graph.
+   Seeded, so a plate looks the same on every load.                        */
+const seed = s => { let h = 2166136261; for (const c of s) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
+function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17, x ^= x << 5, ((x >>> 0) % 100000) / 100000); }
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const PLATES = {
+  "still-cited"(g, w, h, t){
+    const r = rng("still-cited"), cut = w * 0.62;
+    for (let i = 0; i < 900; i++){
+      const x = r() ** 0.7 * w, y = h - Math.pow(r(), 1.9) * h * 0.92;
+      const after = x > cut;
+      g.fillStyle = after ? "rgba(226,86,64," + (0.30 + r() * 0.55) + ")"
+                          : "rgba(120,132,150," + (0.16 + r() * 0.28) + ")";
+      const tw = REDUCED ? 1 : 0.7 + 0.6 * Math.sin(t / 700 + i);
+      g.fillRect(x, y, 1.5 * tw, 1.5 * tw);
+    }
+    g.strokeStyle = "rgba(226,86,64,.85)"; g.lineWidth = 1.4;
+    g.beginPath(); g.moveTo(cut, 6); g.lineTo(cut, h - 4); g.stroke();
+  },
+  "daybook"(g, w, h, t){
+    const off = REDUCED ? 0 : (t / 46) % w;
+    for (let x = 0; x < w; x++){
+      const u = (x + off) / w, season = Math.sin(u * Math.PI * 9), trend = u * 0.34;
+      const mid = h * (0.60 - trend * 0.5) - season * h * 0.20;
+      const amp = h * 0.11 + Math.sin(u * 57) * h * 0.035;
+      const warm = (season + 1) / 2 * 0.72 + trend;
+      g.strokeStyle = `rgb(${Math.round(56 + warm * 178)},${Math.round(112 - warm * 44)},${Math.round(176 - warm * 118)})`;
+      g.globalAlpha = 0.72; g.beginPath(); g.moveTo(x, mid - amp); g.lineTo(x, mid + amp); g.stroke();
+    }
+    g.globalAlpha = 1;
+    g.strokeStyle = "rgba(255,255,255,.30)"; g.lineWidth = 1.4; g.beginPath();
+    for (let x = 0; x < w; x++){ const u = (x + off) / w, y = h * (0.60 - u * 0.34 * 0.5); x ? g.lineTo(x, y) : g.moveTo(x, y); }
+    g.stroke();
+  },
+  "overhead"(g, w, h, t){
+    const cx = w * 0.5, cy = h * 1.42, R = h * 1.16;
+    g.strokeStyle = "rgba(120,190,225,.30)"; g.lineWidth = 1;
+    g.beginPath(); g.arc(cx, cy, R, Math.PI, 2 * Math.PI); g.stroke();
+    const grd = g.createLinearGradient(0, cy - R, 0, cy);
+    grd.addColorStop(0, "rgba(70,140,190,.20)"); grd.addColorStop(1, "rgba(70,140,190,.02)");
+    g.fillStyle = grd; g.beginPath(); g.arc(cx, cy, R, Math.PI, 2 * Math.PI); g.fill();
+    const r = rng("overhead");
+    for (let k = 0; k < 7; k++){
+      const rad = R + 12 + k * (h * 0.115), tilt = 0.20 + r() * 0.62;
+      g.strokeStyle = `rgba(150,215,240,${0.30 - k * 0.028})`; g.lineWidth = 1;
+      g.beginPath();
+      for (let a = Math.PI; a <= 2 * Math.PI; a += 0.03){
+        const x = cx + Math.cos(a) * rad, y = cy + Math.sin(a) * rad * tilt;
+        a === Math.PI ? g.moveTo(x, y) : g.lineTo(x, y);
+      }
+      g.stroke();
+      const ph = (REDUCED ? 0.4 : t / (2600 + k * 700)) + r() * 6;
+      const a = Math.PI + (ph % 1) * Math.PI;
+      g.fillStyle = "rgba(215,240,255,.95)";
+      g.beginPath(); g.arc(cx + Math.cos(a) * rad, cy + Math.sin(a) * rad * tilt, 2.1, 0, 7); g.fill();
+    }
+  },
+  "goat-synthesis"(g, w, h, t){
+    const r = rng("goat-synthesis"), n = 5, pad = h * 0.12, bh = (h - pad * 2) / n - 6;
+    for (let i = 0; i < n; i++){
+      const base = 0.30 + r() * 0.62;
+      const wob = REDUCED ? 0 : Math.sin(t / 1250 + i * 1.4) * 0.07;
+      const bw = Math.max(10, (base + wob) * w * 0.84);
+      const y = pad + i * (bh + 6);
+      g.fillStyle = i === 0 ? "rgba(206,168,74,.92)" : `rgba(120,150,120,${0.52 - i * 0.075})`;
+      g.fillRect(0, y, bw, bh);
+      g.fillStyle = "rgba(255,255,255,.20)"; g.fillRect(bw - 2, y, 2, bh);
+    }
+    g.strokeStyle = "rgba(255,255,255,.16)"; g.lineWidth = 1;
+    for (let k = 1; k < 4; k++){ const x = w * k / 4; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); }
+  },
+  "mermaid-medic"(g, w, h, t){
+    const nodes = [[.14,.28],[.14,.72],[.42,.5],[.70,.24],[.70,.5],[.70,.76],[.92,.5]].map(p => [p[0]*w, p[1]*h]);
+    const edges = [[0,2],[1,2],[2,3],[2,4],[2,5],[3,6],[4,6],[5,6]];
+    g.strokeStyle = "rgba(140,170,210,.46)"; g.lineWidth = 1.2;
+    edges.forEach(([a,b],i) => {
+      const pulse = REDUCED ? 0 : (Math.sin(t/900 + i) + 1) / 2;
+      g.strokeStyle = `rgba(150,180,220,${0.24 + pulse * 0.36})`;
+      g.beginPath(); g.moveTo(nodes[a][0], nodes[a][1]);
+      g.bezierCurveTo((nodes[a][0]+nodes[b][0])/2, nodes[a][1], (nodes[a][0]+nodes[b][0])/2, nodes[b][1], nodes[b][0], nodes[b][1]);
+      g.stroke();
+    });
+    nodes.forEach(([x,y], i) => {
+      const bw = 30, bh2 = 14;
+      g.fillStyle = i === 2 ? "rgba(150,120,205,.92)" : "rgba(96,168,168,.80)";
+      g.fillRect(x - bw/2, y - bh2/2, bw, bh2);
+      g.strokeStyle = "rgba(255,255,255,.24)"; g.lineWidth = 1;
+      g.strokeRect(x - bw/2 + .5, y - bh2/2 + .5, bw - 1, bh2 - 1);
+    });
+  }
+};
+const SLUGS = ["still-cited", "overhead", "daybook", "mermaid-medic", "goat-synthesis"];
+function plate(slug){ return PLATES[slug] || PLATES["mermaid-medic"]; }
+
+function fit(cv){
+  const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1);
+  cv.width = Math.max(1, Math.round(r.width * d)); cv.height = Math.max(1, Math.round(r.height * d));
+  const g = cv.getContext("2d"); g.setTransform(d, 0, 0, d, 0, 0);
+  return { g, w: r.width, h: r.height };
+}
+function draw(t){
+  t = t || 0;
+  document.querySelectorAll("canvas[data-plate]").forEach(cv => {
+    const { g, w, h } = fit(cv);
+    g.clearRect(0, 0, w, h);
+    g.save(); plate(cv.dataset.plate)(g, w, h, t); g.restore();
+  });
+  const hero = document.getElementById("hero");
+  const { g, w, h } = fit(hero);
+  g.clearRect(0, 0, w, h);
+  const n = SLUGS.length, bw = w / n;
+  SLUGS.forEach((s, i) => {
+    g.save();
+    g.beginPath(); g.rect(i * bw, 0, bw, h); g.clip();
+    g.translate(i * bw, 0);
+    plate(s)(g, bw, h, t + i * 900);
+    g.restore();
+    if (i){ g.strokeStyle = "rgba(255,255,255,.13)"; g.lineWidth = 1;
+            g.beginPath(); g.moveTo(i * bw + .5, 0); g.lineTo(i * bw + .5, h); g.stroke(); }
+  });
+}
+let raf = null;
+function loop(t){ draw(t); raf = requestAnimationFrame(loop); }
+addEventListener("resize", () => draw(performance.now()));
 let saved = "auto";
 try{ saved = JSON.parse(localStorage.getItem("quickprojects.theme") || '"auto"'); }catch(e){}
 setTheme(saved);
+if (REDUCED) draw(0); else raf = requestAnimationFrame(loop);
 </script>
 
 </body>

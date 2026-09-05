@@ -61,7 +61,8 @@ def card(m):
         acts = ('<span class="btn pending">Not published yet</span>')
     return f"""<article class="card{'' if m['published'] else ' unpublished'}">
   {hit}
-  <div class="glyph" aria-hidden="true">{esc(m['favicon'])}</div>
+  <div class="plate"><canvas data-plate="{esc(m['slug'])}" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">{esc(m['favicon'])}</span></div>
   <div class="cbody">
     <h2>{esc(m['title'])}</h2>
     <p class="tag-line">{esc(m['tagline'])}</p>
@@ -118,6 +119,7 @@ def build():
               .replace("__SOURCES__", sources_table(ms))
               .replace("__STATS__", "".join(
                   f'<div><div class="v">{esc(v)}</div><div class="k">{esc(k)}</div></div>' for v, k in stats))
+              .replace("__SLUGS__", json.dumps([m["slug"] for m in ms]))
               .replace("__OWNER__", OWNER)
               .replace("__CATALOG_REPO__", CATALOG_REPO)
               .replace("__GENERATED__", datetime.date.today().isoformat()))
