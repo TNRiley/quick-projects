@@ -45,7 +45,7 @@ def apply(path, title):
         s = s[:m.end()] + "\n" + bar + s[m.end():]
     else:                                   # unwrapped fragment: goes at the very top
         s = bar + "\n" + s
-    open(path, "w", encoding="utf-8").write(s)
+    open(path, "w", encoding="utf-8", newline="\n").write(s)
     return "linked"
 
 if __name__ == "__main__":
@@ -60,5 +60,5 @@ if __name__ == "__main__":
     import json
     for p in paths:
         meta = os.path.join(os.path.dirname(p), "meta.json")
-        title = json.load(open(meta))["title"] if os.path.isfile(meta) else "Project"
+        title = json.load(open(meta, encoding="utf-8"))["title"] if os.path.isfile(meta) else "Project"
         print(f"  {os.path.relpath(p, root):40} {apply(p, title)}")

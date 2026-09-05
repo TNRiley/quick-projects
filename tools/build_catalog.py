@@ -28,7 +28,7 @@ esc = lambda s: html.escape(str(s), quote=True)
 def load():
     ms = []
     for f in sorted(glob.glob(os.path.join(ROOT, "projects", "*", "meta.json"))):
-        m = json.load(open(f))
+        m = json.load(open(f, encoding="utf-8"))
         d = os.path.dirname(f)
         m["bytes"] = os.path.getsize(os.path.join(d, "index.html"))
         m["published"] = bool(m.get("published"))
@@ -124,10 +124,10 @@ def build():
               .replace("__CATALOG_REPO__", CATALOG_REPO)
               .replace("__GENERATED__", datetime.date.today().isoformat()))
     os.makedirs(OUT, exist_ok=True)
-    open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(out)
-    open(os.path.join(OUT, ".nojekyll"), "w").write("")
+    open(os.path.join(OUT, "index.html"), "w", encoding="utf-8", newline="\n").write(out)
+    open(os.path.join(OUT, ".nojekyll"), "w", encoding="utf-8", newline="\n").write("")
     json.dump({"generated": datetime.date.today().isoformat(), "owner": OWNER, "projects": ms},
-              open(os.path.join(OUT, "catalog.json"), "w"), indent=2, ensure_ascii=False)
+              open(os.path.join(OUT, "catalog.json"), "w", encoding="utf-8", newline="\n"), indent=2, ensure_ascii=False)
     # the catalog is authored as an Artifact-shaped fragment; Pages needs a real document
     sys.path.insert(0, TOOLS)
     import wrap_for_pages

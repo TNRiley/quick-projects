@@ -43,9 +43,9 @@ def unsplice(path, var, out):
         raise SystemExit("round-trip check failed — refusing to write")
 
     os.makedirs(out, exist_ok=True)
-    open(os.path.join(out, "payload.json"), "w", encoding="utf-8").write(payload)
-    open(os.path.join(out, "template.html"), "w", encoding="utf-8").write(template)
-    open(os.path.join(out, "inject.py"), "w", encoding="utf-8").write(INJECT % var)
+    open(os.path.join(out, "payload.json"), "w", encoding="utf-8", newline="\n").write(payload)
+    open(os.path.join(out, "template.html"), "w", encoding="utf-8", newline="\n").write(template)
+    open(os.path.join(out, "inject.py"), "w", encoding="utf-8", newline="\n").write(INJECT % var)
     print(f"  template.html  {len(template):>10,} B")
     print(f"  payload.json   {len(payload):>10,} B")
     print(f"  round-trip verified against {os.path.basename(path)}"
@@ -63,7 +63,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 payload = open(os.path.join(HERE, "payload.json"), encoding="utf-8").read()
 template = open(os.path.join(HERE, "template.html"), encoding="utf-8").read()
 out = os.path.join(HERE, "..", "index.html")
-open(out, "w", encoding="utf-8").write(template.replace("__PAYLOAD__", payload))
+open(out, "w", encoding="utf-8", newline="\n").write(template.replace("__PAYLOAD__", payload))
 
 root = HERE
 while root != os.path.dirname(root) and not os.path.isdir(os.path.join(root, "projects")):

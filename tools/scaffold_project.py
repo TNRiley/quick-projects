@@ -129,14 +129,14 @@ def run(cmd, cwd):
 
 def scaffold(slug, do_git=True):
     d = os.path.join(PROJECTS, slug)
-    m = json.load(open(os.path.join(d, "meta.json")))
+    m = json.load(open(os.path.join(d, "meta.json"), encoding="utf-8"))
     m["bytes"] = os.path.getsize(os.path.join(d, "index.html"))
     m.setdefault("published", False)
-    json.dump(m, open(os.path.join(d, "meta.json"), "w"), indent=2, ensure_ascii=False)
-    open(os.path.join(d, "README.md"), "w").write(readme(m))
-    open(os.path.join(d, "LICENSE"), "w").write(MIT.format(year=m["built"][:4], name=AUTHOR_NAME))
-    open(os.path.join(d, ".gitignore"), "w").write(GITIGNORE)
-    open(os.path.join(d, ".nojekyll"), "w").write("")   # Pages: serve files as-is, no Jekyll pass
+    json.dump(m, open(os.path.join(d, "meta.json"), "w", encoding="utf-8", newline="\n"), indent=2, ensure_ascii=False)
+    open(os.path.join(d, "README.md"), "w", encoding="utf-8", newline="\n").write(readme(m))
+    open(os.path.join(d, "LICENSE"), "w", encoding="utf-8", newline="\n").write(MIT.format(year=m["built"][:4], name=AUTHOR_NAME))
+    open(os.path.join(d, ".gitignore"), "w", encoding="utf-8", newline="\n").write(GITIGNORE)
+    open(os.path.join(d, ".nojekyll"), "w", encoding="utf-8", newline="\n").write("")   # Pages: serve files as-is, no Jekyll pass
     if not do_git:
         return m
     if not os.path.isdir(os.path.join(d, ".git")):

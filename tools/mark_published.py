@@ -15,10 +15,10 @@ for slug in sys.argv[1:]:
     f = os.path.join(root, "projects", slug, "meta.json")
     if not os.path.isfile(f):
         print(f"  {slug}: no meta.json — skipped"); continue
-    m = json.load(open(f))
+    m = json.load(open(f, encoding="utf-8"))
     if m.get("published"):
         print(f"  {slug}: already marked published"); continue
     m["published"] = True
-    json.dump(m, open(f, "w"), indent=2, ensure_ascii=False)
+    json.dump(m, open(f, "w", encoding="utf-8", newline="\n"), indent=2, ensure_ascii=False)
     print(f"  {slug}: marked published")
 subprocess.run([sys.executable, os.path.join(TOOLS, "build_catalog.py")])

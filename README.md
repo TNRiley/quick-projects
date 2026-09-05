@@ -10,6 +10,9 @@ own GitHub Pages site; this repo holds only the catalog page that links them tog
 See **[PUBLISHING.md](PUBLISHING.md)** — the full workflow, including two traps that are not
 guessable (Artifact HTML is not standalone HTML; session scratchpads are wiped).
 
+On Windows, read **[0b. Working on Windows](PUBLISHING.md#0b-working-on-windows)** first —
+`python3` is a broken alias there, so every `python3 …` command below is `python …`.
+
 ## This page is generated
 
 `index.html` and `catalog.json` are produced by `tools/build_catalog.py` in this repo,

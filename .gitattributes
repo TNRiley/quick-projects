@@ -1,0 +1,10 @@
+# Shell scripts must stay LF: core.autocrlf=true on the Windows machine would otherwise
+# check them out CRLF, and a CRLF shebang is not portable across bash builds.
+*.sh text eol=lf
+
+# Generated pages and payloads are plain text; keep them LF so the two machines
+# don't produce whole-file diffs just by checking out.
+*.py   text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md   text eol=lf

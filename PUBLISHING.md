@@ -35,6 +35,82 @@ The scripts find the workspace root themselves by walking up to the directory co
 
 ---
 
+## 0b. Working on Windows
+
+The workflow above was written on the Mac and assumes it. Everything still applies; these are the
+differences on the PC, all verified 2026-09-05.
+
+**Run the shell scripts from Git Bash, not PowerShell.** `push_repo.sh` and `publish_to_github.sh`
+are bash. PowerShell has no `&&` chaining and will not parse them.
+
+**`python3` is a trap on Windows — the interpreter is `python`.** `python3` resolves to
+`…\WindowsApps\python3`, the Microsoft Store alias stub. It *exists*, so `command -v python3`
+succeeds, but running it prints "Python was not found" and does nothing. The real interpreter is
+`python` (`C:\Python313\python`, 3.13.5). Read every `python3 …` command in this file as
+`python …` on the PC. Both shell scripts now probe for an interpreter that actually runs rather
+than one that merely exists, so they work unchanged on either machine.
+
+**Python writes cp1252 here, and half of it fails silently.** `open()` uses the locale encoding:
+UTF-8 on the Mac, **cp1252** on the PC. Characters outside cp1252 — the emoji favicons, the `→`
+in a generated README — raise `UnicodeDecodeError`/`UnicodeEncodeError` and stop you. Characters
+*inside* cp1252 do not: an em dash is written as byte 0x97, no error, and reads back as `�`. That
+is how a regenerated `.gitignore` silently became `intermediates � regenerate them`. Every text
+`open()` in `tools/` now passes `encoding="utf-8"` explicitly, and every write also passes
+`newline="\n"` so the PC and the Mac generate identical bytes rather than whole-file CRLF churn.
+If you add a tool, do the same — do not rely on it erroring to tell you it is wrong.
+
+**Two accounts — and the scripts now handle it themselves.** These are personal projects, so they
+belong to **TNRiley**, never the TRileyNOAA work account. Both are authenticated here at once, and
+the two tools disagree about which is default:
+
+| | account |
+|---|---|
+| `git push` (default credential for github.com) | **TNRiley** ✓ |
+| `gh` (globally active account) | **TRileyNOAA** ✗ |
+
+So `gh repo create` would put a personal project on the work account. Rather than rely on
+`gh auth switch` — which changes the default for *all* your gh usage, work included, and has to be
+remembered every time — `publish_to_github.sh` now lifts TNRiley's token out of the credential
+store and scopes it to its own process:
+
+```bash
+GH_TOKEN="$(gh auth token --user TNRiley)"
+```
+
+It then asserts `gh api user` really is TNRiley before creating anything, and prints
+`publishing as TNRiley` when it starts. Your globally active account is left untouched, so this
+never disturbs work repos and there is nothing to switch back. `push_repo.sh` was already safe:
+it embeds the username in the remote (`https://TNRiley@github.com/…`), which selects the right
+git credential directly.
+
+
+**On the PC, §5's manual push is unnecessary.** That section describes the Mac, which has no `gh`
+and needs the `https://TNRiley@github.com/…` remote to beat the keychain. The PC has `gh` 2.92.0,
+so use `publish_to_github.sh` — it creates the repo, pushes and enables Pages in one pass, with no
+browser step and no pasted token.
+
+**The walk-up loop used to hang here.** Both scripts found the workspace root with
+`while [ "$ROOT" != "/" ]`, which never terminates on a Windows-style path because `dirname "C:"`
+is `C:`. They now stop when `dirname` stops changing. (`_workspace_root` in the Python tools
+already used that idiom and was never affected.)
+
+**Line endings.** `core.autocrlf=true` is set globally on this machine, so files check out CRLF.
+`.gitattributes` pins `*.sh` and the other text types to LF, so the two machines stop disagreeing.
+
+**Workspace layout.** The scripts locate the root by walking up for a `projects/` directory, so the
+PC needs the same shape as the Mac — this repo as `catalog/`, project clones beside it:
+
+```
+<workspace>/
+├── catalog/            ← this repo (github.com/TNRiley/quick-projects)
+└── projects/<slug>/    ← one clone per project
+```
+
+A flat clone with no `projects/` sibling cannot work: `build_catalog.py` exits with
+"could not find the workspace root".
+
+---
+
 ## 1. Two things that will bite you
 
 ### An Artifact page is not a web page
@@ -169,6 +245,10 @@ The identity is set **per repo**, not globally.
 ---
 
 ## 5. Push it
+
+> On the Windows PC, skip to `publish_to_github.sh` — `gh` is installed there, it selects the
+> TNRiley account by itself, and this section's manual dance is Mac-only.
+> See [0b. Working on Windows](#0b-working-on-windows).
 
 **Ask Trevor before pushing.** A GitHub Pages site is public on the internet even from a private
 repo, and free accounts can only publish Pages from public repos at all — "push it" and "publish

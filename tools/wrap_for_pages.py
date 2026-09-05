@@ -57,7 +57,7 @@ def wrap(path):
     if s.lstrip().lower().startswith("<!doctype"):
         return "already standalone"
     head, body = split_head(s)
-    open(path, "w", encoding="utf-8").write(SKELETON % (OPEN + "\n" + head, body))
+    open(path, "w", encoding="utf-8", newline="\n").write(SKELETON % (OPEN + "\n" + head, body))
     return "wrapped"
 
 def unwrap(path):
@@ -66,7 +66,7 @@ def unwrap(path):
         return "not wrapped by this tool — leaving alone"
     head = s.split(OPEN, 1)[1].split("</head>", 1)[0].strip()
     body = s.split("<body>", 1)[1].rsplit("</body>", 1)[0].strip()
-    open(path, "w", encoding="utf-8").write(head + "\n" + body + "\n")
+    open(path, "w", encoding="utf-8", newline="\n").write(head + "\n" + body + "\n")
     return "unwrapped"
 
 if __name__ == "__main__":
