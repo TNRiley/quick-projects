@@ -129,7 +129,20 @@ repo, and free accounts can only publish Pages from public repos at all — "pus
 it" are the same decision.
 
 There is no `gh` CLI and no Homebrew on this machine, but `osxkeychain` is the system credential
-helper and already holds a GitHub credential, so **plain `git push` works**. The repo has to exist
+helper and holds a GitHub credential, so **plain `git push` works** — with one catch.
+
+> **Two accounts, one keychain.** The stored credential is for **TRileyNOAA** (the work account),
+> but these repos live under **TNRiley**. Left alone, git hands the work credential to a TNRiley
+> repo and the push dies with `Permission to TNRiley/<slug>.git denied to TRileyNOAA` (403).
+> Always set the remote with the username embedded so git looks up the right account:
+>
+> ```bash
+> git remote add origin https://TNRiley@github.com/TNRiley/<slug>.git
+> ```
+>
+> The first push as TNRiley has to be run by Trevor in a real terminal, because git prompts for
+> the password and a personal access token has to be pasted in. After that osxkeychain caches
+> the TNRiley credential and later pushes are non-interactive. The repo has to exist
 first, which Trevor creates in the browser (empty — no README, no .gitignore, no licence):
 
 ```bash

@@ -24,7 +24,9 @@ if [ "$code" = "404" ]; then
 fi
 
 cd "$DIR" || exit 1
-git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://github.com/$OWNER/$SLUG.git"
+# username embedded: this machine also holds a TRileyNOAA credential, and without it
+# git offers that one and GitHub returns 403.
+git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://$OWNER@github.com/$OWNER/$SLUG.git"
 git push -u origin main || exit 1
 
 if [ "$SLUG" != "quick-projects" ]; then
