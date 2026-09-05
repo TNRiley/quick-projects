@@ -1,0 +1,193 @@
+<title>Quick Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  --ground:#EFECE4; --panel:#FBFAF6; --panel2:#E6E2D7; --sunk:#E2DDD0;
+  --ink:#221F1A; --ink2:#544F45; --ink3:#8A8375; --ink4:#AEA79A;
+  --rule:#D5CFC1; --rule2:#E3DED2;
+  --accent:#2A4C7D; --accent-soft:#DCE4EF; --warn:#8A5A16; --ok:#3F6B45; --on-accent:#FBFAF6;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --ground:#15140F; --panel:#1D1B16; --panel2:#26241D; --sunk:#0F0E0A;
+  --ink:#EDEAE1; --ink2:#ADA79A; --ink3:#7E7869; --ink4:#5D584C;
+  --rule:#333027; --rule2:#282520;
+  --accent:#8FB4E0; --accent-soft:#22303F; --warn:#D2A052; --ok:#7FB287; --on-accent:#15140F;
+}}
+:root[data-theme="dark"]{
+  --ground:#15140F; --panel:#1D1B16; --panel2:#26241D; --sunk:#0F0E0A;
+  --ink:#EDEAE1; --ink2:#ADA79A; --ink3:#7E7869; --ink4:#5D584C;
+  --rule:#333027; --rule2:#282520;
+  --accent:#8FB4E0; --accent-soft:#22303F; --warn:#D2A052; --ok:#7FB287; --on-accent:#15140F;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:Archivo,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.app{max-width:1660px;margin:0 auto;padding:0 24px 80px}
+h1,h2,h3{margin:0;text-wrap:balance}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.mono{font-family:"Courier Prime",ui-monospace,Menlo,monospace}
+
+/* masthead */
+header.mast{display:flex;flex-wrap:wrap;gap:26px 40px;align-items:flex-end;padding:44px 0 24px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:"Courier Prime",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:16px}
+h1.t{font-size:clamp(42px,5.4vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1}
+.dek{flex:1 1 400px;max-width:60ch;color:var(--ink2);font-size:16px}
+.dek b{color:var(--ink);font-weight:600}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg3{display:inline-flex;border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.seg3 button{border:0;border-radius:0;background:var(--panel);color:var(--ink);padding:7px 12px;font-size:12px;font-family:"Courier Prime",monospace;letter-spacing:.06em;cursor:pointer;text-transform:uppercase}
+.seg3 button+button{border-left:1px solid var(--rule)}
+.seg3 button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+
+/* stats */
+.strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border-bottom:1px solid var(--rule);margin-bottom:38px}
+@media(min-width:900px){.strip{grid-template-columns:repeat(4,1fr)}}
+.strip>div{background:var(--ground);padding:16px 18px 18px}
+.strip .v{font-family:"Courier Prime",monospace;font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.strip .k{font-size:12.5px;color:var(--ink2);margin-top:5px;line-height:1.4;max-width:34ch}
+
+/* cards */
+.grid{display:grid;gap:20px;grid-template-columns:1fr}
+@media(min-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1240px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:2px;
+  display:flex;flex-direction:column;min-width:0;transition:border-color .14s, transform .14s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .hit{position:absolute;inset:0;z-index:1;border-radius:2px}
+.card a:not(.hit){position:relative;z-index:2}
+.glyph{position:absolute;top:14px;right:16px;font-size:26px;line-height:1;opacity:.9}
+.cbody{padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h2{font-size:25px;font-weight:700;letter-spacing:-.022em;line-height:1.1;padding-right:42px}
+.tag-line{margin:0;font-family:"Courier Prime",monospace;font-size:13px;color:var(--accent);line-height:1.45}
+.blurb{margin:0;color:var(--ink2);font-size:14px;line-height:1.6}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:"Courier Prime",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 7px;border:1px solid var(--rule);border-radius:2px;color:var(--ink3)}
+.meta{border-top:1px solid var(--rule2);padding-top:12px;margin-top:auto}
+.k{font-family:"Courier Prime",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
+.meta dl{margin:0 0 12px;display:grid;gap:3px}
+.meta dl>div{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px;font-size:12.5px}
+.meta dt{color:var(--ink3);font-family:"Courier Prime",monospace;font-size:11.5px}
+.meta dd{margin:0;color:var(--ink2)}
+.meta dd.ok{color:var(--ok)}
+.meta dd.warn{color:var(--warn)}
+ul.srcs{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:5px}
+ul.srcs li{font-size:12.5px;line-height:1.45}
+ul.srcs .lic{display:block;font-family:"Courier Prime",monospace;font-size:11px;color:var(--ink3)}
+.none{margin:0;font-size:12.5px;color:var(--ink3)}
+.acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:8px 14px;border:1px solid var(--rule);border-radius:2px;
+  font-size:13px;font-weight:500;text-decoration:none;color:var(--ink);background:var(--panel2)}
+.btn:hover{border-color:var(--ink3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.pending{background:transparent;border-style:dashed;color:var(--ink3);cursor:default}
+.card.unpublished{background:var(--sunk);border-style:dashed}
+.card.unpublished:hover{transform:none;border-color:var(--rule)}
+.card.unpublished h2,.card.unpublished .glyph{opacity:.72}
+.pill.muted{color:var(--ink4);border-style:dashed}
+
+/* sections */
+section.blk{margin-top:52px}
+h2.sec{font-size:31px;font-weight:700;letter-spacing:-.028em;line-height:1.1}
+.sublede{color:var(--ink2);font-size:15px;max-width:70ch;margin-top:8px}
+.scroller{overflow-x:auto;margin-top:18px;border:1px solid var(--rule);border-radius:2px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule2);vertical-align:top}
+thead th{font-family:"Courier Prime",monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:400;border-bottom:1px solid var(--rule)}
+tbody tr:last-child td{border-bottom:0}
+.lic-cell{font-family:"Courier Prime",monospace;font-size:12.5px;color:var(--ink2);white-space:nowrap}
+.pill{display:inline-block;font-size:12px;padding:2px 8px;border:1px solid var(--rule);border-radius:20px;
+  text-decoration:none;margin:0 4px 4px 0;color:var(--ink2)}
+.pill:hover{border-color:var(--accent);color:var(--accent)}
+
+.blocks{display:grid;gap:8px 44px;grid-template-columns:1fr;margin-top:20px;align-items:start}
+@media(min-width:920px){.blocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1420px){.blocks{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.blocks section{max-width:62ch;min-width:0}
+.blocks h3{font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin:14px 0 7px}
+.blocks p{margin:0 0 11px;color:var(--ink2);font-size:14.5px;line-height:1.62}
+.blocks code{font-family:"Courier Prime",monospace;font-size:13px;background:var(--panel2);padding:1px 5px;border-radius:2px;color:var(--ink);overflow-wrap:anywhere}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);
+  font-family:"Courier Prime",monospace;font-size:12px;color:var(--ink3);line-height:1.8}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<script>
+try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
+     if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t); }catch(e){}
+</script>
+
+<div class="app">
+<header class="mast">
+  <div>
+    <span class="eyebrow">A shelf of one-session builds &middot; __OWNER__</span>
+    <h1 class="t">Quick&nbsp;Projects</h1>
+  </div>
+  <p class="dek">Each of these was researched, built and finished in a single sitting, and each is <b>one self-contained HTML file</b> &mdash; no build step, no server, nothing fetched while you read it. The data was gathered up front and baked in. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed.</p>
+  <div class="tools">
+    <div class="seg3" id="themeSeg">
+      <button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button>
+    </div>
+    <a class="btn" href="https://github.com/__OWNER__/__CATALOG_REPO__">This catalog on GitHub</a>
+  </div>
+</header>
+
+<div class="strip">__STATS__</div>
+
+<div class="grid">__CARDS__</div>
+
+__SOURCES__
+
+<section class="blk">
+  <h2 class="sec">How this is put together</h2>
+  <p class="sublede">The workflow, in case it is useful &mdash; or in case you are me, six months from now, wondering how to add another one.</p>
+  <div class="blocks">
+    <section>
+      <h3>One repo per project</h3>
+      <p>Every project is its own repository with its own GitHub Pages site, so it can be shared, forked or read on its own without dragging the rest of the shelf along. This catalog is just an index over them; it holds no project code.</p>
+    </section>
+    <section>
+      <h3>The page is the deliverable</h3>
+      <p>Each build ships as a single <code>index.html</code> with its data already inside it, usually as base64-encoded typed arrays. That constraint comes from where these are first published, and it turns out to be a good one: the page has no backend to rot, no API key to expire, and works offline forever.</p>
+    </section>
+    <section>
+      <h3>Data is gathered at build time</h3>
+      <p>A small pipeline pulls from public sources, reshapes and compresses, and splices the payload into a template. Those scripts live in each repo's <code>src/</code> where they were kept. Raw downloads are deliberately not committed &mdash; the scripts refetch them.</p>
+    </section>
+    <section>
+      <h3>Statistics are computed in the page</h3>
+      <p>Almost nothing on these pages is a precomputed number typed into HTML. Filters, aggregates, rankings and charts are recalculated in the browser from the shipped arrays, which is what lets the figures respond to whatever you filter to.</p>
+    </section>
+    <section>
+      <h3>Adding one</h3>
+      <p>Drop a <code>meta.json</code> beside the new <code>index.html</code>, run <code>tools/scaffold_project.py</code> to generate the README, licence and first commit, then <code>tools/build_catalog.py</code> to regenerate this page. Nothing here is hand-maintained.</p>
+    </section>
+    <section>
+      <h3>Licensing</h3>
+      <p>Code is MIT. Data keeps whatever licence its source carries &mdash; mostly CC0 or US Government public domain, listed per dataset above. Where a source's redistribution terms are unclear, the project ships the derived page rather than the raw file.</p>
+    </section>
+  </div>
+</section>
+
+<footer>
+  Generated __GENERATED__ by <span class="mono">tools/build_catalog.py</span> from each project's meta.json &mdash; not hand-edited.<br>
+  Built with Claude Code. Code MIT; data under the licences listed above. Go to the sources before citing any of it.
+</footer>
+</div>
+
+<script>
+"use strict";
+const seg = document.getElementById("themeSeg");
+function setTheme(t){
+  try{ localStorage.setItem("quickprojects.theme", JSON.stringify(t)); }catch(e){}
+  if(t === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", t);
+  [...seg.children].forEach(b => b.setAttribute("aria-pressed", b.dataset.t === t));
+}
+[...seg.children].forEach(b => b.onclick = () => setTheme(b.dataset.t));
+let saved = "auto";
+try{ saved = JSON.parse(localStorage.getItem("quickprojects.theme") || '"auto"'); }catch(e){}
+setTheme(saved);
+</script>

@@ -1,0 +1,158 @@
+{
+  "generated": "2026-09-05",
+  "owner": "TNRiley",
+  "projects": [
+    {
+      "slug": "still-cited",
+      "title": "Still Cited",
+      "favicon": "📄",
+      "built": "2026-09-05",
+      "tagline": "What the literature did after each paper was withdrawn.",
+      "blurb": "Every retraction Retraction Watch has catalogued — 72,389 notices — joined by DOI to OpenAlex citation histories. A field of 72,000 marks plots each paper's publication date against how long it survived; facets slice by reason, journal, publisher, country and field; any mark opens the paper, its original reason codes and its DOI. Of the 39,030 papers whose full citation history is observable, 69% were cited again after the year they were retracted, and 34% of every citation they ever collected arrived after the notice.",
+      "tags": [
+        "research integrity",
+        "bibliometrics",
+        "faceted search",
+        "data viz"
+      ],
+      "sources": [
+        {
+          "name": "Retraction Watch database, distributed by Crossref",
+          "url": "https://api.labs.crossref.org/data/retractionwatch",
+          "licence": "CC0"
+        },
+        {
+          "name": "OpenAlex",
+          "url": "https://openalex.org",
+          "licence": "CC0"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "canvas",
+        "typed-array payload"
+      ],
+      "hasSource": true,
+      "bytes": 12851381,
+      "published": false,
+      "repo": null,
+      "live": null
+    },
+    {
+      "slug": "overhead",
+      "title": "Overhead",
+      "favicon": "🛰️",
+      "built": "2026-09-04",
+      "tagline": "721 real satellites, propagated live in your browser from their orbital elements.",
+      "blurb": "A draggable day/night globe with coastlines and ground tracks, a time scrubber running up to 3000×, and an altitude-by-inclination census that exposes the hidden structure of the sky. Rather than freezing satellite positions, it ships the orbital elements and solves Kepler's equation in the page, so it stays live indefinitely with no network. Every number drills down to the six elements behind it, and objects on wild ellipses are drawn as perigee-to-apogee lines instead of points.",
+      "tags": [
+        "space",
+        "orbital mechanics",
+        "data viz",
+        "globe"
+      ],
+      "sources": [
+        {
+          "name": "CelesTrak two-line element sets",
+          "url": "https://celestrak.org",
+          "licence": "check redistribution terms before re-hosting the data"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "canvas",
+        "hand-written Keplerian propagator"
+      ],
+      "hasSource": "lost-reproducible",
+      "bytes": 184110,
+      "published": false,
+      "repo": null,
+      "live": null
+    },
+    {
+      "slug": "daybook",
+      "title": "Daybook",
+      "favicon": "🌡️",
+      "built": "2026-09-04",
+      "tagline": "Eighty-five years of daily weather, drawn as a strip chart and played as sound.",
+      "blurb": "Three NOAA stations within 21 km of one another, one hairline per day from that morning's low to that afternoon's high, inked by departure from normal — and then played out loud. Pitch is temperature, the high voice is the afternoon and the low voice is the overnight, rain is filtered noise and snow a chime. Underneath runs a drone tracking the five-year trailing anomaly: mute everything else and the trend becomes a bass note that climbs across the century. At every station the overnight low rose two to three times faster than the afternoon high.",
+      "tags": [
+        "climate",
+        "sonification",
+        "NOAA",
+        "data viz"
+      ],
+      "sources": [
+        {
+          "name": "NOAA NCEI GHCN-Daily (stations USC00182325, USC00180700, USW00013743)",
+          "url": "https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily",
+          "licence": "US Government public domain"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "canvas",
+        "Web Audio API"
+      ],
+      "hasSource": "lost-reproducible",
+      "bytes": 1036859,
+      "published": false,
+      "repo": null,
+      "live": null
+    },
+    {
+      "slug": "mermaid-medic",
+      "title": "Mermaid Medic",
+      "favicon": "🧜",
+      "built": "2026-09-03",
+      "tagline": "A linter and live renderer for Mermaid architecture diagrams.",
+      "blurb": "Paste a .mmd file and get it checked against a strict convention set — quoted labels, safe node IDs, balanced subgraph/end, no stray fences — then rendered live. One-click auto-fix repairs violations, including renaming an unsafe ID everywhere it appears across both node definitions and edges, which is the failure that silently breaks a diagram.",
+      "tags": [
+        "developer tool",
+        "mermaid",
+        "documentation",
+        "linter"
+      ],
+      "sources": [],
+      "stack": [
+        "vanilla JS",
+        "mermaid.js 10.9.1 (cdnjs)"
+      ],
+      "hasSource": "html-is-source",
+      "bytes": 23230,
+      "published": false,
+      "repo": null,
+      "live": null
+    },
+    {
+      "slug": "goat-synthesis",
+      "title": "GOAT Synthesis",
+      "favicon": "⭐",
+      "built": "2026-09-03",
+      "tagline": "The men's tennis GOAT debate, run as a systematic review.",
+      "blurb": "Five Masters-era greats scored across eight criteria of real ATP data, with weight-the-evidence sliders that re-rank the field live, preset lenses for each common argument, and a Monte-Carlo sensitivity analysis over 10,000 random weightings. The honest result is baked in rather than rigged: by the recorded numbers one player wins in 99.9% of weightings, and the interesting part is what the numbers don't capture.",
+      "tags": [
+        "tennis",
+        "evidence synthesis",
+        "interactive",
+        "monte carlo"
+      ],
+      "sources": [
+        {
+          "name": "ATP records, web-verified at build time",
+          "url": "https://www.atptour.com",
+          "licence": "cited, not redistributed"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "no dependencies"
+      ],
+      "hasSource": "html-is-source",
+      "bytes": 25458,
+      "published": false,
+      "repo": null,
+      "live": null
+    }
+  ]
+}
