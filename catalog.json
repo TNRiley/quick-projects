@@ -34,9 +34,9 @@
       ],
       "hasSource": true,
       "bytes": 12851381,
-      "published": false,
-      "repo": null,
-      "live": null
+      "published": true,
+      "repo": "https://github.com/TNRiley/still-cited",
+      "live": "https://tnriley.github.io/still-cited/"
     },
     {
       "slug": "overhead",
