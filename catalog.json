@@ -1,7 +1,51 @@
 {
-  "generated": "2026-09-05",
+  "generated": "2026-09-06",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "unforced",
+      "title": "Unforced Error",
+      "favicon": "🎾",
+      "built": "2026-09-06",
+      "published": false,
+      "tagline": "19,203 app-store reviews of racquet-sport apps, screened and coded like a systematic review.",
+      "blurb": "Every app in the racquet-sport corner of the App Store and Google Play, found by keyword, screened against a published rule, and its reviews coded by a codebook you can edit on the page — change a regular expression and all 19,203 reviews recode. The finding: nothing that costs an app stars is a feature. Login, price, crashes and ads sit up to two stars below the corpus mean, while the topics that turn up in the happiest reviews are the ones a product manager files as complaints — doubles support, a watch app, a CSV export. People ask you for features at four and five stars. They leave one star over a login that will not take. Half the build failed and is documented: Apple 403'd its review feed and four other routes to the same text were tried and closed.",
+      "tags": [
+        "app store",
+        "text mining",
+        "systematic review",
+        "faceted search",
+        "codebook"
+      ],
+      "sources": [
+        {
+          "name": "Apple iTunes Search API (app metadata, US storefront)",
+          "url": "https://itunes.apple.com/search",
+          "licence": "Apple public endpoint; metadata used for research, not redistributed in bulk"
+        },
+        {
+          "name": "Apple customer-reviews RSS feed",
+          "url": "https://itunes.apple.com/us/rss/customerreviews/",
+          "licence": "Apple public endpoint — returned 403 throughout this build; no review text retrieved"
+        },
+        {
+          "name": "Google Play store listings and PlayStoreUi batchexecute RPC",
+          "url": "https://play.google.com/store/apps/",
+          "licence": "public store pages; review text quoted for research and attributed to its app"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "gzip + DecompressionStream payload",
+        "canvas",
+        "inline SVG",
+        "live regex coding"
+      ],
+      "hasSource": true,
+      "bytes": 1265395,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "still-cited",
       "title": "Still Cited",

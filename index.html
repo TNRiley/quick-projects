@@ -169,7 +169,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
   </div>
 </header>
 
-<div class="strip"><div><div class="v">6 / 6</div><div class="k">projects published so far, each built end to end in a single session</div></div><div><div class="v">18.5 MB</div><div class="k">of self-contained HTML — no build step, no server, no runtime network</div></div><div><div class="v">6</div><div class="k">public datasets pulled at build time and baked in</div></div><div><div class="v">2026-09 – 2026-09</div><div class="k">first and latest</div></div></div>
+<div class="strip"><div><div class="v">6 / 7</div><div class="k">projects published so far, each built end to end in a single session</div></div><div><div class="v">19.8 MB</div><div class="k">of self-contained HTML — no build step, no server, no runtime network</div></div><div><div class="v">9</div><div class="k">public datasets pulled at build time and baked in</div></div><div><div class="v">2026-09 – 2026-09</div><div class="k">first and latest</div></div></div>
 
 <section class="why">
   <div>
@@ -187,7 +187,29 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 <section class="blk">
   <h2 class="sec disp">The shelf</h2>
   <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed &mdash; that part is not optional.</p>
-  <div class="grid"><article class="card">
+  <div class="grid"><article class="card unpublished">
+  
+  <div class="plate"><canvas data-plate="unforced" aria-hidden="true"></canvas>
+    <span class="glyph" aria-hidden="true">🎾</span></div>
+  <div class="cbody">
+    <h2>Unforced Error</h2>
+    <p class="tag-line">19,203 app-store reviews of racquet-sport apps, screened and coded like a systematic review.</p>
+    <p class="blurb">Every app in the racquet-sport corner of the App Store and Google Play, found by keyword, screened against a published rule, and its reviews coded by a codebook you can edit on the page — change a regular expression and all 19,203 reviews recode. The finding: nothing that costs an app stars is a feature. Login, price, crashes and ads sit up to two stars below the corpus mean, while the topics that turn up in the happiest reviews are the ones a product manager files as complaints — doubles support, a watch app, a CSV export. People ask you for features at four and five stars. They leave one star over a login that will not take. Half the build failed and is documented: Apple 403&#x27;d its review feed and four other routes to the same text were tried and closed.</p>
+    <div class="tags"><span class="tag">app store</span><span class="tag">text mining</span><span class="tag">systematic review</span><span class="tag">faceted search</span><span class="tag">codebook</span></div>
+    <div class="meta">
+      <div class="k">Card</div>
+      <dl>
+        <div><dt>First published</dt><dd>2026-09-06</dd></div>
+        <div><dt>Page weight</dt><dd>1.3 MB</dd></div>
+        <div><dt>Built with</dt><dd>vanilla JS, gzip + DecompressionStream payload, canvas, inline SVG, live regex coding</dd></div>
+        <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
+      </dl>
+      <div class="k">Data</div><ul class="srcs"><li><a href="https://itunes.apple.com/search" target="_blank" rel="noopener noreferrer">Apple iTunes Search API (app metadata, US storefront)</a><span class="lic">Apple public endpoint; metadata used for research, not redistributed in bulk</span></li><li><a href="https://itunes.apple.com/us/rss/customerreviews/" target="_blank" rel="noopener noreferrer">Apple customer-reviews RSS feed</a><span class="lic">Apple public endpoint — returned 403 throughout this build; no review text retrieved</span></li><li><a href="https://play.google.com/store/apps/" target="_blank" rel="noopener noreferrer">Google Play store listings and PlayStoreUi batchexecute RPC</a><span class="lic">public store pages; review text quoted for research and attributed to its app</span></li></ul>
+    </div>
+    <div class="acts"><span class="btn pending">Not published yet</span></div>
+  </div>
+</article>
+<article class="card">
   <a class="hit" href="https://tnriley.github.io/still-cited/" aria-label="Open Still Cited"></a>
   <div class="plate"><canvas data-plate="still-cited" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">📄</span></div>
@@ -326,7 +348,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
   <p class="sublede">Every external dataset used across the collection, with the licence it carries and the projects that draw on it. Each page repeats this in its own methods panel, in more detail and with the limitations attached.</p>
   <div class="scroller"><table>
     <thead><tr><th>Dataset</th><th>Licence</th><th>Used by</th></tr></thead>
-    <tbody><tr><td><a href="https://www.atptour.com" target="_blank" rel="noopener noreferrer">ATP records, web-verified at build time</a></td><td class="lic-cell">cited, not redistributed</td><td><a class="pill" href="https://tnriley.github.io/goat-synthesis/">GOAT Synthesis</a></td></tr><tr><td><a href="https://celestrak.org" target="_blank" rel="noopener noreferrer">CelesTrak two-line element sets</a></td><td class="lic-cell">check redistribution terms before re-hosting the data</td><td><a class="pill" href="https://tnriley.github.io/overhead/">Overhead</a></td></tr><tr><td><a href="https://www.loc.gov/collections/chronicling-america/" target="_blank" rel="noopener noreferrer">Chronicling America, Library of Congress</a></td><td class="lic-cell">US Library of Congress — public domain</td><td><a class="pill" href="https://tnriley.github.io/at-large/">At Large</a></td></tr><tr><td><a href="https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily" target="_blank" rel="noopener noreferrer">NOAA NCEI GHCN-Daily (stations USC00182325, USC00180700, USW00013743)</a></td><td class="lic-cell">US Government public domain</td><td><a class="pill" href="https://tnriley.github.io/daybook/">Daybook</a></td></tr><tr><td><a href="https://openalex.org" target="_blank" rel="noopener noreferrer">OpenAlex</a></td><td class="lic-cell">CC0</td><td><a class="pill" href="https://tnriley.github.io/still-cited/">Still Cited</a></td></tr><tr><td><a href="https://api.labs.crossref.org/data/retractionwatch" target="_blank" rel="noopener noreferrer">Retraction Watch database, distributed by Crossref</a></td><td class="lic-cell">CC0</td><td><a class="pill" href="https://tnriley.github.io/still-cited/">Still Cited</a></td></tr></tbody>
+    <tbody><tr><td><a href="https://www.atptour.com" target="_blank" rel="noopener noreferrer">ATP records, web-verified at build time</a></td><td class="lic-cell">cited, not redistributed</td><td><a class="pill" href="https://tnriley.github.io/goat-synthesis/">GOAT Synthesis</a></td></tr><tr><td><a href="https://itunes.apple.com/us/rss/customerreviews/" target="_blank" rel="noopener noreferrer">Apple customer-reviews RSS feed</a></td><td class="lic-cell">Apple public endpoint — returned 403 throughout this build; no review text retrieved</td><td><span class="pill muted">Unforced Error</span></td></tr><tr><td><a href="https://itunes.apple.com/search" target="_blank" rel="noopener noreferrer">Apple iTunes Search API (app metadata, US storefront)</a></td><td class="lic-cell">Apple public endpoint; metadata used for research, not redistributed in bulk</td><td><span class="pill muted">Unforced Error</span></td></tr><tr><td><a href="https://celestrak.org" target="_blank" rel="noopener noreferrer">CelesTrak two-line element sets</a></td><td class="lic-cell">check redistribution terms before re-hosting the data</td><td><a class="pill" href="https://tnriley.github.io/overhead/">Overhead</a></td></tr><tr><td><a href="https://www.loc.gov/collections/chronicling-america/" target="_blank" rel="noopener noreferrer">Chronicling America, Library of Congress</a></td><td class="lic-cell">US Library of Congress — public domain</td><td><a class="pill" href="https://tnriley.github.io/at-large/">At Large</a></td></tr><tr><td><a href="https://play.google.com/store/apps/" target="_blank" rel="noopener noreferrer">Google Play store listings and PlayStoreUi batchexecute RPC</a></td><td class="lic-cell">public store pages; review text quoted for research and attributed to its app</td><td><span class="pill muted">Unforced Error</span></td></tr><tr><td><a href="https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily" target="_blank" rel="noopener noreferrer">NOAA NCEI GHCN-Daily (stations USC00182325, USC00180700, USW00013743)</a></td><td class="lic-cell">US Government public domain</td><td><a class="pill" href="https://tnriley.github.io/daybook/">Daybook</a></td></tr><tr><td><a href="https://openalex.org" target="_blank" rel="noopener noreferrer">OpenAlex</a></td><td class="lic-cell">CC0</td><td><a class="pill" href="https://tnriley.github.io/still-cited/">Still Cited</a></td></tr><tr><td><a href="https://api.labs.crossref.org/data/retractionwatch" target="_blank" rel="noopener noreferrer">Retraction Watch database, distributed by Crossref</a></td><td class="lic-cell">CC0</td><td><a class="pill" href="https://tnriley.github.io/still-cited/">Still Cited</a></td></tr></tbody>
   </table></div>
 </section>
 
@@ -362,7 +384,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </section>
 
 <footer>
-  Generated 2026-09-05 by <span class="mono">tools/build_catalog.py</span> from each project's meta.json &mdash; not hand-edited.<br>
+  Generated 2026-09-06 by <span class="mono">tools/build_catalog.py</span> from each project's meta.json &mdash; not hand-edited.<br>
   Built with Claude Code. Code MIT; data under the licences listed above. Go to the sources before citing any of it.
 </footer>
 </div>
@@ -500,7 +522,7 @@ const PLATES = {
     });
   }
 };
-const SLUGS = ["still-cited", "at-large", "overhead", "daybook", "mermaid-medic", "goat-synthesis"];
+const SLUGS = ["unforced", "still-cited", "at-large", "overhead", "daybook", "mermaid-medic", "goat-synthesis"];
 function plate(slug){ return PLATES[slug] || PLATES["mermaid-medic"]; }
 
 function fit(cv){
