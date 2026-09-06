@@ -47,6 +47,46 @@
       "live": "https://tnriley.github.io/unforced/"
     },
     {
+      "slug": "thirty-seven",
+      "title": "Thirty-Seven Waves",
+      "favicon": "🌊",
+      "built": "2026-09-06",
+      "published": true,
+      "tagline": "Every US tide gauge taken apart into the 37 waves it is made of, and put back together in the browser.",
+      "blurb": "NOAA publishes, for each of its tide gauges, the amplitude and phase of thirty-seven waves — the moon twice a day, the sun, the moon's elliptical orbit, the tilt of the earth, and ten shallow-water distortions that are not astronomy at all. Add them up and you have the tide, for any date, with no measurement of the ocean. This page ships those coefficients for 1,303 gauges and does the adding itself: a map with no coastline in it, where the country appears because the gauges are on the water; an instrument that switches the waves on one at a time so you can watch the tide assemble; and eight days when the sum was wrong, where subtracting the moon from the record leaves the storm — Isabel putting 7.9 ft of unexpected water into the Potomac at Washington, Sandy 9.3 ft at the Battery, Ian pulling 5.8 ft out of Tampa Bay. The model agrees with NOAA's own tide tables to about a minute and a hundredth of a foot, but it did not start there: it was right in 2026 and 90 minutes wrong in 2003, and finding out why meant measuring NOAA's node factors across a full 18.6-year cycle and discovering a single mis-remembered astronomical constant.",
+      "tags": [
+        "tides",
+        "NOAA",
+        "harmonic analysis",
+        "physics in the browser",
+        "storm surge",
+        "instrument UI"
+      ],
+      "sources": [
+        {
+          "name": "NOAA CO-OPS harmonic constituents (37 per station, 1,303 stations)",
+          "url": "https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations/8594900/harcon.json",
+          "licence": "US Government public domain"
+        },
+        {
+          "name": "NOAA CO-OPS observed water level and official predictions",
+          "url": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter",
+          "licence": "US Government public domain"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "hand-written harmonic tide engine",
+        "gzip + DecompressionStream payload",
+        "canvas",
+        "empirical calibration against NOAA"
+      ],
+      "hasSource": true,
+      "bytes": 362480,
+      "repo": "https://github.com/TNRiley/thirty-seven",
+      "live": "https://tnriley.github.io/thirty-seven/"
+    },
+    {
       "slug": "headwaters",
       "title": "Headwaters",
       "favicon": "💧",
