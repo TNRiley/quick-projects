@@ -47,6 +47,56 @@
       "live": "https://tnriley.github.io/unforced/"
     },
     {
+      "slug": "headwaters",
+      "title": "Headwaters",
+      "favicon": "💧",
+      "built": "2026-09-06",
+      "tagline": "Open data sources, described well enough to use from a shell — and probed, so the catalogue knows what still answers.",
+      "blurb": "Forty open data sources, each one a JSON record with its licence, auth, rate limit, the traps that cost an hour, copy-pasteable recipes, and — the part nobody else keeps — small real requests with stated expectations that a script re-runs to prove the endpoint still works. Building it turned up six live failures nothing else documents: data.gov's CKAN API 404s on every documented path while its API gateway authenticates your key and redirects you to the dead origin; NOAA's GHCN station list and SWPC's solar-wind feed both moved; Jeff Sackmann's tennis_atp and tennis_wta, the basis of most public tennis analytics, are gone; the Census API without a key returns an HTML page with HTTP 200 so the failure reaches you as a JSON parse error; and the GitHub contents API silently caps a directory at 1,000 entries, which hid 199 datasets from this repository's own first harvest. A companion harvester pulls 3,600 candidates from Data Is Plural, TidyTuesday and the AWS open-data registry into a queue to work through.",
+      "tags": [
+        "open data",
+        "catalog",
+        "tooling",
+        "link rot",
+        "faceted search",
+        "meta"
+      ],
+      "sources": [
+        {
+          "name": "Data Is Plural archive (Jeremy Singer-Vine)",
+          "url": "https://www.data-is-plural.com/",
+          "licence": "archive released for reuse; headline, links and a short excerpt only"
+        },
+        {
+          "name": "TidyTuesday (Data Science Learning Community)",
+          "url": "https://github.com/rfordatascience/tidytuesday",
+          "licence": "per-week; each readme names the original source"
+        },
+        {
+          "name": "Registry of Open Data on AWS",
+          "url": "https://registry.opendata.aws/",
+          "licence": "registry metadata CC-BY 4.0"
+        },
+        {
+          "name": "40 catalogued endpoints, probed live",
+          "url": "https://tnriley.github.io/headwaters/",
+          "licence": "each source keeps its own licence, recorded in its record; the catalogue records are CC0"
+        }
+      ],
+      "stack": [
+        "python 3.9 stdlib",
+        "vanilla JS",
+        "JSON Schema",
+        "no dependencies"
+      ],
+      "hasSource": true,
+      "keepReadme": true,
+      "bytes": 155900,
+      "published": false,
+      "repo": null,
+      "live": null
+    },
+    {
       "slug": "still-cited",
       "title": "Still Cited",
       "favicon": "📄",

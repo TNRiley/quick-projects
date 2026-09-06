@@ -197,6 +197,7 @@ table — is generated from it.
 | `published` | leave `false`; the push script flips it |
 | `sources` | every external dataset, each with a real licence string. `[]` if none. |
 | `hasSource` | `true` (pipeline in `src/`), `"html-is-source"` (no pipeline), or `"lost-reproducible"` (pipeline gone) — be honest, the catalog shows it |
+| `keepReadme` | optional. `true` stops `scaffold_project.py` overwriting `README.md`, for a project that is a tool rather than one page and needs a README about running it. Headwaters is the first. |
 
 ---
 

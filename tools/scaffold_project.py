@@ -133,7 +133,11 @@ def scaffold(slug, do_git=True):
     m["bytes"] = os.path.getsize(os.path.join(d, "index.html"))
     m.setdefault("published", False)
     json.dump(m, open(os.path.join(d, "meta.json"), "w", encoding="utf-8", newline="\n"), indent=2, ensure_ascii=False)
-    open(os.path.join(d, "README.md"), "w", encoding="utf-8", newline="\n").write(readme(m))
+    # Most projects are one page and the generated README says everything there is to say.
+    # A project that is a *tool* needs a README about running it, so meta.json may set
+    # "keepReadme": true and hand-maintain its own.
+    if not m.get("keepReadme"):
+        open(os.path.join(d, "README.md"), "w", encoding="utf-8", newline="\n").write(readme(m))
     open(os.path.join(d, "LICENSE"), "w", encoding="utf-8", newline="\n").write(MIT.format(year=m["built"][:4], name=AUTHOR_NAME))
     open(os.path.join(d, ".gitignore"), "w", encoding="utf-8", newline="\n").write(GITIGNORE)
     open(os.path.join(d, ".nojekyll"), "w", encoding="utf-8", newline="\n").write("")   # Pages: serve files as-is, no Jekyll pass
