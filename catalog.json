@@ -54,7 +54,7 @@
         "ArcGIS REST paged harvest"
       ],
       "hasSource": true,
-      "bytes": 7143433,
+      "bytes": 7144354,
       "repo": null,
       "live": null
     },
@@ -228,7 +228,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 3529270,
+      "bytes": 3546871,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"
