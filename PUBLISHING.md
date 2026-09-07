@@ -247,16 +247,19 @@ The identity is set **per repo**, not globally.
 
 ## 5. Push it
 
-> On the Windows PC, skip to `publish_to_github.sh` — `gh` is installed there, it selects the
-> TNRiley account by itself, and this section's manual dance is Mac-only.
-> See [0b. Working on Windows](#0b-working-on-windows).
+> **As of 2026-09-07 `gh` is installed on the Mac too** (`~/.local/bin/gh`, authenticated as
+> **TNRiley**, which is also the globally active account here). So on *both* machines the answer
+> is the same: run `publish_to_github.sh` and skip everything below. It creates the repo, pushes
+> and enables Pages in one pass, with no browser step and no pasted token. The manual dance that
+> follows is kept only as the fallback if `gh` ever goes away — it was the Mac's only route until
+> this date, which is why older notes say the Mac has no `gh`.
 
 **Ask Trevor before pushing.** A GitHub Pages site is public on the internet even from a private
 repo, and free accounts can only publish Pages from public repos at all — "push it" and "publish
 it" are the same decision.
 
-There is no `gh` CLI and no Homebrew on this machine, but `osxkeychain` is the system credential
-helper and holds a GitHub credential, so **plain `git push` works** — with one catch.
+*(Fallback route, only if `gh` is unavailable.)* `osxkeychain` is the system credential helper and
+holds a GitHub credential, so **plain `git push` works** — with one catch.
 
 > **Two accounts, one keychain.** The stored credential is for **TRileyNOAA** (the work account),
 > but these repos live under **TNRiley**. Left alone, git hands the work credential to a TNRiley
@@ -290,7 +293,13 @@ Then Trevor turns on Pages: **Settings → Pages → Source: Deploy from a branc
 The site appears at `https://tnriley.github.io/<slug>/` within a minute or two.
 
 `catalog/tools/publish_to_github.sh` automates all of this — creating the repo, pushing, enabling
-Pages — but it needs the `gh` CLI, which is not installed yet. Until then, use the manual steps.
+Pages. It is now the route on both machines; the manual steps above are the fallback.
+
+**Note it walks every project, not just the slug you pass**, re-pushing any that are behind and
+reporting `repo exists` / `pages already on` for the rest. That is harmless, but the new project's
+lines scroll past early — check the tail for your slug, or confirm with
+`gh repo view TNRiley/<slug>`. It also flips `published` in `meta.json`, so **commit that change
+and re-run `build_catalog.py`** afterwards or the catalog card stays stale.
 
 ---
 
