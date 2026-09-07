@@ -334,6 +334,78 @@ const PLATES = {
     g.strokeStyle = "rgba(255,255,255,.16)"; g.lineWidth = 1;
     for (let k = 1; k < 4; k++){ const x = w * k / 4; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, h); g.stroke(); }
   },
+  "thirty-seven"(g, w, h, t){
+    /* one tide record pulled apart: the constituents faint, their sum in bold */
+    const r = rng("thirty-seven"), comps = [];
+    for (let k = 0; k < 11; k++)
+      comps.push({ f: 1.1 + k * 1.4 + r() * 0.8, a: (0.30 - k * 0.019) * h * 0.40, p: r() * 6.283 });
+    const drift = REDUCED ? 0 : t / 2600, mid = h * 0.52;
+    comps.forEach((c, i) => {
+      g.strokeStyle = `rgba(112,172,208,${0.30 - i * 0.017})`; g.lineWidth = 1;
+      g.beginPath();
+      for (let x = 0; x <= w; x += 2){
+        const y = mid + Math.sin((x / w) * c.f * 6.283 + c.p + drift * (1 + i * 0.08)) * c.a;
+        x ? g.lineTo(x, y) : g.moveTo(x, y);
+      }
+      g.stroke();
+    });
+    g.strokeStyle = "rgba(152,228,238,.92)"; g.lineWidth = 1.8;
+    g.beginPath();
+    for (let x = 0; x <= w; x += 2){
+      let y = mid;
+      comps.forEach((c, i) => { y += Math.sin((x / w) * c.f * 6.283 + c.p + drift * (1 + i * 0.08)) * c.a * 0.42; });
+      x ? g.lineTo(x, y) : g.moveTo(x, y);
+    }
+    g.stroke();
+  },
+  "unforced"(g, w, h, t){
+    /* a review corpus in five star bands; the codebook sweeps through and recodes */
+    const r = rng("unforced"), rows = 5, rh = h / rows;
+    const sweep = REDUCED ? w * 0.58 : ((t / 30) % (w * 1.45)) - w * 0.22;
+    for (let row = 0; row < rows; row++){
+      const stars = rows - row;                       /* five at the top, one at the foot */
+      const density = stars >= 4 ? 0.92 : stars === 1 ? 0.66 : 0.30;
+      const y0 = row * rh + rh * 0.20, bh = rh * 0.58;
+      for (let x = 6; x < w - 6; x += 3.4){
+        if (r() > density) continue;
+        const tall = bh * (0.32 + r() * 0.68);
+        const hit = Math.abs(x - sweep) < 24;
+        g.fillStyle = hit ? `rgba(226,178,86,${0.52 + r() * 0.42})`
+                          : `rgba(122,152,180,${0.15 + r() * 0.26})`;
+        g.fillRect(x, y0 + (bh - tall), 2, tall);
+      }
+      if (row){ g.strokeStyle = "rgba(255,255,255,.05)"; g.lineWidth = 1;
+                g.beginPath(); g.moveTo(0, row * rh + .5); g.lineTo(w, row * rh + .5); g.stroke(); }
+    }
+  },
+  "headwaters"(g, w, h, t){
+    /* tributaries converging on one channel - and two that dry up before they arrive */
+    const r = rng("headwaters"), n = 9, outX = w * 0.92, outY = h * 0.5;
+    const bez = (p0, p1, p2, p3, s) => { const m = 1 - s;
+      return m*m*m*p0 + 3*m*m*s*p1 + 3*m*s*s*p2 + s*s*s*p3; };
+    for (let i = 0; i < n; i++){
+      const y0 = h * (0.09 + (i / (n - 1)) * 0.82) + (r() - 0.5) * 7;
+      const dry = i === 2 || i === 6;                 /* every link list rots; some strands stop */
+      const end = dry ? w * (0.40 + r() * 0.18) : outX;
+      const endY = dry ? (y0 + outY) / 2 : outY;
+      const c1x = w * 0.34, c2x = w * 0.58, c2y = outY + (y0 - outY) * 0.22;
+      const grd = g.createLinearGradient(0, 0, end, 0);
+      grd.addColorStop(0, "rgba(95,179,240,.10)");
+      grd.addColorStop(0.55, dry ? "rgba(140,160,175,.30)" : "rgba(95,179,240,.44)");
+      grd.addColorStop(1, dry ? "rgba(140,160,175,0)" : "rgba(126,224,196,.66)");
+      g.strokeStyle = grd; g.lineWidth = dry ? 1 : 1.2;
+      g.beginPath(); g.moveTo(0, y0);
+      g.bezierCurveTo(c1x, y0, c2x, c2y, end, endY);
+      g.stroke();
+      if (!REDUCED && !dry){
+        const u = ((t / 3400) + i * 0.115) % 1;
+        g.fillStyle = "rgba(196,242,255,.85)";
+        g.beginPath(); g.arc(bez(0, c1x, c2x, end, u), bez(y0, y0, c2y, endY, u), 1.9, 0, 6.283); g.fill();
+      }
+    }
+    g.strokeStyle = "rgba(126,224,196,.9)"; g.lineWidth = 2;
+    g.beginPath(); g.moveTo(outX, outY - h * 0.11); g.lineTo(outX, outY + h * 0.11); g.stroke();
+  },
   "mermaid-medic"(g, w, h, t){
     const nodes = [[.14,.28],[.14,.72],[.42,.5],[.70,.24],[.70,.5],[.70,.76],[.92,.5]].map(p => [p[0]*w, p[1]*h]);
     const edges = [[0,2],[1,2],[2,3],[2,4],[2,5],[3,6],[4,6],[5,6]];
