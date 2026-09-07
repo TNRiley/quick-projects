@@ -59,6 +59,8 @@ SOFTWARE.
 GITIGNORE = """.DS_Store
 *.pyc
 __pycache__/
+# fetched-and-cached intermediates — a project's own scripts refetch them
+.cache/
 # raw downloads and intermediates — regenerate them, don't commit them
 *.csv
 *.dly
