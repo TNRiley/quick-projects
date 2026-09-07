@@ -1,7 +1,47 @@
 {
-  "generated": "2026-09-06",
+  "generated": "2026-09-07",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "ahead-of-season",
+      "title": "Ahead of Season",
+      "favicon": "🐦",
+      "built": "2026-09-07",
+      "published": true,
+      "tagline": "Twenty-five springs of bird sightings against the temperature each spring actually had — with two birds that never migrate carried along as a lie detector.",
+      "blurb": "Do migrants arrive earlier in warm springs? This lines up 1.9 million GBIF sighting records — 13 species across Washington, Boston and Atlanta, 2000 to 2024 — against Open-Meteo's ERA5 temperature history for the same ground, and lets you re-sort the twenty-five years by warmth instead of by number to see whether the arrival dates fall into line. Because sightings measure birdwatchers as much as birds, every count is divided by all bird records logged in the same box on the same day, and two year-round residents are run through the identical pipeline as controls: a Northern Cardinal cannot arrive in spring, so whatever shift the method reports for it is the method's own drift. In Washington that drift is −0.13 days/°C and the Baltimore Oriole's 0.65 days per degree stands; in Boston the residents drift +0.70 and the page flags the entire city rather than report it. The Ruby-throated Hummingbird shows nothing anywhere — it winters in Central America and departs on daylength, unable to perceive a warm North American spring, which is the mechanism behind phenological mismatch.",
+      "tags": [
+        "phenology",
+        "biodiversity",
+        "climate",
+        "observer bias",
+        "controls",
+        "data fusion"
+      ],
+      "sources": [
+        {
+          "name": "GBIF occurrence records (species and all-bird effort denominator)",
+          "url": "https://api.gbif.org/v1/occurrence/search",
+          "licence": "per-record CC0 / CC-BY / CC-BY-NC — honour each record's own licence"
+        },
+        {
+          "name": "Open-Meteo ERA5 reanalysis archive (daily 2 m max/min temperature)",
+          "url": "https://archive-api.open-meteo.com/v1/archive",
+          "licence": "CC-BY-4.0"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "hand-built SVG",
+        "GBIF facet=day histogram harvest",
+        "effort-normalised detection frequency",
+        "resident-species control cohort"
+      ],
+      "hasSource": true,
+      "bytes": 458654,
+      "repo": "https://github.com/TNRiley/ahead-of-season",
+      "live": "https://tnriley.github.io/ahead-of-season/"
+    },
     {
       "slug": "unforced",
       "title": "Unforced Error",
@@ -91,13 +131,14 @@
       "title": "Headwaters",
       "favicon": "💧",
       "built": "2026-09-06",
-      "tagline": "428 datasets worth working with, and the 40 sources they come from — classified, searchable, probed.",
-      "blurb": "Two catalogues in one. The dataset layer holds every TidyTuesday week since April 2018 - 428 published datasets, 814 data files and 8,575 column names - each with the curator's own pitch, the files it contains, the upstream publisher, and the article that prompted it, classified by subject, publisher and place so you can browse for something to work with rather than search for something you already know exists. The source layer holds 40 endpoints you can query repeatedly, each described well enough to use from a shell and carrying small real requests that a script re-runs to prove the endpoint still works. Building the source layer turned up six live failures nothing else documents, including data.gov's CKAN API 404ing on every documented path while its gateway authenticates your key and redirects you to the dead origin, and the GitHub contents API silently capping a directory at 1,000 entries - which hid 199 datasets from this repository's own harvest.",
+      "tagline": "2,371 datasets worth working with, and the 40 sources they come from — classified, searchable, probed.",
+      "blurb": "Two catalogues in one. The dataset layer holds 2,371 published datasets drawn from two aggregations that select for very different things - every TidyTuesday week since April 2018, which is tidy and teachable and comes with 8,575 column names, and ten years of Data Is Plural, which is odd and specific and global. Each record carries the curator's own pitch, the upstream publisher and the article that prompted it, classified by subject, publisher and place so you can browse for something to work with rather than search for something you already know exists; the 30 datasets both aggregations surfaced are one record with two sightings, and a facet filters on how a dataset was found. The source layer holds 40 endpoints you can query repeatedly, each described well enough to use from a shell and carrying small real requests that a weekly job re-runs to prove the endpoint still works. Building it turned up failures nothing else documents, including data.gov's CKAN API 404ing on every documented path while its gateway authenticates your key and redirects you to the dead origin.",
       "tags": [
         "open data",
         "catalog",
         "dataset discovery",
         "tidytuesday",
+        "data is plural",
         "faceted search",
         "tooling"
       ],
@@ -110,7 +151,7 @@
         {
           "name": "Data Is Plural archive (Jeremy Singer-Vine)",
           "url": "https://www.data-is-plural.com/",
-          "licence": "archive released for reuse; harvested as leads only - headline, links and a short excerpt"
+          "licence": "archive released for reuse; the prose is the author's - records quote at most a few sentences, with a link back to the edition"
         },
         {
           "name": "Registry of Open Data on AWS",
@@ -131,7 +172,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 1079302,
+      "bytes": 3529270,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"
