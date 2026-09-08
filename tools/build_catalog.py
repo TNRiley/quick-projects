@@ -6,7 +6,7 @@
 Writes catalog/index.html and catalog/catalog.json. Adding a project to the catalog
 means dropping a meta.json next to its index.html and re-running this.
 """
-import json, os, glob, datetime, html, sys
+import json, os, glob, datetime, html, re, sys
 
 def _workspace_root(start):
     """Walk up until we find the directory holding projects/ — so these scripts work
@@ -115,6 +115,20 @@ def build():
              (f"{len({s['name'] for m in ms for s in m.get('sources', [])})}", "public datasets pulled at build time and baked in"),
              (f"{dates[-1][:7]} – {dates[0][:7]}", "first and latest")]
     tpl = open(os.path.join(TOOLS, "catalog_template.html"), encoding="utf-8").read()
+
+    # Every project needs its own index plate. The template falls back to another
+    # project's motif when one is missing, which is invisible in the build and only
+    # shows up as two cards with identical artwork -- it has slipped through more
+    # than once. Fail here instead, naming the slug and where to add it.
+    defined = set(re.findall(r'^\s{2}"([a-z0-9-]+)"\(g, w, h, t\)\s*\{', tpl, re.M))
+    missing = [m["slug"] for m in ms if m["slug"] not in defined]
+    if missing:
+        raise SystemExit(
+            "no index plate for: %s\n"
+            "Add a motif keyed by that slug to PLATES in tools/catalog_template.html "
+            "(signature `\"<slug>\"(g, w, h, t){ ... }`), echoing that project's own "
+            "visual language. Without one the card silently reuses another project's "
+            "plate and two cards look identical." % ", ".join(missing))
     out = (tpl.replace("__CARDS__", "\n".join(card(m) for m in ms))
               .replace("__SOURCES__", sources_table(ms))
               .replace("__STATS__", "".join(
