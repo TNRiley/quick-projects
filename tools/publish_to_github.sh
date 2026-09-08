@@ -2,10 +2,15 @@
 # Create the GitHub repos, push, and turn on Pages. Idempotent — safe to re-run;
 # repos that already exist are pushed to, not recreated.
 #
-# Needs the GitHub CLI, authenticated as TNRiley:
+# Needs the GitHub CLI with TNRiley among its authenticated accounts:
 #     macOS:    brew install gh
 #     Windows:  winget install GitHub.cli
-#     both:     gh auth login && gh auth switch --user TNRiley
+#     both:     gh auth login          # as TNRiley; it does not have to be the active account
+#
+# Do NOT run `gh auth switch --user TNRiley` for this. TNRiley's token is pulled out of the
+# credential store and scoped to this process below, so the globally active account -- which
+# on the Windows machine is the TRileyNOAA work account -- is left exactly as it was. Switching
+# globally would work once and then quietly change the default for every other gh command.
 set -uo pipefail
 OWNER="TNRiley"
 PY="python3"; "$PY" -c "" >/dev/null 2>&1 || PY="python"
