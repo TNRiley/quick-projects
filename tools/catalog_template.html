@@ -528,6 +528,37 @@ const PLATES = {
     g.fillStyle = "rgba(122,80,46,.92)";
     g.beginPath(); g.arc(cx, cy, pith + 1.6, 0, Math.PI * 2); g.fill();
   },
+  "right-of-way"(g, w, h, t){
+    /* the altitude column from section 05: strike marks stacked against the
+       ground, dense in the first few hundred feet and thinning upward, with a
+       climb-out path drawn through them and the few marks it actually meets
+       lit in the damage colour */
+    const r = rng("right-of-way"), ground = h * 0.88;
+    g.strokeStyle = "rgba(150,165,180,.34)"; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(0, ground); g.lineTo(w, ground); g.stroke();
+    /* runway centreline dashes, receding */
+    g.strokeStyle = "rgba(150,165,180,.22)"; g.setLineDash([7, 9]);
+    g.beginPath(); g.moveTo(0, ground + 5); g.lineTo(w * .62, ground + 5); g.stroke();
+    g.setLineDash([]);
+    /* the climb-out: shallow at first, then away */
+    const path = x => ground - Math.pow(Math.max(0, x - w * .12) / (w * .88), 1.7) * (h * .80);
+    const marks = [];
+    for (let i = 0; i < 88; i++){
+      /* heights concentrated near the ground: cube of a uniform draw */
+      const u = r(), x = r() * w, y = ground - Math.pow(u, 3) * (h * .84);
+      marks.push([x, y, 1.2 + r() * 1.7]);
+    }
+    const sweep = REDUCED ? w * 0.72 : (w * 0.16) + ((t / 3400) % 1) * (w * 0.96);
+    marks.forEach(([x, y, rad]) => {
+      const near = Math.abs(y - path(x)) < 5 && x < sweep;
+      g.fillStyle = near ? "rgba(224,112,95,.95)" : "rgba(150,165,180,.58)";
+      g.beginPath(); g.arc(x, y, near ? rad + 1.1 : rad, 0, Math.PI * 2); g.fill();
+    });
+    g.strokeStyle = "rgba(224,112,95,.62)"; g.lineWidth = 1.4;
+    g.beginPath();
+    for (let x = 0; x <= sweep; x += 3) x ? g.lineTo(x, path(x)) : g.moveTo(x, path(x));
+    g.stroke();
+  },
   "mermaid-medic"(g, w, h, t){
     const nodes = [[.14,.28],[.14,.72],[.42,.5],[.70,.24],[.70,.5],[.70,.76],[.92,.5]].map(p => [p[0]*w, p[1]*h]);
     const edges = [[0,2],[1,2],[2,3],[2,4],[2,5],[3,6],[4,6],[5,6]];
