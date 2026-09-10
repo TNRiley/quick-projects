@@ -7,7 +7,7 @@
       "title": "Right of Way",
       "favicon": "🛬",
       "built": "2026-09-10",
-      "published": false,
+      "published": true,
       "tagline": "Reported collisions between American aircraft and American wildlife rose eightfold since 1990 — counted six ways, almost all of the growth is reports of nothing happening.",
       "blurb": "Every civil aircraft-wildlife collision reported in the United States since 1990 — 354,874 of them, harvested a month at a time from the FAA's own public export — counted six ways. The raw number of reports rises 687%, and the page exists to take that number apart: dividing by air-carrier departures only brings it down to 355%, because flying did not grow anything like eightfold, but counting only the strikes that damaged the aircraft brings it to 92%. Put the other way round, damage was indicated on 15.8% of reports in the first five years and 3.8% in the last five, so nearly every extra report is a report of nothing happening — and the reporting channel was rebuilt underneath the count in exactly that period, the paper form giving way to an electronic one that now carries four fifths of everything filed. The strictest series does fall by two thirds, and rather than bank the win the page shows you why not to trust it: the FAA re-grades damaging strikes from 'substantial' to 'minor, uncertain' around 2016, which is visible as a step in its own chart. Two other fields that looked like recoding-proof severity measures were tested and rejected on the same grounds. The species board is the other surprise: the most-struck animal in the file, the mourning dove, damages an aircraft 1.8% of the time; a white-tailed deer does it 81.7% of the time.",
       "tags": [
@@ -41,8 +41,8 @@
       ],
       "hasSource": true,
       "bytes": 435614,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/right-of-way",
+      "live": "https://tnriley.github.io/right-of-way/"
     },
     {
       "slug": "narrow-year",
