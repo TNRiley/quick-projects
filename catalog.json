@@ -1,7 +1,57 @@
 {
-  "generated": "2026-09-08",
+  "generated": "2026-09-10",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "narrow-year",
+      "title": "Narrow Year",
+      "favicon": "🪵",
+      "built": "2026-09-08",
+      "published": true,
+      "tagline": "2,474 tree-ring chronologies asked which years the world's trees all had a bad time at once — and whether those were the years the history books would predict.",
+      "blurb": "A tree ring is a date, because trees hundreds of miles apart put down the same pattern of fat and starved years. This draws real chronologies from the International Tree-Ring Data Bank as cross-sections you can read ring by ring, gives you the crossdating instrument itself — slide one site against another and watch the correlation lock at the true offset — and then pools all 2,474 sites into one series: the share of the world's trees that recorded an unusually narrow ring each year from 925 to 2006, with the wide-year share carried underneath as a control. The result is a null. Across the 42 largest eruptions whose dates come from someone writing them down at the time, the narrow share lifts by 1.3 points, from 8.9% to 10.1%; 1816, the year without a summer, comes in below average narrow worldwide. The explanation is about the archive rather than about trees: 1,167 of the 2,474 sites stand in western North America, where 1816 was a superb growing season — 1.4% of sites narrow against 32.7% wide — so the one region that did record it, eastern North America at 13.9% narrow, is averaged into silence. Samalas in 1257 is the counter-example that proves the method works, reaching 36.6% narrow against 2.4% wide in the western sites the year after it erupted.",
+      "tags": [
+        "dendrochronology",
+        "paleoclimate",
+        "volcanism",
+        "sampling bias",
+        "controls",
+        "canvas rendering",
+        "instrument UI"
+      ],
+      "sources": [
+        {
+          "name": "International Tree-Ring Data Bank site chronologies (ITRDB v7.13), NOAA Paleoclimatology",
+          "url": "https://www.ncei.noaa.gov/pub/data/paleo/treering/chronologies/",
+          "licence": "US Government public domain; cite the original contributor of each chronology"
+        },
+        {
+          "name": "NOAA Paleoclimatology study metadata (site coordinates and species)",
+          "url": "https://www.ncei.noaa.gov/access/paleo-search/study/search.json",
+          "licence": "US Government public domain"
+        },
+        {
+          "name": "Global Volcanism Program, Holocene eruption catalogue, Smithsonian Institution",
+          "url": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows",
+          "licence": "cited, not redistributed in bulk"
+        },
+        {
+          "name": "Natural Earth 110m land outline (via world-atlas)",
+          "url": "https://www.naturalearthdata.com",
+          "licence": "public domain"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "canvas",
+        "typed-array payload",
+        "numpy"
+      ],
+      "hasSource": true,
+      "bytes": 4336408,
+      "repo": "https://github.com/TNRiley/narrow-year",
+      "live": "https://tnriley.github.io/narrow-year/"
+    },
     {
       "slug": "redline",
       "title": "Redline",

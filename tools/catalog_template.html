@@ -497,6 +497,37 @@ const PLATES = {
     });
   },
 
+  "narrow-year"(g, w, h, t){
+    /* a cut stump: growth rings from an off-centre pith, the starved years
+       picked out in rust, and a slow sweep outward standing in for reading a
+       core from the middle out */
+    const r = rng("narrow-year");
+    const cx = w * 0.42, cy = h * 0.54;
+    const maxR = Math.hypot(Math.max(cx, w - cx), Math.max(cy, h - cy));
+    const n = 78, widths = [], narrow = [];
+    for (let i = 0; i < n; i++){
+      const v = 0.35 + r() * 1.25, bad = r() < 0.11;
+      widths.push(bad ? v * 0.28 : v); narrow.push(bad);
+    }
+    const tot = widths.reduce((a, b) => a + b, 0), pith = maxR * 0.02;
+    const sweep = REDUCED ? -1 : ((t / 2600) % 1) * maxR;
+    let rad = pith;
+    for (let i = 0; i < n; i++){
+      const dr = (maxR - pith) * widths[i] / tot, mid = rad + dr / 2;
+      const lit = sweep < 0 ? 0 : Math.max(0, 1 - Math.abs(mid - sweep) / (maxR * 0.16));
+      if (narrow[i]){
+        g.strokeStyle = "rgba(226,102,66," + (0.52 + lit * 0.40) + ")";
+        g.lineWidth = Math.max(1.1, dr);
+      } else {
+        g.strokeStyle = "rgba(214,176,124," + (0.12 + r() * 0.10 + lit * 0.15) + ")";
+        g.lineWidth = Math.max(0.7, dr * 0.85);
+      }
+      g.beginPath(); g.arc(cx, cy, mid, 0, Math.PI * 2); g.stroke();
+      rad += dr;
+    }
+    g.fillStyle = "rgba(122,80,46,.92)";
+    g.beginPath(); g.arc(cx, cy, pith + 1.6, 0, Math.PI * 2); g.fill();
+  },
   "mermaid-medic"(g, w, h, t){
     const nodes = [[.14,.28],[.14,.72],[.42,.5],[.70,.24],[.70,.5],[.70,.76],[.92,.5]].map(p => [p[0]*w, p[1]*h]);
     const edges = [[0,2],[1,2],[2,3],[2,4],[2,5],[3,6],[4,6],[5,6]];
