@@ -1,7 +1,46 @@
 {
-  "generated": "2026-09-10",
+  "generated": "2026-09-11",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "momentum",
+      "title": "Momentum",
+      "favicon": "🎾",
+      "built": "2026-09-11",
+      "published": false,
+      "tagline": "Six things commentators say about momentum, tested on 11,452 charted matches — and tested again on tennis played by coins, which says the same thing.",
+      "blurb": "Every point of 11,452 professional matches from the Match Charting Project, rebuilt from the score counters up, and used to test the six things commentators say about momentum: serving for the set, serving to stay in it, the game after a break, wasted break points, the hot hand, and winning the first set. All six are true as plainly stated — servers do hold 80.4% of the games they serve for the set against 75.8% of their others. The page exists because a plain comparison cannot tell you anything here, and neither can a careful one: hold the player fixed and compare him with himself inside one set, and serving for the set swings from +4.3 per 100 games to −14.8. So every test is run again on the same matches played as independent coin flips, with the same players, the same formats and serve strengths calibrated to reproduce the real distribution of scorelines. Memoryless tennis produces −14.8 too, because winning a game ends the set and so decides how many baseline games exist. Nothing survives: the largest gap between real tennis and coins is within its own confidence interval. The hot hand comes closest, and dies on a scoring detail — two points played at 30–15 have identical win-loss counts and differ only in order, and compared that way the effect is +0.04 ± 0.11 per 100 points. You can run the control yourself: the page replays all 11,452 matches in your browser.",
+      "tags": [
+        "tennis",
+        "hot hand",
+        "null results",
+        "simulation",
+        "selection effects",
+        "permutation tests",
+        "canvas rendering"
+      ],
+      "sources": [
+        {
+          "name": "The Tennis Abstract Match Charting Project, crowdsourced shot-by-shot data (Jeff Sackmann and the 192 volunteer charters credited in these files)",
+          "url": "https://github.com/JeffSackmann/tennis_MatchChartingProject",
+          "licence": "CC BY-NC-SA 4.0 — attribution, non-commercial, share-alike; no point-level data is redistributed here, and the derived aggregates on the page carry the same licence"
+        }
+      ],
+      "stack": [
+        "python 3",
+        "numpy",
+        "memoryless match simulator",
+        "Mantel-Haenszel conditional test",
+        "vanilla JS",
+        "canvas",
+        "in-browser simulation",
+        "node canvas-geometry test"
+      ],
+      "hasSource": true,
+      "bytes": 187394,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "right-of-way",
       "title": "Right of Way",
@@ -357,7 +396,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 3644753,
+      "bytes": 3644312,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"

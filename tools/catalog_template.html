@@ -244,6 +244,32 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "momentum"(g, w, h, t){
+    /* the null cloud: replicate after replicate of memoryless tennis piling up, with the
+       real result standing inside them rather than outside - and a strip of won and lost
+       points below that never resolves into a streak that means anything */
+    const r = rng("momentum"), cx = w * 0.5, sd = w * 0.105, top = h * 0.09, band = h * 0.60;
+    for (let i = 0; i < 560; i++){
+      const u = r() || 0.5, v = r();
+      const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);   // a real bell
+      const drift = REDUCED ? 0 : Math.sin(t / 2400 + i * 0.7) * 0.07;
+      const x = cx + (z + drift) * sd;
+      if (x < 2 || x > w - 2) continue;
+      const y = top + band * (0.10 + Math.pow(r(), 0.55) * 0.88);
+      g.fillStyle = "rgba(167,150,214," + Math.max(0.34 - Math.abs(z) * 0.085, 0.07) + ")";
+      g.fillRect(x, y, 1.8, 1.8);
+    }
+    const rx = cx + sd * 0.17;                                             /* the real matches */
+    g.strokeStyle = "rgba(111,188,158,.92)"; g.lineWidth = 1.6;
+    g.beginPath(); g.moveTo(rx, top - 3); g.lineTo(rx, top + band + 5); g.stroke();
+    const n = Math.max(16, Math.round(w / 13)), sw = w / n, sy = h - h * 0.175;
+    for (let i = 0; i < n; i++){
+      const won = r() < 0.62;
+      const pulse = REDUCED ? 1 : 0.74 + 0.26 * Math.sin(t / 640 - i * 0.55);
+      g.fillStyle = won ? "rgba(111,188,158," + (0.26 + 0.34 * pulse) + ")" : "rgba(255,255,255,.10)";
+      g.fillRect(i * sw + sw * 0.22, sy, sw * 0.56, h * 0.085);
+    }
+  },
   "at-large"(g, w, h, t){
     /* newsprint columns of set type, with one column broken and its lines escaping */
     const r = rng("at-large"), cols = 5, cw = w / cols;
