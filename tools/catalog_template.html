@@ -244,6 +244,34 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "last-visited"(g, w, h, t){
+    // lines of linked text: the early ones hold, the later ones break into dead
+    // dashes, with a slow sweep passing over them like a link checker running
+    const r = rng("last-visited");
+    const lines = 7, y0 = h * 0.14, dy = (h * 0.72) / (lines - 1);
+    const sweep = REDUCED ? -1 : (t / 1700) % 1.35;
+    for (let i = 0; i < lines; i++){
+      const yy = y0 + i * dy, rot = i / (lines - 1);
+      let x = w * 0.09; const end = w * 0.91;
+      while (x < end){
+        const seg = Math.min(w * (0.045 + r() * 0.105), end - x);
+        const dead = r() < rot * 0.72;
+        const near = sweep >= 0 && Math.abs((x / w) - sweep) < 0.07;
+        if (dead){
+          g.setLineDash([2, 3]);
+          g.strokeStyle = `rgba(188,84,68,${0.26 + (near ? 0.30 : 0)})`;
+          g.lineWidth = 1.2;
+        } else {
+          g.setLineDash([]);
+          g.strokeStyle = `rgba(112,166,224,${0.58 + (near ? 0.32 : 0)})`;
+          g.lineWidth = 2.1;
+        }
+        g.beginPath(); g.moveTo(x, yy); g.lineTo(x + seg, yy); g.stroke();
+        x += seg + w * 0.013;
+      }
+    }
+    g.setLineDash([]);
+  },
   "momentum"(g, w, h, t){
     /* the null cloud: replicate after replicate of memoryless tennis piling up, with the
        real result standing inside them rather than outside - and a strip of won and lost

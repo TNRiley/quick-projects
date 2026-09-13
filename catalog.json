@@ -1,7 +1,57 @@
 {
-  "generated": "2026-09-11",
+  "generated": "2026-09-12",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "last-visited",
+      "title": "Last Visited",
+      "favicon": "🔗",
+      "built": "2026-09-12",
+      "published": true,
+      "tagline": "Every URL the Supreme Court has ever cited, fetched again. Fewer than half still resolve to what the Justices read.",
+      "blurb": "1,382 web citations pulled out of 529 Supreme Court opinions — the whole run, from the first URL the Court ever cited in 1996 to the current term — then fetched again and looked up in the Internet Archive. Of the 1,185 addresses that give a definite answer, 44.6% still resolve to the document that was cited; 158 hosts have stopped resolving altogether, the publisher gone rather than the page. The failure is graded by age, which is what separates rot from noise: citations first made between 2005 and 2009 are 88% gone, those from 2015 onward mostly fine. Named for the Bluebook parenthetical, and built around two things that are easy to get wrong. The first is that roughly half the corpus is OCR of printed reporters, where a scanning error yields an address that was never real and looks identical to a rotted one — so every URL is also checked against the Wayback Machine, and rot is reported separately on the 696 addresses the archive can vouch for. The second is the measuring instrument itself: every one of the Court's own perma.cc links returned 403, not because of the user-agent but because the refusal keys on the HTTP client fingerprint, and re-fetching through curl changed 166 verdicts. The page also reads the Court's own answer to the problem out of the opinions: a blanket visitation note through the 2010s, a copy filed with the Clerk of Court, and then — in OT2025 and essentially never before — 73 citations carrying \"(archived at https://perma.cc/…)\", which makes perma.cc the most-cited host in the corpus. Those links work: 53 of the 54 that answer.",
+      "tags": [
+        "link rot",
+        "Supreme Court",
+        "citation practice",
+        "web archiving",
+        "OCR",
+        "measurement error",
+        "canvas rendering"
+      ],
+      "sources": [
+        {
+          "name": "Caselaw Access Project bulk data — U.S. Reports vols. 500–572 and Supreme Court Reporter vols. 134–140",
+          "url": "https://static.case.law/",
+          "licence": "CC0 1.0 — public domain dedication"
+        },
+        {
+          "name": "Slip opinions, Supreme Court of the United States, OT2020–OT2025",
+          "url": "https://www.supremecourt.gov/opinions/slipopinion/25",
+          "licence": "Public domain — a work of the United States Government"
+        },
+        {
+          "name": "Internet Archive Wayback Availability API, used to establish whether each cited address was ever captured",
+          "url": "https://archive.org/help/wayback_api.php",
+          "licence": "Free public API; snapshot metadata only, no archived content redistributed"
+        }
+      ],
+      "stack": [
+        "python 3",
+        "OCR line-break repair",
+        "pdftotext -layout",
+        "threaded liveness checking",
+        "curl fallback for fingerprint-blocked hosts",
+        "Wayback availability lookups",
+        "vanilla JS",
+        "canvas",
+        "node DOM-stub page test"
+      ],
+      "hasSource": true,
+      "bytes": 250798,
+      "repo": "https://github.com/TNRiley/last-visited",
+      "live": "https://tnriley.github.io/last-visited/"
+    },
     {
       "slug": "momentum",
       "title": "Momentum",

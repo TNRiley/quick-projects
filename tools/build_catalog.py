@@ -29,6 +29,11 @@ def load():
     ms = []
     for f in sorted(glob.glob(os.path.join(ROOT, "projects", "*", "meta.json"))):
         m = json.load(open(f, encoding="utf-8"))
+        # "catalog": false keeps a finished-but-held project off the public shelf
+        # entirely -- no card, no hero plate, not counted -- where an unpublished one
+        # would otherwise show as "Not published yet" with its full blurb.
+        if m.get("catalog") is False:
+            continue
         d = os.path.dirname(f)
         m["bytes"] = os.path.getsize(os.path.join(d, "index.html"))
         m["published"] = bool(m.get("published"))
