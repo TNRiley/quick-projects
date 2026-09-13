@@ -48,7 +48,7 @@
         "node DOM-stub page test"
       ],
       "hasSource": true,
-      "bytes": 250798,
+      "bytes": 251138,
       "repo": "https://github.com/TNRiley/last-visited",
       "live": "https://tnriley.github.io/last-visited/"
     },
@@ -57,7 +57,7 @@
       "title": "Momentum",
       "favicon": "🎾",
       "built": "2026-09-11",
-      "published": false,
+      "published": true,
       "tagline": "Six things commentators say about momentum, tested on 11,452 charted matches — and tested again on tennis played by coins, which says the same thing.",
       "blurb": "Every point of 11,452 professional matches from the Match Charting Project, rebuilt from the score counters up, and used to test the six things commentators say about momentum: serving for the set, serving to stay in it, the game after a break, wasted break points, the hot hand, and winning the first set. All six are true as plainly stated — servers do hold 80.4% of the games they serve for the set against 75.8% of their others. The page exists because a plain comparison cannot tell you anything here, and neither can a careful one: hold the player fixed and compare him with himself inside one set, and serving for the set swings from +4.3 per 100 games to −14.8. So every test is run again on the same matches played as independent coin flips, with the same players, the same formats and serve strengths calibrated to reproduce the real distribution of scorelines. Memoryless tennis produces −14.8 too, because winning a game ends the set and so decides how many baseline games exist. Nothing survives: the largest gap between real tennis and coins is within its own confidence interval. The hot hand comes closest, and dies on a scoring detail — two points played at 30–15 have identical win-loss counts and differ only in order, and compared that way the effect is +0.04 ± 0.11 per 100 points. You can run the control yourself: the page replays all 11,452 matches in your browser.",
       "tags": [
@@ -88,8 +88,8 @@
       ],
       "hasSource": true,
       "bytes": 187394,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/momentum",
+      "live": "https://tnriley.github.io/momentum/"
     },
     {
       "slug": "right-of-way",
