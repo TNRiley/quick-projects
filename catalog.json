@@ -51,6 +51,59 @@
       "live": "https://tnriley.github.io/six-more-weeks/"
     },
     {
+      "slug": "request-denied",
+      "title": "Request Denied",
+      "favicon": "🚫",
+      "built": "2026-09-16",
+      "published": true,
+      "tagline": "What states won't let you put on a license plate, and how they decide. California reads the worst meaning into a birthday ending in 13.",
+      "blurb": "Personalized-plate decisions from California, New York, Texas and a dozen states' 2012 ban lists, set side by side. California asks applicants what a plate means, then reads it the worst way it can: of 23,430 flagged applications in 2015–16, 80% were denied, and a flagged plate ending in 13 (read as a gang number) was approved 7% of the time, down from 11% in 2012–13. New York issued 741 plates ending in 13 over four years. Thirty denials are quoted as the DMV recorded them — a union member's local numbers, a Tesla golfing pun, a mother of eight — and seven of those exact plates were issued in New York. The 2012 lists, pulled out of scanned public-records responses, turn out not to be independent judgements: 71% of Arkansas's banned list is on Vermont's, OLDFART is on all twelve large lists, and Maine's list is mostly Alaska's. Utah's list overlaps least with the others and is the only one that gives a reason for every plate. Texas doesn't consider intent at all but dates every request, so its 2025 rejections follow the news: all seven plates naming Elon Musk were requested between March 25 and June 17. Built around a trap: pdftotext's layout mode silently pairs about 84 of Texas's 1,951 plates with a neighbour's date.",
+      "tags": [
+        "censorship",
+        "public records",
+        "license plates",
+        "content moderation",
+        "OCR",
+        "vanilla JS",
+        "SVG charts"
+      ],
+      "sources": [
+        {
+          "name": "California DMV personalized plate review decisions, 2015–16 (released to Noah Veltman)",
+          "url": "https://github.com/veltman/ca-license-plates",
+          "licence": "Government public records; the repository states no licence. The page carries derived counts and quoted rows, not the file."
+        },
+        {
+          "name": "New York DMV personalized plate orders, rejections and Red Guide, 2010–14 (WNYC FOIL request)",
+          "url": "https://github.com/datanews/license-plates",
+          "licence": "Government public records; the repository states no licence. The page carries derived counts only."
+        },
+        {
+          "name": "State DMV banned-plate lists, 2012 (governmentattic.org) and California review sheets, 2012–13 (MuckRock), collected by Dan Nguyen",
+          "url": "https://github.com/dannguyen/dmv-vanity-plate-rejections",
+          "licence": "Government public records; the repository states no licence. The page carries derived counts and quoted rows, not the files."
+        },
+        {
+          "name": "Texas DMV declined personalized plates, 2025, and personalized plate criteria",
+          "url": "https://www.txdmv.gov/sites/default/files/body-files/PLP_Criteria.pdf",
+          "licence": "Texas government public records. The declined-plate PDF is fetched from FOX 4's re-host; the page carries derived counts and dates."
+        }
+      ],
+      "stack": [
+        "python 3 (standard library)",
+        "stdlib xlsx reader",
+        "pdftotext -raw / -layout",
+        "OCR table extraction",
+        "vanilla JS",
+        "inline SVG",
+        "node DOM-stub page test"
+      ],
+      "hasSource": true,
+      "bytes": 46122,
+      "repo": "https://github.com/TNRiley/request-denied",
+      "live": "https://tnriley.github.io/request-denied/"
+    },
+    {
       "slug": "last-visited",
       "title": "Last Visited",
       "favicon": "🔗",
@@ -453,8 +506,8 @@
       "title": "Headwaters",
       "favicon": "💧",
       "built": "2026-09-06",
-      "tagline": "2,371 datasets worth working with, and the 54 sources they come from — classified, searchable, probed.",
-      "blurb": "Two catalogues in one. The dataset layer holds 2,371 published datasets drawn from two aggregations that select for very different things - every TidyTuesday week since April 2018, which is tidy and teachable and comes with 8,575 column names, and ten years of Data Is Plural, which is odd and specific and global. Each record carries the curator's own pitch, the upstream publisher and the article that prompted it, classified by subject, publisher and place so you can browse for something to work with rather than search for something you already know exists; the 30 datasets both aggregations surfaced are one record with two sightings, and a facet filters on how a dataset was found. The source layer holds 54 endpoints you can query repeatedly, each described well enough to use from a shell and carrying small real requests that a weekly job re-runs to prove the endpoint still works. Building it turned up failures nothing else documents, including data.gov's CKAN API 404ing on every documented path while its gateway authenticates your key and redirects you to the dead origin, SEC EDGAR refusing any User-Agent that contains the string github.com while accepting the same header with any other domain, and ProPublica's Congress API being retired outright while its documentation site still serves 200.",
+      "tagline": "2,374 datasets worth working with, and the 54 sources they come from — classified, searchable, probed.",
+      "blurb": "Two catalogues in one. The dataset layer holds 2,374 published datasets, all but three drawn from two aggregations that select for very different things - every TidyTuesday week since April 2018, which is tidy and teachable and comes with 8,575 column names, and ten years of Data Is Plural, which is odd and specific and global. Each record carries the curator's own pitch, the upstream publisher and the article that prompted it, classified by subject, publisher and place so you can browse for something to work with rather than search for something you already know exists; the 30 datasets both aggregations surfaced are one record with two sightings, and a facet filters on how a dataset was found. The source layer holds 54 endpoints you can query repeatedly, each described well enough to use from a shell and carrying small real requests that a weekly job re-runs to prove the endpoint still works. Building it turned up failures nothing else documents, including data.gov's CKAN API 404ing on every documented path while its gateway authenticates your key and redirects you to the dead origin, SEC EDGAR refusing any User-Agent that contains the string github.com while accepting the same header with any other domain, and ProPublica's Congress API being retired outright while its documentation site still serves 200.",
       "tags": [
         "open data",
         "catalog",
@@ -494,7 +547,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 3653521,
+      "bytes": 3653546,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"

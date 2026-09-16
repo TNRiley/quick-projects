@@ -326,6 +326,43 @@ const PLATES = {
     g.beginPath(); g.ellipse(bx, hz - 8, 4.5, 8.5, 0, 0, 7); g.fill();
     g.beginPath(); g.arc(bx + 0.5, hz - 18, 3.6, 0, 7); g.fill();
   },
+  "request-denied"(g, w, h, t){
+    /* vanity plates drifting past in three lanes, each ending in two digits; every few seconds
+       a red DENIED stamp comes down on whichever plate ending in 13 is nearest the centre.
+       Characters are drawn as bars, never letters, so a random string can't spell anything */
+    const r = rng("request-denied"), pw = 58, ph = 26, gap = 14, lanes = 3;
+    const rr = (x, y, ww, hh, q) => { g.beginPath(); g.moveTo(x + q, y); g.arcTo(x + ww, y, x + ww, y + hh, q);
+      g.arcTo(x + ww, y + hh, x, y + hh, q); g.arcTo(x, y + hh, x, y, q); g.arcTo(x, y, x + ww, y, q); g.closePath(); };
+    const laneY = i => h * 0.14 + i * (h * 0.76 / lanes);
+    const drift = REDUCED ? 0 : t / 60, stampT = REDUCED ? 0.6 : ((t / 3200) % 1);
+    const drift0 = REDUCED ? 0 : (t - stampT * 3200) / 60;   /* where plates were when this stamp began */
+    let target = null, best = 1e9;
+    for (let L = 0; L < lanes; L++){
+      const P = pw + gap, sp = (L % 2 ? -1 : 1) * (0.55 + L * 0.2), jit = r() * P;
+      const base = drift * sp + jit, base0 = drift0 * sp + jit, y = laneY(L);
+      const first = Math.floor(-base / P) - 1, n = Math.ceil(w / P) + 2;
+      for (let j = first; j < first + n; j++){
+        const x = j * P + base;                      /* plate j keeps its identity as it drifts */
+        const pr = rng("rd" + L + ":" + (((j % 997) + 997) % 997)), thirteen = pr() < 0.28;
+        g.fillStyle = "rgba(236,232,222,.86)"; rr(x, y, pw, ph, 4); g.fill();
+        g.strokeStyle = "rgba(120,126,140,.9)"; g.lineWidth = 1; rr(x + 2.5, y + 2.5, pw - 5, ph - 5, 3); g.stroke();
+        g.fillStyle = "rgba(38,52,98,.85)";
+        for (let c = 0; c < 4; c++){ const bh = 8 + pr() * 4; g.fillRect(x + 7 + c * 7, y + ph / 2 - bh / 2 + 1, 4.2, bh); }
+        g.font = "700 11px 'Courier Prime', monospace"; g.textBaseline = "middle";
+        g.fillText(thirteen ? "13" : String(10 + Math.floor(pr() * 89)), x + 37, y + ph / 2 + 1);
+        const d = Math.abs(j * P + base0 + pw / 2 - w / 2) + Math.abs(y - h / 2) * 0.5;
+        if (thirteen && d < best){ best = d; target = [x, y]; }
+      }
+    }
+    if (!target) return;
+    const e = stampT < 0.18 ? stampT / 0.18 : 1, fade = stampT > 0.8 ? (1 - stampT) / 0.2 : 1;
+    const s = 1 + (1 - e) * 1.2, [sx, sy] = target;
+    g.save(); g.translate(sx + pw / 2, sy + ph / 2); g.rotate(-0.16); g.scale(s, s);
+    g.globalAlpha = Math.max(0, e * fade) * 0.95;
+    g.strokeStyle = "#E0584A"; g.lineWidth = 2; rr(-33, -10, 66, 20, 3); g.stroke();
+    g.fillStyle = "#E0584A"; g.font = "700 11px 'Courier Prime', monospace"; g.textAlign = "center"; g.textBaseline = "middle";
+    g.fillText("DENIED", 0, 1); g.restore(); g.globalAlpha = 1; g.textAlign = "left";
+  },
   "at-large"(g, w, h, t){
     /* newsprint columns of set type, with one column broken and its lines escaping */
     const r = rng("at-large"), cols = 5, cw = w / cols;
