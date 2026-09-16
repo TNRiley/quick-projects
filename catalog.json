@@ -1,7 +1,55 @@
 {
-  "generated": "2026-09-12",
+  "generated": "2026-09-16",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "six-more-weeks",
+      "title": "Six More Weeks",
+      "favicon": "🦫",
+      "built": "2026-09-16",
+      "published": true,
+      "tagline": "Every Groundhog Day forecast on record, graded against the six weeks that followed. A groundhog that never came out of its burrow would win.",
+      "blurb": "1,442 Groundhog Day forecasts from 93 prognosticators — live groundhogs and marmots, ten taxidermied ones, people in suits, and also a lobster, an alligator, a largemouth bass, a golf club cover and a plastic flamingo — each graded against the literal six more weeks, February 3 to March 16, at the nearest long-running NOAA GHCN-Daily station. They were right 54.1% of the time. That beats a coin, but not a forecaster who stays in the burrow: the climate warms faster than a thirty-year normal can catch up, so a spring beats its own trailing normal 64% of the time, and 76% in the 2020s. Calling early spring every year would have scored 64%. Called at their own rates at random, the forecasters would have scored 51.7%, so their entire edge over chance is about 34 forecasts. Punxsutawney Phil calls winter 81% of the time and is right 43 times in 100. The only perfect record over five years belongs to Featherstone the Flamingo, a plastic lawn ornament in Massachusetts, which has never seen its shadow. The page carries two controls because one is not enough. The top of the table, an Alabama opossum right 13 times in 14, beats the best of 54 fair coins in 98% of replays, yet it sees its shadow in two years of fourteen in a place where spring is usually early, and calling at that rate at random would already score 70%. Matching every forecast since 1940 to ERA5 reanalysis of the sky over its burrow shows that someone really does look: shadows are called on 60% of sunny mornings and 29% of overcast ones. The taxidermied forecasters respond to the sky even more sharply than the live ones, so the handlers are the ones looking. The measurement they take is also useless: six weeks after a sunny Groundhog Day ran +0.75 °F warmer than after an overcast one, the opposite of the Candlemas rhyme, with an interval that straddles zero.",
+      "tags": [
+        "folklore",
+        "forecast verification",
+        "controls",
+        "base rates",
+        "climate normals",
+        "multiple comparisons",
+        "canvas rendering"
+      ],
+      "sources": [
+        {
+          "name": "groundhog-day.com API — prognosticators and their recorded shadow calls, each record citing its own source",
+          "url": "https://groundhog-day.com/api/v1/groundhogs",
+          "licence": "public API; forecast records are compiled facts, each forecaster links its original source"
+        },
+        {
+          "name": "NOAA NCEI GHCN-Daily station records (TMAX, TMIN) via the NCEI Access Data Service",
+          "url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries",
+          "licence": "US Government public domain"
+        },
+        {
+          "name": "ERA5 reanalysis (hourly cloud cover and sunshine duration) via the Open-Meteo Historical Weather API",
+          "url": "https://archive-api.open-meteo.com/v1/archive",
+          "licence": "CC-BY-4.0 (Open-Meteo); ERA5 contains modified Copernicus Climate Change Service information"
+        }
+      ],
+      "stack": [
+        "python 3 stdlib",
+        "nearest-complete-station selection",
+        "coin-field Monte Carlo",
+        "year-block bootstrap",
+        "vanilla JS",
+        "canvas",
+        "inline SVG"
+      ],
+      "hasSource": true,
+      "bytes": 269987,
+      "repo": "https://github.com/TNRiley/six-more-weeks",
+      "live": "https://tnriley.github.io/six-more-weeks/"
+    },
     {
       "slug": "last-visited",
       "title": "Last Visited",
@@ -446,7 +494,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 3644312,
+      "bytes": 3653521,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"
