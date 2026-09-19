@@ -326,6 +326,31 @@ const PLATES = {
     g.beginPath(); g.ellipse(bx, hz - 8, 4.5, 8.5, 0, 0, 7); g.fill();
     g.beginPath(); g.arc(bx + 0.5, hz - 18, 3.6, 0, 7); g.fill();
   },
+  "brick-by-brick"(g, w, h, t){
+    /* the wall: columns of top-down studs, one per year, whose colour mix drifts from the
+       classic six through the greys to earth tones and azures as the years scroll past */
+    const s = 12, rows = Math.max(4, Math.floor((h - 16) / s)), y0 = h - 8 - rows * s;
+    const eras = [
+      ["#C91A09", "#F2CD37", "#0055BF", "#FFFFFF", "#05131D", "#237841"],
+      ["#9BA19D", "#6D6E5C", "#05131D", "#C91A09", "#FFFFFF", "#F2CD37", "#0055BF"],
+      ["#A0A5A9", "#6C6E68", "#05131D", "#E4CD9E", "#582A12", "#FFFFFF", "#C91A09"],
+      ["#6C6E68", "#A0A5A9", "#E4CD9E", "#AA7D55", "#36AEBF", "#FF698F", "#A0BCAC", "#05131D"],
+    ];
+    const cols = Math.ceil(w / s) + 2, shift = REDUCED ? 0 : (t / 90) % s, base = REDUCED ? 0 : Math.floor(t / 90 / s);
+    for (let c = 0; c < cols; c++){
+      const year = c + base, era = eras[Math.floor(((year % 72) + 72) % 72 / 18)];
+      const cr = rng("bbb" + year), n = 1 + ((year % 72) / 72) * 4;
+      for (let k = 0; k < rows; k++){
+        const x = c * s - shift, y = y0 + k * s;
+        if (cr() < 0.12 * (1 - k / rows)) continue;          /* a ragged top edge */
+        const hex = era[Math.floor(Math.pow(cr(), n > 3 ? 1 : 1.6) * era.length)];
+        g.globalAlpha = 0.9; g.fillStyle = hex; g.fillRect(x, y, s - 1, s - 1);
+        g.globalAlpha = 0.28; g.fillStyle = "#000"; g.beginPath(); g.arc(x + s / 2 + 0.7, y + s / 2 + 0.8, s * 0.3, 0, 7); g.fill();
+        g.globalAlpha = 1; g.fillStyle = hex; g.beginPath(); g.arc(x + s / 2, y + s / 2, s * 0.3, 0, 7); g.fill();
+      }
+    }
+    g.globalAlpha = 1;
+  },
   "request-denied"(g, w, h, t){
     /* vanity plates drifting past in three lanes, each ending in two digits; every few seconds
        a red DENIED stamp comes down on whichever plate ending in 13 is nearest the centre.

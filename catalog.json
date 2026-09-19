@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-16",
+  "generated": "2026-09-19",
   "owner": "TNRiley",
   "projects": [
     {
@@ -102,6 +102,43 @@
       "bytes": 46122,
       "repo": "https://github.com/TNRiley/request-denied",
       "live": "https://tnriley.github.io/request-denied/"
+    },
+    {
+      "slug": "brick-by-brick",
+      "title": "Brick by Brick",
+      "favicon": "🧱",
+      "built": "2026-09-16",
+      "published": true,
+      "tagline": "Every piece in 18,000 LEGO sets, counted by colour and year. The classic six colours went from 89% of the bricks to 40%, and the greys changed overnight.",
+      "blurb": "Rebrickable's parts lists for every official LEGO set, 1949 to 2026, counted by colour. Each year becomes a column of studs, and the page is styled as an instruction booklet with a 3D house behind it that builds itself as you scroll and repaints in each era's colours. Red, yellow, blue, white, black and green were 89% of 1970s pieces and are 40% now. In 2004 the old greys fell from about a fifth of all pieces to 3% within a year, replaced by the bluish greys, and Brown became Reddish Brown at the same moment. The number of colours making up at least 0.1% of a year's pieces grew from 10 in 1975 to 52 in 2004, was cut to 34 by 2007, and has since grown back with nougats, azures, lavenders and coral. You can see every theme's palette and tip out any set to compare it with another, such as the 1979 and 2022 Galaxy Explorer.",
+      "tags": [
+        "LEGO",
+        "colour",
+        "toys",
+        "palette history",
+        "three.js",
+        "scroll-driven 3D",
+        "canvas rendering"
+      ],
+      "sources": [
+        {
+          "name": "Rebrickable LEGO catalogue downloads: colors, themes, sets, inventories, inventory_parts",
+          "url": "https://rebrickable.com/downloads/",
+          "licence": "Free to use for any purpose, including commercial, with acknowledgement of Rebrickable as the source"
+        }
+      ],
+      "stack": [
+        "python 3 stdlib",
+        "largest-remainder stud mosaics",
+        "base64 typed-array payload",
+        "vanilla JS",
+        "canvas",
+        "three.js r128 instanced meshes"
+      ],
+      "hasSource": true,
+      "bytes": 1862209,
+      "repo": "https://github.com/TNRiley/brick-by-brick",
+      "live": "https://tnriley.github.io/brick-by-brick/"
     },
     {
       "slug": "last-visited",
