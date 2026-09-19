@@ -3,6 +3,42 @@
   "owner": "TNRiley",
   "projects": [
     {
+      "slug": "personal-best",
+      "title": "Personal Best",
+      "favicon": "⏱️",
+      "built": "2026-09-19",
+      "published": false,
+      "tagline": "Every official Rubik's Cube competition since 2003. The world-record average got four times faster. A first-timer's average has barely moved, and half of first-timers never come back.",
+      "blurb": "The World Cube Association's full results export: 286,140 people and 9.3 million timed 3×3 solves at 15,342 competitions. The world-record average fell from 14.52 seconds at the end of 2004 to 3.51 in June 2026. The median first average a newcomer sets in their first round went from 38.8 seconds in 2005 to 34.0, about a tenth of that improvement. Only 48% of first-timers enter another competition within two years, and the ones who stay were faster from the start: people who competed once started at a median of 41.5 seconds, and people who went on to twenty or more competitions started at 25.2. So a WCA field gets faster partly through practice and partly through who stays. Two hero timers race in real time, the record stopping at 3.51 while the typical first-timer keeps going. You can type your own average to see where it falls among every personal best and every first round. The last section looks at the five solves of a round. The first is most often the slowest, and the fifth is the one most likely to be a DNF. That jump is almost entirely among the fastest solvers: after four clean solves under ten seconds, the DNF rate goes from 1.13% on the fourth solve to 1.67% on the fifth. Slow solvers, the ones a time limit would catch, show no jump.",
+      "tags": [
+        "speedcubing",
+        "Rubik's Cube",
+        "survivorship",
+        "selection effects",
+        "sport records",
+        "vanilla JS",
+        "canvas rendering"
+      ],
+      "sources": [
+        {
+          "name": "World Cube Association results export (TSV, format v2.0.2), as of 18 September 2026",
+          "url": "https://www.worldcubeassociation.org/export/results",
+          "licence": "May be republished in whole or part with the WCA's attribution notice: \"This information is based on competition results owned and maintained by the World Cube Association, published at https://worldcubeassociation.org/results as of September 18, 2026.\""
+        }
+      ],
+      "stack": [
+        "python 3 + pandas",
+        "quantile payload with DNF-as-slowest ranking",
+        "vanilla JS",
+        "canvas",
+        "real-time LCD race"
+      ],
+      "hasSource": true,
+      "bytes": 74414,
+      "repo": null,
+      "live": null
+    },
+    {
       "slug": "six-more-weeks",
       "title": "Six More Weeks",
       "favicon": "🦫",

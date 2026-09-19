@@ -351,6 +351,37 @@ const PLATES = {
     }
     g.globalAlpha = 1;
   },
+  "personal-best"(g, w, h, t){
+    /* the record and the rookie: a red record staircase stepping down across the plate under a
+       flat blue band of first-timers that never moves - and a cube face in the corner whose
+       stickers scramble, then click solved, like each newcomer's first solve */
+    const r = rng("personal-best"), x0 = w * 0.06, x1 = w * 0.94, top = h * 0.12, bot = h * 0.88;
+    const Y = v => top + (1 - v) * (bot - top);              /* v: 1 slow, 0 fast (log-ish) */
+    const pts = 22, xs = i => x0 + i / (pts - 1) * (x1 - x0);
+    g.fillStyle = "rgba(111,168,255,.13)"; g.beginPath();
+    for (let i = 0; i < pts; i++) g.lineTo(xs(i), Y(0.93 + (r() - 0.5) * 0.05));
+    for (let i = pts - 1; i >= 0; i--) g.lineTo(xs(i), Y(0.62 + (r() - 0.5) * 0.05)); g.closePath(); g.fill();
+    g.strokeStyle = "rgba(111,168,255,.9)"; g.lineWidth = 2; g.beginPath();
+    const rk = rng("pb-rookie");
+    for (let i = 0; i < pts; i++){ const y = Y(0.77 + (rk() - 0.5) * 0.06); i ? g.lineTo(xs(i), y) : g.moveTo(xs(i), y); }
+    g.stroke();
+    const reveal = REDUCED ? 1 : Math.min(1, ((t / 7000) % 1.25));
+    g.strokeStyle = "rgba(240,80,106,.95)"; g.lineWidth = 2.2; g.beginPath();
+    let v = 0.5, x = x0, sr = rng("pb-steps"); g.moveTo(x, Y(v));
+    while (x < x0 + (x1 - x0) * reveal){
+      const nx = Math.min(x0 + (x1 - x0) * reveal, x + (x1 - x0) * (0.03 + sr() * 0.07));
+      g.lineTo(nx, Y(v)); x = nx; v = Math.max(0.03, v - 0.015 - sr() * 0.035); g.lineTo(x, Y(v));
+    }
+    g.stroke();
+    const cols = ["#F4F5F7", "#FFD84A", "#F0506A", "#FF8A3D", "#5B9BFF", "#2FC88A"];
+    const tick = REDUCED ? 0 : Math.floor(t / 650), solved = REDUCED || tick % 6 === 5;
+    const fr = rng("pb-face" + tick), s = Math.max(7, Math.min(11, h * 0.07)), fx = w * 0.06, fy = h - 3 * (s + 2) - h * 0.1;
+    g.fillStyle = "rgba(0,0,0,.55)"; g.fillRect(fx - 3, fy - 3, 3 * (s + 2) + 4, 3 * (s + 2) + 4);
+    for (let i = 0; i < 9; i++){
+      g.fillStyle = solved ? cols[4] : cols[Math.floor(fr() * 6)];
+      g.fillRect(fx + (i % 3) * (s + 2), fy + Math.floor(i / 3) * (s + 2), s, s);
+    }
+  },
   "request-denied"(g, w, h, t){
     /* vanity plates drifting past in three lanes, each ending in two digits; every few seconds
        a red DENIED stamp comes down on whichever plate ending in 13 is nearest the centre.
