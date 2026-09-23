@@ -752,6 +752,37 @@ const PLATES = {
       g.strokeStyle = "rgba(255,255,255,.24)"; g.lineWidth = 1;
       g.strokeRect(x - bw/2 + .5, y - bh2/2 + .5, bw - 1, bh2 - 1);
     });
+  },
+  "first-ballot"(g, w, h, t){
+    /* nomination rows: a beam of hollow losses drifting by, most rows never lighting a
+       single gold win - then a shrinking row of bars along the floor, first nomination
+       tallest, tapering to almost nothing, the way a career's odds do after it */
+    const r = rng("first-ballot"), rows = 5, x0 = w * 0.06, x1 = w * 0.94;
+    const top = h * 0.10, rowGap = (h * 0.50) / (rows - 1);
+    for (let i = 0; i < rows; i++){
+      const y = top + i * rowGap, n = 6 + Math.floor(r() * 7);
+      const winIdx = r() < 0.72 ? -1 : Math.floor(r() * n);   /* most rows: no win at all */
+      g.strokeStyle = "rgba(227,178,75,.16)"; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(x0, y); g.lineTo(x1, y); g.stroke();
+      for (let k = 0; k < n; k++){
+        const x = x0 + (k + 0.5) / n * (x1 - x0);
+        const pulse = REDUCED ? 1 : (0.7 + 0.3 * Math.sin(t / 900 - k * 0.6 - i));
+        if (k === winIdx){
+          g.fillStyle = `rgba(227,178,75,${0.55 + 0.4 * pulse})`;
+          g.beginPath(); g.arc(x, y, 3.6, 0, 7); g.fill();
+          g.strokeStyle = "rgba(240,200,104,.9)"; g.lineWidth = 1.2; g.stroke();
+        } else {
+          g.fillStyle = "rgba(120,110,90,.45)";
+          g.beginPath(); g.arc(x, y, 2.1, 0, 7); g.fill();
+        }
+      }
+    }
+    const counts = [294, 76, 32, 18, 7, 3, 2], bw = (x1 - x0) / counts.length, base = h * 0.93, maxc = counts[0];
+    counts.forEach((c, i) => {
+      const bh = Math.max(2, (h * 0.24) * (c / maxc));
+      g.fillStyle = i === 0 ? "rgba(230,140,110,.85)" : "rgba(227,178,75,.7)";
+      g.fillRect(x0 + i * bw + bw * 0.18, base - bh, bw * 0.64, bh);
+    });
   }
 };
 const SLUGS = __SLUGS__;
