@@ -68,6 +68,7 @@ __pycache__/
 openalex_*.json
 payload.json
 retractionwatch.csv
+src/raw/
 node_modules/
 """
 

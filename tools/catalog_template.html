@@ -783,6 +783,26 @@ const PLATES = {
       g.fillStyle = i === 0 ? "rgba(230,140,110,.85)" : "rgba(227,178,75,.7)";
       g.fillRect(x0 + i * bw + bw * 0.18, base - bh, bw * 0.64, bh);
     });
+  },
+  "wherever-found"(g, w, h, t){
+    /* the timeline chart from section 02, in miniature: a listing count per
+       year, the two real one-day mass-listing spikes (1970, 1976) and 1973 -
+       the Act itself - picked out in gold and gently pulsing */
+    const r = rng("wherever-found"), yrs = 34, base = h * 0.92;
+    const shape = [.22,.98,.06,.09,.62,.16,.10,.14,.22,.26,.24,.20,.30,.27,.34,
+      .29,.25,.19,.12,.06,.10,.08,.24,.30,.33,.26,.22,.10,.08,.14,.09,.06,.08,.05];
+    const goldIdx = 3;
+    const bw = w / yrs;
+    const pulse = REDUCED ? 1 : 0.85 + Math.sin(t / 900) * 0.15;
+    for (let i = 0; i < yrs; i++){
+      const n = shape[i] * (0.92 + r() * 0.16);
+      const bh = Math.max(1.5, n * (h * 0.82));
+      const gold = i === goldIdx;
+      g.fillStyle = gold ? `rgba(212,166,74,${0.55 + 0.4 * pulse})` : "rgba(87,167,132,.62)";
+      g.fillRect(i * bw + bw * 0.14, base - bh, bw * 0.72, bh);
+    }
+    g.strokeStyle = "rgba(140,150,128,.35)"; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(0, base); g.lineTo(w, base); g.stroke();
   }
 };
 const SLUGS = __SLUGS__;
