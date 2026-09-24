@@ -7,7 +7,7 @@
       "title": "Low Enough",
       "favicon": "🌸",
       "built": "2026-09-24",
-      "published": false,
+      "published": true,
       "tagline": "Washington has 10,405 flowering cherries that are nowhere near the Tidal Basin, and two-thirds of them stand under a power line.",
       "blurb": "Every Prunus in the District of Columbia's public-space tree inventory, mapped, sized and sorted by when it flowers. The city's blossom map turns out to be its overhead-wire map: 63% of DC's cherries have a utility line above them against 19% of its oaks, because a cherry is what a forester plants where a shade tree would grow into the cable. Across the eight wards the share of street trees that are cherries tracks the share with wires overhead at r = 0.92 - and Ward 2, which contains the Tidal Basin, has the fewest street cherries in the city.",
       "tags": [
@@ -51,9 +51,9 @@
         "typed-array payload"
       ],
       "hasSource": true,
-      "bytes": 320412,
-      "repo": null,
-      "live": null
+      "bytes": 320639,
+      "repo": "https://github.com/TNRiley/low-enough",
+      "live": "https://tnriley.github.io/low-enough/"
     },
     {
       "slug": "wherever-found",
