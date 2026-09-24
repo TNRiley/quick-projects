@@ -1,7 +1,60 @@
 {
-  "generated": "2026-09-22",
+  "generated": "2026-09-24",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "low-enough",
+      "title": "Low Enough",
+      "favicon": "🌸",
+      "built": "2026-09-24",
+      "published": false,
+      "tagline": "Washington has 10,405 flowering cherries that are nowhere near the Tidal Basin, and two-thirds of them stand under a power line.",
+      "blurb": "Every Prunus in the District of Columbia's public-space tree inventory, mapped, sized and sorted by when it flowers. The city's blossom map turns out to be its overhead-wire map: 63% of DC's cherries have a utility line above them against 19% of its oaks, because a cherry is what a forester plants where a shade tree would grow into the cable. Across the eight wards the share of street trees that are cherries tracks the share with wires overhead at r = 0.92 - and Ward 2, which contains the Tidal Basin, has the fewest street cherries in the city.",
+      "tags": [
+        "urban forestry",
+        "cherry blossom",
+        "maps",
+        "infrastructure",
+        "Washington DC"
+      ],
+      "sources": [
+        {
+          "name": "District of Columbia public-space tree inventory (UFA Street Trees), DC GIS Urban Tree Canopy service layer 23, maintained by the DDOT Urban Forestry Division - species, position, trunk diameter, condition, ward, lidar crown and overhead-wire status for 222,660 trees",
+          "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Urban_Tree_Canopy/MapServer/23",
+          "licence": "Public domain (DC Open Data)"
+        },
+        {
+          "name": "Ward boundaries (Ward - 2022) and Waterbodies, DC GIS",
+          "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/53",
+          "licence": "Public domain (DC Open Data)"
+        },
+        {
+          "name": "Cherry tree varieties and their bloom order, National Park Service",
+          "url": "https://www.nps.gov/subjects/cherryblossom/types-of-trees.htm",
+          "licence": "US Government public domain"
+        },
+        {
+          "name": "Bloom-order corroboration for Okame and Kwanzan, Casey Trees",
+          "url": "https://caseytrees.org/2026/03/cherry-blossom-season-is-here-find-blooms-near-you/",
+          "licence": "Cited, not redistributed"
+        },
+        {
+          "name": "Prunus 'Snow Goose' parentage and flowering habit, Landscape Plants, Oregon State University",
+          "url": "https://landscapeplants.oregonstate.edu/plants/prunus-snow-goose",
+          "licence": "Cited, not redistributed"
+        }
+      ],
+      "stack": [
+        "vanilla JS",
+        "canvas",
+        "inline SVG",
+        "typed-array payload"
+      ],
+      "hasSource": true,
+      "bytes": 320412,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "wherever-found",
       "title": "Wherever Found",

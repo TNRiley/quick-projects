@@ -12,7 +12,7 @@
 # on the Windows machine is the TRileyNOAA work account -- is left exactly as it was. Switching
 # globally would work once and then quietly change the default for every other gh command.
 set -uo pipefail
-OWNER="TNRiley"
+OWNER="TNRiley"; export OWNER   # the credential helper below runs in a subshell and needs it
 PY="python3"; "$PY" -c "" >/dev/null 2>&1 || PY="python"
 "$PY" -c "" >/dev/null 2>&1 || { echo "no working python on PATH (tried python3, python)"; exit 1; }
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -62,7 +62,14 @@ publish () {                       # $1 = local dir, $2 = repo name, $3 = descri
       git remote add origin "https://$OWNER@github.com/$OWNER/$repo.git" 2>/dev/null
       echo "   repo created"
     fi
-    git push -u origin main || return 1
+    # On Windows, plain `git push` hands the request to Git Credential Manager,
+    # which opens a GUI prompt and hangs a non-interactive run forever. gh has
+    # already handed us a valid token, so feed it straight to git as a one-shot
+    # credential helper scoped to this command -- no popup, no stored state, and
+    # the machine's own credential config is left untouched.
+    local helper='!f() { echo "username=$OWNER"; echo "password=$GH_TOKEN"; }; f'
+    git -c credential.helper= -c "credential.helper=$helper" -c core.askPass= \
+        push -u origin main || return 1
     if gh api "repos/$OWNER/$repo/pages" >/dev/null 2>&1; then
       echo "   pages already on"
     else

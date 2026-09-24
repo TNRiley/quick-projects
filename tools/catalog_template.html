@@ -326,6 +326,71 @@ const PLATES = {
     g.beginPath(); g.ellipse(bx, hz - 8, 4.5, 8.5, 0, 0, 7); g.fill();
     g.beginPath(); g.arc(bx + 0.5, hz - 18, 3.6, 0, 7); g.fill();
   },
+  "low-enough"(g, w, h, t){
+    /* poles and a sagging span of wire, with the cherries kept underneath it -
+       and a bloom wave running left to right, opening each crown in turn, so the
+       card does in six seconds what the page does in six weeks */
+    const r = rng("low-enough");
+    const RAMP = ["#E693AD", "#D57193", "#BF4E77", "#9C355F", "#702244"];
+    const top = h * 0.16, sag = h * 0.11, poles = 3;
+    const px = i => w * (0.06 + i * 0.44);                 /* pole x positions */
+    const wireY = x => {                                   /* catenary between poles */
+      const span = w * 0.44;
+      const i = Math.min(poles - 2, Math.max(0, Math.floor((x - px(0)) / span)));
+      const u = Math.min(1, Math.max(0, (x - px(i)) / span));
+      return top + sag * 4 * u * (1 - u);
+    };
+    /* the crowns: a low hedge of cherries that never reaches the wire. Sizes key
+       off the plate's width, because this runs at 285x80 on a card and at about
+       40x130 in the hero strip. */
+    const n = Math.max(4, Math.min(30, Math.round(w / 11)));
+    const step = w * 0.92 / Math.max(1, n - 1);
+    const wave = REDUCED ? 1.4 : ((t / 2600) % 1.9) - 0.25;
+    for (let k = 0; k < n; k++){
+      const x = w * 0.04 + k * step;
+      const rad = Math.min(h * 0.2, step * (0.5 + r() * 0.24));
+      const ground = h * 0.99;
+      /* the crown top is tucked just under the lowest wire - that is the point */
+      const cy = Math.min(ground - rad * 0.4, wireY(x) + 12 + rad);
+      const slot = Math.floor(r() * 5);                    /* which cultivar, i.e. how late */
+      const phase = (k / Math.max(1, n)) * 0.8 + slot * 0.04;
+      const open = Math.max(0, Math.min(1, (wave - phase) * 6));
+      const fade = Math.max(0, Math.min(1, 1 - (wave - phase - 0.34) * 5));
+      const lit = open * fade;
+      /* trunk */
+      g.globalAlpha = 0.5; g.strokeStyle = "#6F5F5A"; g.lineWidth = 1.4;
+      g.beginPath(); g.moveTo(x, cy); g.lineTo(x, ground); g.stroke();
+      /* crown - grey when dormant, its cultivar colour when in flower */
+      g.globalAlpha = 0.28 + 0.6 * lit;
+      g.fillStyle = lit > 0.02 ? RAMP[slot] : "#6F5F5A";
+      g.beginPath(); g.arc(x, cy, rad * (0.7 + 0.3 * lit), 0, 7); g.fill();
+      /* a few petals breaking off the ones at full bloom */
+      if (lit > 0.55 && !REDUCED){
+        g.globalAlpha = (lit - 0.55) * 0.8; g.fillStyle = RAMP[Math.max(0, slot - 1)];
+        for (let q = 0; q < 3; q++){
+          const a = r() * 7, d = rad * (1.1 + r() * 0.7);
+          g.beginPath(); g.arc(x + Math.cos(a) * d, cy + Math.sin(a) * d * 0.7, 1.5, 0, 7); g.fill();
+        }
+      }
+    }
+    /* the wires, over the top of everything */
+    g.globalAlpha = 0.85; g.strokeStyle = "#C9B8B2"; g.lineWidth = 1.1;
+    for (const drop of [0, 5, 10]){
+      g.beginPath();
+      for (let x = px(0); x <= px(poles - 1); x += 2){
+        const y = wireY(x) + drop;
+        x === px(0) ? g.moveTo(x, y) : g.lineTo(x, y);
+      }
+      g.stroke();
+    }
+    g.lineWidth = 2.2;
+    for (let i = 0; i < poles; i++){
+      const x = px(i);
+      g.beginPath(); g.moveTo(x, top - h * 0.06); g.lineTo(x, h * 0.99); g.stroke();
+      g.beginPath(); g.moveTo(x - w * 0.035, top + 2); g.lineTo(x + w * 0.035, top + 2); g.stroke();
+    }
+    g.globalAlpha = 1;
+  },
   "brick-by-brick"(g, w, h, t){
     /* the wall: columns of top-down studs, one per year, whose colour mix drifts from the
        classic six through the greys to earth tones and azures as the years scroll past */
