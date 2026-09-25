@@ -244,6 +244,68 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "every-bell-once"(g, w, h, t){
+    /* eight ropes plaiting: one lead of Plain Bob Major, rung out here from its
+       own place notation rather than drawn by hand, with the treble in red and
+       one working bell in blue - the same braid the page opens with, and it
+       draws itself left to right the way the page's does */
+    const N = 8;
+    const tok = s => {                                   /* "-18-18" -> ["-","18","-","18"] */
+      const o = []; let c = "";
+      for (const ch of s){
+        if (ch === "-"){ if (c){ o.push(c); c = ""; } o.push("-"); }
+        else if (ch === "."){ if (c){ o.push(c); c = ""; } }
+        else c += ch;
+      }
+      if (c) o.push(c);
+      return o;
+    };
+    /* each comma-separated block is itself, then itself backwards bar the last */
+    let ch = [];
+    for (const seg of "-18-18-18-18,12".split(",")){
+      const a = tok(seg);
+      ch = ch.concat(a, a.slice(0, -1).reverse());
+    }
+    let row = [0, 1, 2, 3, 4, 5, 6, 7];
+    const rows = [row];
+    for (const c of ch){                                 /* named places hold, the rest swap */
+      const pl = c === "-" ? [] : [...c].map(d => parseInt(d, 10) - 1);
+      const nx = row.slice();
+      for (let i = 0; i < N;){
+        if (pl.indexOf(i) >= 0) i++;
+        else if (i + 1 < N && pl.indexOf(i + 1) < 0){ nx[i] = row[i + 1]; nx[i + 1] = row[i]; i += 2; }
+        else i++;
+      }
+      row = nx; rows.push(row);
+    }
+
+    const n = rows.length, land = w >= h, pad = Math.max(3, Math.min(w, h) * 0.06);
+    const X = land ? (i, p) => pad + i * (w - 2 * pad) / (n - 1)
+                   : (i, p) => pad + p * (w - 2 * pad) / (N - 1);
+    const Y = land ? (i, p) => pad + p * (h - 2 * pad) / (N - 1)
+                   : (i, p) => pad + i * (h - 2 * pad) / (n - 1);
+    const prog = REDUCED ? 1 : Math.min(1, ((t / 5400) % 1.4));
+    const upto = prog * (n - 1), whole = Math.floor(upto), frac = upto - whole;
+
+    const line = (b, col, lw, alpha) => {
+      g.globalAlpha = alpha; g.strokeStyle = col; g.lineWidth = lw;
+      g.lineJoin = "round"; g.lineCap = "round"; g.beginPath();
+      for (let i = 0; i <= whole; i++){
+        const p = rows[i].indexOf(b);
+        i ? g.lineTo(X(i, p), Y(i, p)) : g.moveTo(X(i, p), Y(i, p));
+      }
+      if (frac > 0 && whole + 1 < n){
+        const a = rows[whole].indexOf(b), c = rows[whole + 1].indexOf(b);
+        g.lineTo(X(whole, a) + (X(whole + 1, c) - X(whole, a)) * frac,
+                 Y(whole, a) + (Y(whole + 1, c) - Y(whole, a)) * frac);
+      }
+      g.stroke();
+    };
+    for (let b = 2; b < N; b++) line(b, "#8E887B", 1, 0.5);   /* the other six ropes */
+    line(0, "#F0506A", 2, 0.95);                              /* the treble */
+    line(1, "#6FA8FF", 2, 0.95);                              /* one working bell */
+    g.globalAlpha = 1;
+  },
   "last-visited"(g, w, h, t){
     // lines of linked text: the early ones hold, the later ones break into dead
     // dashes, with a slow sweep passing over them like a link checker running

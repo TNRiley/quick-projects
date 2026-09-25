@@ -3,6 +3,45 @@
   "owner": "TNRiley",
   "projects": [
     {
+      "slug": "every-bell-once",
+      "title": "Every Bell Once",
+      "favicon": "🔔",
+      "built": "2026-09-25",
+      "published": false,
+      "tagline": "Every named change-ringing method there is, rung in the browser from its place notation. Across 661,509 changes no bell ever moves more than one place — and 77% of the eight-bell library draws the identical treble line.",
+      "blurb": "The Central Council of Church Bell Ringers' complete method collection: 25,094 named ways to ring a tower of bells, from a first performance in 1684 to one this month. Each method is a short string of place notation; the page ships nothing but those strings and re-rings every lead in your browser, change by change, so the drawings cannot drift from the data. Two findings carry it. First, the rule the whole tradition rests on holds absolutely — rung out in full, across 661,509 changes and 5.4 million bell positions, the largest distance any bell moves in any change is exactly 1, with no exceptions anywhere in the library. Second, the library is enormous and its frame is tiny: all 25,094 methods use only 1,370 distinct hunt-bell paths between them, and on eight bells a single treble path accounts for 8,347 of the 8,480 Surprise, Delight and Treble Bob methods ever named — Cambridge and Bristol, the two methods ringers argue about most, draw the identical red line and differ only in what the other seven bells do behind it. A searchable explorer covers all 25,094 with their notation, symmetry, lead head and first peal; one canvas overlays every treble-dodging Major method at once, shaded by how many took each line. Along the way: no two methods in the library ring an identical lead, but 5,712 of them are identical until the final change, and the single busiest naming day on record is a band on Guernsey ringing 35 new methods in one go and naming them all after Billie Eilish songs.",
+      "tags": [
+        "change ringing",
+        "bell ringing",
+        "permutations",
+        "England",
+        "line drawing",
+        "minimalism",
+        "vanilla JS",
+        "canvas"
+      ],
+      "sources": [
+        {
+          "name": "Central Council of Church Bell Ringers, Methods Library — the full XML export of all classes and stages (25,094 methods), plus the separate jump-method collection (28), generated 12 September 2026",
+          "url": "https://methods.cccbr.org.uk/",
+          "licence": "© Central Council of Church Bell Ringers. Published by the Council for use in spreadsheets and computer programs; used here in derived form (names, place notation and performance records) with attribution. The raw export is not redistributed."
+        }
+      ],
+      "stack": [
+        "python 3 stdlib",
+        "place-notation engine, verified against the library's own lead lengths, lead heads and hunt-bell paths for all 25,094 methods",
+        "the same engine ported to JS, so every line is re-rung in the browser",
+        "vanilla JS",
+        "canvas",
+        "density accumulation with a gamma map",
+        "gzip + base64 payload"
+      ],
+      "hasSource": true,
+      "bytes": 624757,
+      "repo": null,
+      "live": null
+    },
+    {
       "slug": "low-enough",
       "title": "Low Enough",
       "favicon": "🌸",
