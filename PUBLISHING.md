@@ -295,11 +295,23 @@ The site appears at `https://tnriley.github.io/<slug>/` within a minute or two.
 `catalog/tools/publish_to_github.sh` automates all of this — creating the repo, pushing, enabling
 Pages. It is now the route on both machines; the manual steps above are the fallback.
 
-**Note it walks every project, not just the slug you pass**, re-pushing any that are behind and
-reporting `repo exists` / `pages already on` for the rest. That is harmless, but the new project's
-lines scroll past early — check the tail for your slug, or confirm with
-`gh repo view TNRiley/<slug>`. It also flips `published` in `meta.json`, so **commit that change
-and re-run `build_catalog.py`** afterwards or the catalog card stays stale.
+**Pass the slug** — `publish_to_github.sh <slug>` publishes that project and the catalog, and
+nothing else:
+
+```bash
+bash catalog/tools/publish_to_github.sh second-language
+```
+
+With **no argument it walks every project**, re-pushing any that are behind and reporting
+`repo exists` / `pages already on` for the rest. That is mostly harmless, but it is not harmless
+when another project is finished and deliberately unpushed: a bare run makes it public too.
+(Until 2026-09-27 the bare walk was the only mode, which is why older notes say to check the tail
+of the output for your slug.) Either way it flips `published` in `meta.json`, so **commit that
+change and re-run `build_catalog.py`** afterwards or the catalog card stays stale.
+
+The catalog is always pushed, with or without a slug — a new card only reaches the shelf once it
+is. Unpublished projects still get a card, marked *Not published yet* with no live link, so
+pushing the catalog never leaves a dead link behind.
 
 ---
 

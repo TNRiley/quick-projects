@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
-# Create the GitHub repos, push, and turn on Pages. Idempotent — safe to re-run;
+# Create the GitHub repos, push, and turn on Pages. Idempotent - safe to re-run;
 # repos that already exist are pushed to, not recreated.
+#
+#     publish_to_github.sh                    # every project, plus the catalog
+#     publish_to_github.sh second-language    # just that one, plus the catalog
+#
+# Name one or more slugs to publish only those. With no arguments it walks every
+# project, which is what it always did -- and which will make a finished-but-held
+# project public along with the one you meant. The catalog is always pushed, since
+# a new card only appears on the shelf once it is.
 #
 # Needs the GitHub CLI with TNRiley among its authenticated accounts:
 #     macOS:    brew install gh
@@ -83,8 +91,19 @@ publish () {                       # $1 = local dir, $2 = repo name, $3 = descri
   )
 }
 
-for d in "$ROOT"/projects/*/; do
-  slug="$(basename "$d")"
+# Any slugs given on the command line restrict the run to those projects.
+if [ "$#" -gt 0 ]; then
+  for slug in "$@"; do
+    [ -d "$ROOT/projects/$slug" ] || { echo "no such project: $slug"; exit 1; }
+  done
+  targets=("$@")
+else
+  targets=()
+  for d in "$ROOT"/projects/*/; do targets+=("$(basename "$d")"); done
+fi
+
+for slug in "${targets[@]}"; do
+  d="$ROOT/projects/$slug"
   desc="$("$PY" -c "import json,sys;print(json.load(open(sys.argv[1]))['tagline'])" "$d/meta.json" 2>/dev/null)"
   publish "$d" "$slug" "$desc"
 done

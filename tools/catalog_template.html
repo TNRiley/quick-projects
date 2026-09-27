@@ -930,6 +930,53 @@ const PLATES = {
     }
     g.strokeStyle = "rgba(140,150,128,.35)"; g.lineWidth = 1;
     g.beginPath(); g.moveTo(0, base); g.lineTo(w, base); g.stroke();
+  },
+  "second-language"(g, w, h, t){
+    /* the page's own motif: a block of crossword cells whose letters turn over,
+       amber (the retired vocabulary) to blue (the invented one), on a wave that
+       sweeps left to right - the 1993 swap, run on a loop. Below about 13px a
+       cell drops its letter and keeps the colour, so this still reads in the
+       narrow hero strip. */
+    const r = rng("second-language");
+    const OLD = "ESNEOSARENAREIRADEPROAOLPEUNALASORATLEEVOETULEANOAINEE";
+    const NEW = "SNLEDUTSAIMACIKEAESPNEBAYACAIELOMRIURLCEOLSATODIEATARI";
+    const cs = Math.max(8, Math.min(h * 0.46, w / 9, 26));
+    const gap = Math.max(1.5, cs * 0.09);
+    const cols = Math.max(2, Math.floor((w + gap) / (cs + gap)));
+    const rows = Math.max(1, Math.floor((h + gap) / (cs + gap)));
+    const ox = (w - (cols * (cs + gap) - gap)) / 2;
+    const oy = (h - (rows * (cs + gap) - gap)) / 2;
+    const wave = REDUCED ? 0.6 : ((t / 5400) % 1.4) - 0.22;
+    const lettered = cs >= 13;
+    if (lettered){
+      g.font = `600 ${Math.round(cs * 0.58)}px "IBM Plex Mono", ui-monospace, monospace`;
+      g.textAlign = "center"; g.textBaseline = "middle";
+    }
+    let k = 0;
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++, k++){
+      const x = ox + i * (cs + gap), y = oy + j * (cs + gap);
+      if (r() < 0.15){                                   /* a few filled squares */
+        g.fillStyle = "rgba(126,116,100,.28)";
+        g.fillRect(x, y, cs, cs);
+        continue;
+      }
+      g.strokeStyle = "rgba(142,133,116,.42)"; g.lineWidth = 1;
+      g.strokeRect(x + .5, y + .5, cs - 1, cs - 1);
+      /* how far the wave has got to this cell, reading the way a grid is filled */
+      const p = (i + j * 0.4) / (cols + rows * 0.4);
+      const on = Math.max(0, Math.min(1, (wave - p) * 7));
+      const oc = `rgba(206,146,70,${(1 - on).toFixed(3)})`;
+      const nc = `rgba(104,160,222,${on.toFixed(3)})`;
+      if (lettered){
+        const cx = x + cs / 2, cy = y + cs / 2 + cs * 0.03;
+        g.fillStyle = oc; g.fillText(OLD[k % OLD.length], cx, cy);
+        g.fillStyle = nc; g.fillText(NEW[k % NEW.length], cx, cy);
+      } else {
+        const pad = cs * 0.22, sz = cs - pad * 2;
+        g.fillStyle = oc; g.fillRect(x + pad, y + pad, sz, sz);
+        g.fillStyle = nc; g.fillRect(x + pad, y + pad, sz, sz);
+      }
+    }
   }
 };
 const SLUGS = __SLUGS__;
