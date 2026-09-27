@@ -59,10 +59,21 @@ h1.t em{font-style:normal;color:var(--accent)}
 .btn.pending{background:transparent;border-style:dashed;color:var(--ink3);cursor:default}
 
 .band{margin-top:34px;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--plate-bg);position:relative}
-canvas#hero{display:block;width:100%;height:172px}
-@media(min-width:900px){canvas#hero{height:224px}}
-.bandcap{position:absolute;left:14px;bottom:11px;font-family:"Courier Prime",monospace;font-size:10.5px;
-  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);pointer-events:none}
+canvas#hero{display:block;width:100%;height:224px}
+/* One transparent link over each plate. The band is a canvas, so hit-testing
+   it by hand would give a mouse-only, screen-reader-invisible control; real
+   anchors in a matching grid are focusable, announce themselves and open on
+   Enter for free. The column and row counts are set from the same numbers the
+   canvas draws with, so the two never drift. */
+.plategrid{position:absolute;inset:0;display:grid;
+  grid-template-columns:repeat(var(--cols,13),minmax(0,1fr));
+  grid-template-rows:repeat(var(--rows,2),minmax(0,1fr))}
+.plategrid a{display:block;outline-offset:-3px;-webkit-tap-highlight-color:transparent}
+.plategrid a:focus-visible{outline:2px solid var(--accent)}
+.bandcap{position:absolute;left:14px;bottom:11px;right:14px;font-family:"Courier Prime",monospace;font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);pointer-events:none;
+  transition:color .12s;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.bandcap.on{color:rgba(255,255,255,.92)}
 
 /* ── stats ────────────────────────────────────────── */
 .strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
@@ -164,8 +175,9 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     </div>
   </div>
   <div class="band">
-    <canvas id="hero"></canvas>
-    <div class="bandcap">index plate &middot; one motif per project</div>
+    <canvas id="hero" aria-hidden="true"></canvas>
+    <nav class="plategrid" id="plategrid" aria-label="Projects"></nav>
+    <div class="bandcap" id="bandcap">index plate &middot; one motif per project</div>
   </div>
 </header>
 
@@ -187,7 +199,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 <section class="blk">
   <h2 class="sec disp">The shelf</h2>
   <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed &mdash; that part is not optional.</p>
-  <div class="grid"><article class="card">
+  <div class="grid"><article class="card" id="p-second-language">
   <a class="hit" href="https://tnriley.github.io/second-language/" aria-label="Open Second Language"></a>
   <div class="plate"><canvas data-plate="second-language" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">✏️</span></div>
@@ -209,7 +221,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/second-language/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/second-language">Repository</a></div>
   </div>
 </article>
-<article class="card unpublished">
+<article class="card unpublished" id="p-every-bell-once">
   
   <div class="plate"><canvas data-plate="every-bell-once" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🔔</span></div>
@@ -231,7 +243,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><span class="btn pending">Not published yet</span></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-low-enough">
   <a class="hit" href="https://tnriley.github.io/low-enough/" aria-label="Open Low Enough"></a>
   <div class="plate"><canvas data-plate="low-enough" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🌸</span></div>
@@ -253,7 +265,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/low-enough/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/low-enough">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-wherever-found">
   <a class="hit" href="https://tnriley.github.io/wherever-found/" aria-label="Open Wherever Found"></a>
   <div class="plate"><canvas data-plate="wherever-found" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🦊</span></div>
@@ -275,7 +287,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/wherever-found/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/wherever-found">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-first-ballot">
   <a class="hit" href="https://tnriley.github.io/first-ballot/" aria-label="Open First Ballot"></a>
   <div class="plate"><canvas data-plate="first-ballot" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🌟</span></div>
@@ -297,7 +309,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/first-ballot/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/first-ballot">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-personal-best">
   <a class="hit" href="https://tnriley.github.io/personal-best/" aria-label="Open Personal Best"></a>
   <div class="plate"><canvas data-plate="personal-best" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">⏱️</span></div>
@@ -319,7 +331,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/personal-best/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/personal-best">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-six-more-weeks">
   <a class="hit" href="https://tnriley.github.io/six-more-weeks/" aria-label="Open Six More Weeks"></a>
   <div class="plate"><canvas data-plate="six-more-weeks" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🦫</span></div>
@@ -341,7 +353,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/six-more-weeks/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/six-more-weeks">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-request-denied">
   <a class="hit" href="https://tnriley.github.io/request-denied/" aria-label="Open Request Denied"></a>
   <div class="plate"><canvas data-plate="request-denied" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🚫</span></div>
@@ -363,7 +375,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/request-denied/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/request-denied">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-brick-by-brick">
   <a class="hit" href="https://tnriley.github.io/brick-by-brick/" aria-label="Open Brick by Brick"></a>
   <div class="plate"><canvas data-plate="brick-by-brick" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🧱</span></div>
@@ -385,7 +397,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/brick-by-brick/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/brick-by-brick">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-last-visited">
   <a class="hit" href="https://tnriley.github.io/last-visited/" aria-label="Open Last Visited"></a>
   <div class="plate"><canvas data-plate="last-visited" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🔗</span></div>
@@ -407,7 +419,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/last-visited/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/last-visited">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-momentum">
   <a class="hit" href="https://tnriley.github.io/momentum/" aria-label="Open Momentum"></a>
   <div class="plate"><canvas data-plate="momentum" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🎾</span></div>
@@ -429,7 +441,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/momentum/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/momentum">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-right-of-way">
   <a class="hit" href="https://tnriley.github.io/right-of-way/" aria-label="Open Right of Way"></a>
   <div class="plate"><canvas data-plate="right-of-way" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🛬</span></div>
@@ -451,7 +463,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/right-of-way/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/right-of-way">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-narrow-year">
   <a class="hit" href="https://tnriley.github.io/narrow-year/" aria-label="Open Narrow Year"></a>
   <div class="plate"><canvas data-plate="narrow-year" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🪵</span></div>
@@ -473,7 +485,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/narrow-year/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/narrow-year">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-redline">
   <a class="hit" href="https://tnriley.github.io/redline/" aria-label="Open Redline"></a>
   <div class="plate"><canvas data-plate="redline" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">✒️</span></div>
@@ -495,7 +507,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/redline/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/redline">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-broke-ground">
   <a class="hit" href="https://tnriley.github.io/broke-ground/" aria-label="Open Broke Ground"></a>
   <div class="plate"><canvas data-plate="broke-ground" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🏘️</span></div>
@@ -517,7 +529,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/broke-ground/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/broke-ground">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-ahead-of-season">
   <a class="hit" href="https://tnriley.github.io/ahead-of-season/" aria-label="Open Ahead of Season"></a>
   <div class="plate"><canvas data-plate="ahead-of-season" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🐦</span></div>
@@ -539,7 +551,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/ahead-of-season/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/ahead-of-season">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-unforced">
   <a class="hit" href="https://tnriley.github.io/unforced/" aria-label="Open Unforced Error"></a>
   <div class="plate"><canvas data-plate="unforced" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🎾</span></div>
@@ -561,7 +573,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/unforced/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/unforced">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-thirty-seven">
   <a class="hit" href="https://tnriley.github.io/thirty-seven/" aria-label="Open Thirty-Seven Waves"></a>
   <div class="plate"><canvas data-plate="thirty-seven" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🌊</span></div>
@@ -583,7 +595,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/thirty-seven/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/thirty-seven">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-headwaters">
   <a class="hit" href="https://tnriley.github.io/headwaters/" aria-label="Open Headwaters"></a>
   <div class="plate"><canvas data-plate="headwaters" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">💧</span></div>
@@ -605,7 +617,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/headwaters/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/headwaters">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-still-cited">
   <a class="hit" href="https://tnriley.github.io/still-cited/" aria-label="Open Still Cited"></a>
   <div class="plate"><canvas data-plate="still-cited" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">📄</span></div>
@@ -627,7 +639,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/still-cited/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/still-cited">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-at-large">
   <a class="hit" href="https://tnriley.github.io/at-large/" aria-label="Open At Large"></a>
   <div class="plate"><canvas data-plate="at-large" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🦁</span></div>
@@ -649,7 +661,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/at-large/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/at-large">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-overhead">
   <a class="hit" href="https://tnriley.github.io/overhead/" aria-label="Open Overhead"></a>
   <div class="plate"><canvas data-plate="overhead" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🛰️</span></div>
@@ -671,7 +683,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/overhead/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/overhead">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-daybook">
   <a class="hit" href="https://tnriley.github.io/daybook/" aria-label="Open Daybook"></a>
   <div class="plate"><canvas data-plate="daybook" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🌡️</span></div>
@@ -693,7 +705,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/daybook/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/daybook">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-mermaid-medic">
   <a class="hit" href="https://tnriley.github.io/mermaid-medic/" aria-label="Open Mermaid Medic"></a>
   <div class="plate"><canvas data-plate="mermaid-medic" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">🧜</span></div>
@@ -715,7 +727,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/mermaid-medic/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/mermaid-medic">Repository</a></div>
   </div>
 </article>
-<article class="card">
+<article class="card" id="p-goat-synthesis">
   <a class="hit" href="https://tnriley.github.io/goat-synthesis/" aria-label="Open GOAT Synthesis"></a>
   <div class="plate"><canvas data-plate="goat-synthesis" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">⭐</span></div>
@@ -1543,7 +1555,7 @@ const PLATES = {
     }
   }
 };
-const SLUGS = ["second-language", "every-bell-once", "low-enough", "wherever-found", "first-ballot", "personal-best", "six-more-weeks", "request-denied", "brick-by-brick", "last-visited", "momentum", "right-of-way", "narrow-year", "redline", "broke-ground", "ahead-of-season", "unforced", "thirty-seven", "headwaters", "still-cited", "at-large", "overhead", "daybook", "mermaid-medic", "goat-synthesis"];
+const SLUGS = [{"s": "second-language", "t": "Second Language", "u": "https://tnriley.github.io/second-language/"}, {"s": "every-bell-once", "t": "Every Bell Once", "u": null}, {"s": "low-enough", "t": "Low Enough", "u": "https://tnriley.github.io/low-enough/"}, {"s": "wherever-found", "t": "Wherever Found", "u": "https://tnriley.github.io/wherever-found/"}, {"s": "first-ballot", "t": "First Ballot", "u": "https://tnriley.github.io/first-ballot/"}, {"s": "personal-best", "t": "Personal Best", "u": "https://tnriley.github.io/personal-best/"}, {"s": "six-more-weeks", "t": "Six More Weeks", "u": "https://tnriley.github.io/six-more-weeks/"}, {"s": "request-denied", "t": "Request Denied", "u": "https://tnriley.github.io/request-denied/"}, {"s": "brick-by-brick", "t": "Brick by Brick", "u": "https://tnriley.github.io/brick-by-brick/"}, {"s": "last-visited", "t": "Last Visited", "u": "https://tnriley.github.io/last-visited/"}, {"s": "momentum", "t": "Momentum", "u": "https://tnriley.github.io/momentum/"}, {"s": "right-of-way", "t": "Right of Way", "u": "https://tnriley.github.io/right-of-way/"}, {"s": "narrow-year", "t": "Narrow Year", "u": "https://tnriley.github.io/narrow-year/"}, {"s": "redline", "t": "Redline", "u": "https://tnriley.github.io/redline/"}, {"s": "broke-ground", "t": "Broke Ground", "u": "https://tnriley.github.io/broke-ground/"}, {"s": "ahead-of-season", "t": "Ahead of Season", "u": "https://tnriley.github.io/ahead-of-season/"}, {"s": "unforced", "t": "Unforced Error", "u": "https://tnriley.github.io/unforced/"}, {"s": "thirty-seven", "t": "Thirty-Seven Waves", "u": "https://tnriley.github.io/thirty-seven/"}, {"s": "headwaters", "t": "Headwaters", "u": "https://tnriley.github.io/headwaters/"}, {"s": "still-cited", "t": "Still Cited", "u": "https://tnriley.github.io/still-cited/"}, {"s": "at-large", "t": "At Large", "u": "https://tnriley.github.io/at-large/"}, {"s": "overhead", "t": "Overhead", "u": "https://tnriley.github.io/overhead/"}, {"s": "daybook", "t": "Daybook", "u": "https://tnriley.github.io/daybook/"}, {"s": "mermaid-medic", "t": "Mermaid Medic", "u": "https://tnriley.github.io/mermaid-medic/"}, {"s": "goat-synthesis", "t": "GOAT Synthesis", "u": "https://tnriley.github.io/goat-synthesis/"}];
 function plate(slug){ return PLATES[slug] || PLATES["mermaid-medic"]; }
 
 function fit(cv){
@@ -1552,26 +1564,108 @@ function fit(cv){
   const g = cv.getContext("2d"); g.setTransform(d, 0, 0, d, 0, 0);
   return { g, w: r.width, h: r.height };
 }
+/* ── the index band ───────────────────────────────────────────────────────
+   One plate per project, in a grid rather than the single strip this used to
+   be: at 25 projects a one-row strip gave each motif about 48px and none of
+   them read. Two rows double that. The layout numbers live here and are
+   pushed to the overlay's CSS, so the links always sit exactly on the cells
+   the canvas painted. */
+const hero = document.getElementById("hero");
+const pgrid = document.getElementById("plategrid");
+const bandcap = document.getElementById("bandcap");
+const CAPTION = bandcap.textContent;
+let hover = -1, shape = null, lastT = 0, accent = "#fff";
+
+function bandShape(w){
+  const n = SLUGS.length;
+  /* Two rows as soon as there is room for them; narrower viewports get more
+     rows rather than thinner plates. cols is derived first so that rows comes
+     out exactly full, and only the final plate ever stretches. */
+  const want = w < 560 ? 5 : w < 880 ? 4 : 2;
+  const cols = Math.ceil(n / want);
+  const rows = Math.ceil(n / cols);
+  return { cols, rows, span: Math.min(2, cols * rows - n + 1),
+           rowH: w < 560 ? 76 : w < 880 ? 92 : 112 };
+}
+function cell(i, w, h){
+  const c = i % shape.cols, r = (i / shape.cols) | 0;
+  const bw = w / shape.cols, bh = h / shape.rows;
+  const span = i === SLUGS.length - 1 ? shape.span : 1;
+  return { x: c * bw, y: r * bh, w: bw * span, h: bh };
+}
+function setHover(i){
+  if (i === hover) return;
+  hover = i;
+  const p = SLUGS[i];
+  bandcap.textContent = i < 0 ? CAPTION
+    : p.t + (p.u ? "  ·  open →" : "  ·  not published yet");
+  bandcap.classList.toggle("on", i >= 0);
+  accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#fff";
+  draw(lastT);
+}
+(function buildBand(){
+  SLUGS.forEach((p, i) => {
+    const a = document.createElement("a");
+    /* An unpublished project has no live page, so its plate goes to its own
+       card on this page instead of nowhere. */
+    a.href = p.u || ("#p-" + p.s);
+    a.title = p.t + (p.u ? "" : " — not published yet");
+    a.setAttribute("aria-label", a.title);
+    a.addEventListener("pointerenter", () => setHover(i));
+    a.addEventListener("pointerleave", () => setHover(-1));
+    a.addEventListener("focus", () => setHover(i));
+    a.addEventListener("blur", () => setHover(-1));
+    pgrid.appendChild(a);
+  });
+})();
+
 function draw(t){
-  t = t || 0;
+  t = lastT = t || 0;
   document.querySelectorAll("canvas[data-plate]").forEach(cv => {
     const { g, w, h } = fit(cv);
     g.clearRect(0, 0, w, h);
     g.save(); plate(cv.dataset.plate)(g, w, h, t); g.restore();
   });
-  const hero = document.getElementById("hero");
+  const sh = bandShape(hero.getBoundingClientRect().width);
+  if (!shape || sh.cols !== shape.cols || sh.rows !== shape.rows || sh.rowH !== shape.rowH){
+    shape = sh;
+    hero.style.height = (sh.rows * sh.rowH) + "px";
+    pgrid.style.setProperty("--cols", sh.cols);
+    pgrid.style.setProperty("--rows", sh.rows);
+    const last = pgrid.lastElementChild;
+    if (last) last.style.gridColumn = sh.span > 1 ? "span " + sh.span : "";
+  }
   const { g, w, h } = fit(hero);
   g.clearRect(0, 0, w, h);
-  const n = SLUGS.length, bw = w / n;
-  SLUGS.forEach((s, i) => {
+  SLUGS.forEach((p, i) => {
+    const q = cell(i, w, h);
     g.save();
-    g.beginPath(); g.rect(i * bw, 0, bw, h); g.clip();
-    g.translate(i * bw, 0);
-    plate(s)(g, bw, h, t + i * 900);
+    g.beginPath(); g.rect(q.x, q.y, q.w, q.h); g.clip();
+    g.translate(q.x, q.y);
+    plate(p.s)(g, q.w, q.h, t + i * 900);
     g.restore();
-    if (i){ g.strokeStyle = "rgba(255,255,255,.13)"; g.lineWidth = 1;
-            g.beginPath(); g.moveTo(i * bw + .5, 0); g.lineTo(i * bw + .5, h); g.stroke(); }
   });
+  g.strokeStyle = "rgba(255,255,255,.13)"; g.lineWidth = 1;
+  SLUGS.forEach((p, i) => {
+    const q = cell(i, w, h);
+    g.beginPath();
+    if (q.x > .5){ g.moveTo(q.x + .5, q.y); g.lineTo(q.x + .5, q.y + q.h); }
+    if (q.y > .5){ g.moveTo(q.x, q.y + .5); g.lineTo(q.x + q.w, q.y + .5); }
+    g.stroke();
+  });
+  /* Hovering one plate dims the other twenty-four rather than lighting one up:
+     at this size a highlight reads as noise, an absence of noise does not. */
+  if (hover >= 0){
+    g.fillStyle = "rgba(0,0,0,.55)";
+    SLUGS.forEach((p, i) => {
+      if (i === hover) return;
+      const q = cell(i, w, h);
+      g.fillRect(q.x, q.y, q.w, q.h);
+    });
+    const q = cell(hover, w, h);
+    g.strokeStyle = accent; g.lineWidth = 2;
+    g.strokeRect(q.x + 1, q.y + 1, q.w - 2, q.h - 2);
+  }
 }
 let raf = null;
 function loop(t){ draw(t); raf = requestAnimationFrame(loop); }

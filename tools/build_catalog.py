@@ -64,7 +64,7 @@ def card(m):
     else:
         hit = ""
         acts = ('<span class="btn pending">Not published yet</span>')
-    return f"""<article class="card{'' if m['published'] else ' unpublished'}">
+    return f"""<article class="card{'' if m['published'] else ' unpublished'}" id="p-{esc(m['slug'])}">
   {hit}
   <div class="plate"><canvas data-plate="{esc(m['slug'])}" aria-hidden="true"></canvas>
     <span class="glyph" aria-hidden="true">{esc(m['favicon'])}</span></div>
@@ -138,7 +138,12 @@ def build():
               .replace("__SOURCES__", sources_table(ms))
               .replace("__STATS__", "".join(
                   f'<div><div class="v">{esc(v)}</div><div class="k">{esc(k)}</div></div>' for v, k in stats))
-              .replace("__SLUGS__", json.dumps([m["slug"] for m in ms]))
+              # the index band draws one plate per project and overlays a real link on
+              # each: slug to pick the motif, title for the caption, and a destination -
+              # the live page, or the project's own card when it is not published yet
+              .replace("__SLUGS__", json.dumps(
+                  [{"s": m["slug"], "t": m["title"], "u": m["live"]} for m in ms],
+                  ensure_ascii=False))
               .replace("__OWNER__", OWNER)
               .replace("__CATALOG_REPO__", CATALOG_REPO)
               .replace("__GENERATED__", datetime.date.today().isoformat()))

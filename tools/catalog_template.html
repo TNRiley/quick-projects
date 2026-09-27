@@ -52,10 +52,21 @@ h1.t em{font-style:normal;color:var(--accent)}
 .btn.pending{background:transparent;border-style:dashed;color:var(--ink3);cursor:default}
 
 .band{margin-top:34px;border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:var(--plate-bg);position:relative}
-canvas#hero{display:block;width:100%;height:172px}
-@media(min-width:900px){canvas#hero{height:224px}}
-.bandcap{position:absolute;left:14px;bottom:11px;font-family:"Courier Prime",monospace;font-size:10.5px;
-  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);pointer-events:none}
+canvas#hero{display:block;width:100%;height:224px}
+/* One transparent link over each plate. The band is a canvas, so hit-testing
+   it by hand would give a mouse-only, screen-reader-invisible control; real
+   anchors in a matching grid are focusable, announce themselves and open on
+   Enter for free. The column and row counts are set from the same numbers the
+   canvas draws with, so the two never drift. */
+.plategrid{position:absolute;inset:0;display:grid;
+  grid-template-columns:repeat(var(--cols,13),minmax(0,1fr));
+  grid-template-rows:repeat(var(--rows,2),minmax(0,1fr))}
+.plategrid a{display:block;outline-offset:-3px;-webkit-tap-highlight-color:transparent}
+.plategrid a:focus-visible{outline:2px solid var(--accent)}
+.bandcap{position:absolute;left:14px;bottom:11px;right:14px;font-family:"Courier Prime",monospace;font-size:10.5px;
+  letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42);pointer-events:none;
+  transition:color .12s;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.bandcap.on{color:rgba(255,255,255,.92)}
 
 /* ── stats ────────────────────────────────────────── */
 .strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
@@ -156,8 +167,9 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     </div>
   </div>
   <div class="band">
-    <canvas id="hero"></canvas>
-    <div class="bandcap">index plate &middot; one motif per project</div>
+    <canvas id="hero" aria-hidden="true"></canvas>
+    <nav class="plategrid" id="plategrid" aria-label="Projects"></nav>
+    <div class="bandcap" id="bandcap">index plate &middot; one motif per project</div>
   </div>
 </header>
 
@@ -988,26 +1000,108 @@ function fit(cv){
   const g = cv.getContext("2d"); g.setTransform(d, 0, 0, d, 0, 0);
   return { g, w: r.width, h: r.height };
 }
+/* ── the index band ───────────────────────────────────────────────────────
+   One plate per project, in a grid rather than the single strip this used to
+   be: at 25 projects a one-row strip gave each motif about 48px and none of
+   them read. Two rows double that. The layout numbers live here and are
+   pushed to the overlay's CSS, so the links always sit exactly on the cells
+   the canvas painted. */
+const hero = document.getElementById("hero");
+const pgrid = document.getElementById("plategrid");
+const bandcap = document.getElementById("bandcap");
+const CAPTION = bandcap.textContent;
+let hover = -1, shape = null, lastT = 0, accent = "#fff";
+
+function bandShape(w){
+  const n = SLUGS.length;
+  /* Two rows as soon as there is room for them; narrower viewports get more
+     rows rather than thinner plates. cols is derived first so that rows comes
+     out exactly full, and only the final plate ever stretches. */
+  const want = w < 560 ? 5 : w < 880 ? 4 : 2;
+  const cols = Math.ceil(n / want);
+  const rows = Math.ceil(n / cols);
+  return { cols, rows, span: Math.min(2, cols * rows - n + 1),
+           rowH: w < 560 ? 76 : w < 880 ? 92 : 112 };
+}
+function cell(i, w, h){
+  const c = i % shape.cols, r = (i / shape.cols) | 0;
+  const bw = w / shape.cols, bh = h / shape.rows;
+  const span = i === SLUGS.length - 1 ? shape.span : 1;
+  return { x: c * bw, y: r * bh, w: bw * span, h: bh };
+}
+function setHover(i){
+  if (i === hover) return;
+  hover = i;
+  const p = SLUGS[i];
+  bandcap.textContent = i < 0 ? CAPTION
+    : p.t + (p.u ? "  ·  open →" : "  ·  not published yet");
+  bandcap.classList.toggle("on", i >= 0);
+  accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#fff";
+  draw(lastT);
+}
+(function buildBand(){
+  SLUGS.forEach((p, i) => {
+    const a = document.createElement("a");
+    /* An unpublished project has no live page, so its plate goes to its own
+       card on this page instead of nowhere. */
+    a.href = p.u || ("#p-" + p.s);
+    a.title = p.t + (p.u ? "" : " — not published yet");
+    a.setAttribute("aria-label", a.title);
+    a.addEventListener("pointerenter", () => setHover(i));
+    a.addEventListener("pointerleave", () => setHover(-1));
+    a.addEventListener("focus", () => setHover(i));
+    a.addEventListener("blur", () => setHover(-1));
+    pgrid.appendChild(a);
+  });
+})();
+
 function draw(t){
-  t = t || 0;
+  t = lastT = t || 0;
   document.querySelectorAll("canvas[data-plate]").forEach(cv => {
     const { g, w, h } = fit(cv);
     g.clearRect(0, 0, w, h);
     g.save(); plate(cv.dataset.plate)(g, w, h, t); g.restore();
   });
-  const hero = document.getElementById("hero");
+  const sh = bandShape(hero.getBoundingClientRect().width);
+  if (!shape || sh.cols !== shape.cols || sh.rows !== shape.rows || sh.rowH !== shape.rowH){
+    shape = sh;
+    hero.style.height = (sh.rows * sh.rowH) + "px";
+    pgrid.style.setProperty("--cols", sh.cols);
+    pgrid.style.setProperty("--rows", sh.rows);
+    const last = pgrid.lastElementChild;
+    if (last) last.style.gridColumn = sh.span > 1 ? "span " + sh.span : "";
+  }
   const { g, w, h } = fit(hero);
   g.clearRect(0, 0, w, h);
-  const n = SLUGS.length, bw = w / n;
-  SLUGS.forEach((s, i) => {
+  SLUGS.forEach((p, i) => {
+    const q = cell(i, w, h);
     g.save();
-    g.beginPath(); g.rect(i * bw, 0, bw, h); g.clip();
-    g.translate(i * bw, 0);
-    plate(s)(g, bw, h, t + i * 900);
+    g.beginPath(); g.rect(q.x, q.y, q.w, q.h); g.clip();
+    g.translate(q.x, q.y);
+    plate(p.s)(g, q.w, q.h, t + i * 900);
     g.restore();
-    if (i){ g.strokeStyle = "rgba(255,255,255,.13)"; g.lineWidth = 1;
-            g.beginPath(); g.moveTo(i * bw + .5, 0); g.lineTo(i * bw + .5, h); g.stroke(); }
   });
+  g.strokeStyle = "rgba(255,255,255,.13)"; g.lineWidth = 1;
+  SLUGS.forEach((p, i) => {
+    const q = cell(i, w, h);
+    g.beginPath();
+    if (q.x > .5){ g.moveTo(q.x + .5, q.y); g.lineTo(q.x + .5, q.y + q.h); }
+    if (q.y > .5){ g.moveTo(q.x, q.y + .5); g.lineTo(q.x + q.w, q.y + .5); }
+    g.stroke();
+  });
+  /* Hovering one plate dims the other twenty-four rather than lighting one up:
+     at this size a highlight reads as noise, an absence of noise does not. */
+  if (hover >= 0){
+    g.fillStyle = "rgba(0,0,0,.55)";
+    SLUGS.forEach((p, i) => {
+      if (i === hover) return;
+      const q = cell(i, w, h);
+      g.fillRect(q.x, q.y, q.w, q.h);
+    });
+    const q = cell(hover, w, h);
+    g.strokeStyle = accent; g.lineWidth = 2;
+    g.strokeRect(q.x + 1, q.y + 1, q.w - 2, q.h - 2);
+  }
 }
 let raf = null;
 function loop(t){ draw(t); raf = requestAnimationFrame(loop); }
