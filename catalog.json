@@ -40,7 +40,7 @@
         "single-byte-per-year string payload"
       ],
       "hasSource": true,
-      "bytes": 1995840,
+      "bytes": 1996584,
       "repo": "https://github.com/TNRiley/second-language",
       "live": "https://tnriley.github.io/second-language/"
     },
@@ -78,7 +78,7 @@
         "Bradley-Terry fit in pure Python"
       ],
       "hasSource": true,
-      "bytes": 2460841,
+      "bytes": 2461581,
       "repo": "https://github.com/TNRiley/coffee-last",
       "live": "https://tnriley.github.io/coffee-last/"
     },
@@ -117,7 +117,7 @@
         "gzip + base64 payload"
       ],
       "hasSource": true,
-      "bytes": 624757,
+      "bytes": 625501,
       "repo": "https://github.com/TNRiley/every-bell-once",
       "live": "https://tnriley.github.io/every-bell-once/"
     },
@@ -170,7 +170,7 @@
         "typed-array payload"
       ],
       "hasSource": true,
-      "bytes": 320639,
+      "bytes": 321378,
       "repo": "https://github.com/TNRiley/low-enough",
       "live": "https://tnriley.github.io/low-enough/"
     },
@@ -244,7 +244,7 @@
         "gzip + base64 payload"
       ],
       "hasSource": true,
-      "bytes": 586119,
+      "bytes": 586862,
       "repo": "https://github.com/TNRiley/wherever-found",
       "live": "https://tnriley.github.io/wherever-found/"
     },
@@ -280,7 +280,7 @@
         "JSON payload"
       ],
       "hasSource": true,
-      "bytes": 273485,
+      "bytes": 274226,
       "repo": "https://github.com/TNRiley/first-ballot",
       "live": "https://tnriley.github.io/first-ballot/"
     },
@@ -316,7 +316,7 @@
         "real-time LCD race"
       ],
       "hasSource": true,
-      "bytes": 74414,
+      "bytes": 75162,
       "repo": "https://github.com/TNRiley/personal-best",
       "live": "https://tnriley.github.io/personal-best/"
     },
@@ -364,7 +364,7 @@
         "inline SVG"
       ],
       "hasSource": true,
-      "bytes": 269987,
+      "bytes": 270730,
       "repo": "https://github.com/TNRiley/six-more-weeks",
       "live": "https://tnriley.github.io/six-more-weeks/"
     },
@@ -417,7 +417,7 @@
         "node DOM-stub page test"
       ],
       "hasSource": true,
-      "bytes": 46122,
+      "bytes": 46865,
       "repo": "https://github.com/TNRiley/request-denied",
       "live": "https://tnriley.github.io/request-denied/"
     },
@@ -454,7 +454,7 @@
         "three.js r128 instanced meshes"
       ],
       "hasSource": true,
-      "bytes": 1862209,
+      "bytes": 1862952,
       "repo": "https://github.com/TNRiley/brick-by-brick",
       "live": "https://tnriley.github.io/brick-by-brick/"
     },
@@ -504,7 +504,7 @@
         "node DOM-stub page test"
       ],
       "hasSource": true,
-      "bytes": 251138,
+      "bytes": 251879,
       "repo": "https://github.com/TNRiley/last-visited",
       "live": "https://tnriley.github.io/last-visited/"
     },
@@ -543,7 +543,7 @@
         "node canvas-geometry test"
       ],
       "hasSource": true,
-      "bytes": 187394,
+      "bytes": 188132,
       "repo": "https://github.com/TNRiley/momentum",
       "live": "https://tnriley.github.io/momentum/"
     },
@@ -585,7 +585,7 @@
         "node --check smoke test"
       ],
       "hasSource": true,
-      "bytes": 435614,
+      "bytes": 436355,
       "repo": "https://github.com/TNRiley/right-of-way",
       "live": "https://tnriley.github.io/right-of-way/"
     },
@@ -635,7 +635,7 @@
         "numpy"
       ],
       "hasSource": true,
-      "bytes": 4336408,
+      "bytes": 4337148,
       "repo": "https://github.com/TNRiley/narrow-year",
       "live": "https://tnriley.github.io/narrow-year/"
     },
@@ -672,7 +672,7 @@
         "node smoke test that runs the built page"
       ],
       "hasSource": true,
-      "bytes": 4803546,
+      "bytes": 4805198,
       "repo": "https://github.com/TNRiley/redline",
       "live": "https://tnriley.github.io/redline/"
     },
@@ -728,7 +728,7 @@
         "ArcGIS REST paged harvest"
       ],
       "hasSource": true,
-      "bytes": 7149138,
+      "bytes": 7148477,
       "repo": "https://github.com/TNRiley/broke-ground",
       "live": "https://tnriley.github.io/broke-ground/"
     },
@@ -768,7 +768,7 @@
         "resident-species control cohort"
       ],
       "hasSource": true,
-      "bytes": 459490,
+      "bytes": 459398,
       "repo": "https://github.com/TNRiley/ahead-of-season",
       "live": "https://tnriley.github.io/ahead-of-season/"
     },
@@ -812,7 +812,7 @@
         "live regex coding"
       ],
       "hasSource": true,
-      "bytes": 1266444,
+      "bytes": 1266139,
       "repo": "https://github.com/TNRiley/unforced",
       "live": "https://tnriley.github.io/unforced/"
     },
@@ -852,7 +852,7 @@
         "empirical calibration against NOAA"
       ],
       "hasSource": true,
-      "bytes": 363872,
+      "bytes": 364148,
       "repo": "https://github.com/TNRiley/thirty-seven",
       "live": "https://tnriley.github.io/thirty-seven/"
     },
@@ -902,7 +902,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 3653362,
+      "bytes": 3654286,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"
@@ -938,7 +938,7 @@
         "typed-array payload"
       ],
       "hasSource": true,
-      "bytes": 12852301,
+      "bytes": 12853041,
       "published": true,
       "repo": "https://github.com/TNRiley/still-cited",
       "live": "https://tnriley.github.io/still-cited/"
@@ -971,7 +971,7 @@
         "Bodoni Moda"
       ],
       "hasSource": true,
-      "bytes": 4390482,
+      "bytes": 4391219,
       "repo": "https://github.com/TNRiley/at-large",
       "live": "https://tnriley.github.io/at-large/"
     },
@@ -1001,7 +1001,7 @@
         "hand-written Keplerian propagator"
       ],
       "hasSource": "lost-reproducible",
-      "bytes": 185027,
+      "bytes": 185764,
       "published": true,
       "repo": "https://github.com/TNRiley/overhead",
       "live": "https://tnriley.github.io/overhead/"
@@ -1032,7 +1032,7 @@
         "Web Audio API"
       ],
       "hasSource": true,
-      "bytes": 1037774,
+      "bytes": 1038510,
       "published": true,
       "repo": "https://github.com/TNRiley/daybook",
       "live": "https://tnriley.github.io/daybook/"
@@ -1056,7 +1056,7 @@
         "mermaid.js 10.9.1 (cdnjs)"
       ],
       "hasSource": "html-is-source",
-      "bytes": 24152,
+      "bytes": 24894,
       "published": true,
       "repo": "https://github.com/TNRiley/mermaid-medic",
       "live": "https://tnriley.github.io/mermaid-medic/"
@@ -1086,7 +1086,7 @@
         "no dependencies"
       ],
       "hasSource": "html-is-source",
-      "bytes": 26381,
+      "bytes": 27124,
       "published": true,
       "repo": "https://github.com/TNRiley/goat-synthesis",
       "live": "https://tnriley.github.io/goat-synthesis/"

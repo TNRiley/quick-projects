@@ -30,6 +30,7 @@ a{color:var(--accent)}
 .disp{font-family:"Bricolage Grotesque",Archivo,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.96}
 .mono{font-family:"Courier Prime",ui-monospace,Menlo,monospace}
 .lbl{font-family:"Courier Prime",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.lbl .visits{font-variant-numeric:tabular-nums;color:var(--ink2)}
 
 /* ── hero ─────────────────────────────────────────── */
 header.mast{padding:52px 0 0}
@@ -113,6 +114,7 @@ h2.sec{font-size:clamp(28px,3.2vw,40px)}
 .meta dl>div{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px;font-size:12.5px}
 .meta dt{color:var(--ink3);font-family:"Courier Prime",monospace;font-size:11.5px}
 .meta dd{margin:0;color:var(--ink2)}
+.meta dl>div:last-child dd{font-variant-numeric:tabular-nums}
 .meta dd.ok{color:var(--ok)} .meta dd.warn{color:var(--warn)}
 ul.srcs{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:5px}
 ul.srcs li{font-size:12.5px;line-height:1.45}
@@ -154,10 +156,10 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 
 <div class="app">
 <header class="mast">
-  <span class="lbl">__OWNER__ &middot; one-session builds, dispatched by hand</span>
+  <span class="lbl" id="mastLbl">__OWNER__ &middot; one-session builds, dispatched by hand</span>
   <h1 class="t disp">Quick&nbsp;<em>Projects</em></h1>
   <div class="herorow">
-    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing (subject, data, interface), then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read.</p>
+    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing (subject, data, interface), then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read except the visit count.</p>
     <div class="tools">
       <div class="seg3" id="themeSeg">
         <button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button>
@@ -1169,3 +1171,5 @@ try{ saved = JSON.parse(localStorage.getItem("quickprojects.theme") || '"auto"')
 setTheme(saved);
 if (REDUCED) draw(0); else raf = requestAnimationFrame(loop);
 </script>
+
+__COUNTER__

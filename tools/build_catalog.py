@@ -7,6 +7,8 @@ Writes catalog/index.html and catalog/catalog.json. Adding a project to the cata
 means dropping a meta.json next to its index.html and re-running this.
 """
 import json, os, glob, datetime, html, re, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import visit_counter
 
 def _workspace_root(start):
     """Walk up until we find the directory holding projects/, so these scripts work
@@ -64,7 +66,8 @@ def card(m):
     else:
         hit = ""
         acts = ('<span class="btn pending">Not published yet</span>')
-    return f"""<article class="card{'' if m['published'] else ' unpublished'}" id="p-{esc(m['slug'])}">
+    vis = f' data-visits="{esc(m["slug"])}"' if m["published"] else ""
+    return f"""<article class="card{'' if m['published'] else ' unpublished'}" id="p-{esc(m['slug'])}"{vis}>
   {hit}
   <div class="plate"><canvas data-plate="{esc(m['slug'])}" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -152,7 +155,8 @@ def build():
                   ensure_ascii=False))
               .replace("__OWNER__", OWNER)
               .replace("__CATALOG_REPO__", CATALOG_REPO)
-              .replace("__GENERATED__", datetime.date.today().isoformat()))
+              .replace("__GENERATED__", datetime.date.today().isoformat())
+              .replace("__COUNTER__", visit_counter.catalog_script()))
 
     # No em dashes on the catalog page. They read as a tell rather than as
     # punctuation, and most of them want to be a colon, a comma or a full stop

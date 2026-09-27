@@ -37,6 +37,7 @@ a{color:var(--accent)}
 .disp{font-family:"Bricolage Grotesque",Archivo,sans-serif;font-weight:800;letter-spacing:-.035em;line-height:.96}
 .mono{font-family:"Courier Prime",ui-monospace,Menlo,monospace}
 .lbl{font-family:"Courier Prime",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.lbl .visits{font-variant-numeric:tabular-nums;color:var(--ink2)}
 
 /* ── hero ─────────────────────────────────────────── */
 header.mast{padding:52px 0 0}
@@ -120,6 +121,7 @@ h2.sec{font-size:clamp(28px,3.2vw,40px)}
 .meta dl>div{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px;font-size:12.5px}
 .meta dt{color:var(--ink3);font-family:"Courier Prime",monospace;font-size:11.5px}
 .meta dd{margin:0;color:var(--ink2)}
+.meta dl>div:last-child dd{font-variant-numeric:tabular-nums}
 .meta dd.ok{color:var(--ok)} .meta dd.warn{color:var(--warn)}
 ul.srcs{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:5px}
 ul.srcs li{font-size:12.5px;line-height:1.45}
@@ -162,10 +164,10 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 <body>
 <div class="app">
 <header class="mast">
-  <span class="lbl">TNRiley &middot; one-session builds, dispatched by hand</span>
+  <span class="lbl" id="mastLbl">TNRiley &middot; one-session builds, dispatched by hand</span>
   <h1 class="t disp">Quick&nbsp;<em>Projects</em></h1>
   <div class="herorow">
-    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing (subject, data, interface), then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read.</p>
+    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing (subject, data, interface), then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read except the visit count.</p>
     <div class="tools">
       <div class="seg3" id="themeSeg">
         <button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button>
@@ -198,7 +200,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 <section class="blk">
   <h2 class="sec disp">The shelf</h2>
   <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed. That part is not optional.</p>
-  <div class="grid"><article class="card" id="p-second-language">
+  <div class="grid"><article class="card" id="p-second-language" data-visits="second-language">
   <a class="hit" href="https://tnriley.github.io/second-language/" aria-label="Open Second Language"></a>
   <div class="plate"><canvas data-plate="second-language" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -219,7 +221,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/second-language/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/second-language">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-coffee-last">
+<article class="card" id="p-coffee-last" data-visits="coffee-last">
   <a class="hit" href="https://tnriley.github.io/coffee-last/" aria-label="Open Coffee Last"></a>
   <div class="plate"><canvas data-plate="coffee-last" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -240,7 +242,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/coffee-last/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/coffee-last">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-every-bell-once">
+<article class="card" id="p-every-bell-once" data-visits="every-bell-once">
   <a class="hit" href="https://tnriley.github.io/every-bell-once/" aria-label="Open Every Bell Once"></a>
   <div class="plate"><canvas data-plate="every-bell-once" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -252,7 +254,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-25</dd></div>
-        <div><dt>Page weight</dt><dd>625 KB</dd></div>
+        <div><dt>Page weight</dt><dd>626 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3 stdlib, place-notation engine, verified against the library&#x27;s own lead lengths, lead heads and hunt-bell paths for all 25,094 methods, the same engine ported to JS, so every line is re-rung in the browser, vanilla JS, canvas, density accumulation with a gamma map, gzip + base64 payload</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -261,7 +263,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/every-bell-once/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/every-bell-once">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-low-enough">
+<article class="card" id="p-low-enough" data-visits="low-enough">
   <a class="hit" href="https://tnriley.github.io/low-enough/" aria-label="Open Low Enough"></a>
   <div class="plate"><canvas data-plate="low-enough" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -282,7 +284,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/low-enough/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/low-enough">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-wherever-found">
+<article class="card" id="p-wherever-found" data-visits="wherever-found">
   <a class="hit" href="https://tnriley.github.io/wherever-found/" aria-label="Open Wherever Found"></a>
   <div class="plate"><canvas data-plate="wherever-found" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -294,7 +296,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-22</dd></div>
-        <div><dt>Page weight</dt><dd>586 KB</dd></div>
+        <div><dt>Page weight</dt><dd>587 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3 stdlib, pypdf, undocumented ECOS pull-reports REST API, NOAA Fisheries species-directory JSON export, self-validating PDF table parsers (reconciled against each report&#x27;s own printed total), entity_id / scientific-name join with a DPS-label bridge, a taxonomic-synonym bridge and word-overlap fallbacks, vanilla JS, canvas timeline, inline SVG choropleth, gzip + base64 payload</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -303,7 +305,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/wherever-found/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/wherever-found">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-first-ballot">
+<article class="card" id="p-first-ballot" data-visits="first-ballot">
   <a class="hit" href="https://tnriley.github.io/first-ballot/" aria-label="Open First Ballot"></a>
   <div class="plate"><canvas data-plate="first-ballot" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -315,7 +317,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-22</dd></div>
-        <div><dt>Page weight</dt><dd>273 KB</dd></div>
+        <div><dt>Page weight</dt><dd>274 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3 stdlib, keyword category classifier, vanilla JS, inline SVG, JSON payload</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -324,7 +326,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/first-ballot/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/first-ballot">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-personal-best">
+<article class="card" id="p-personal-best" data-visits="personal-best">
   <a class="hit" href="https://tnriley.github.io/personal-best/" aria-label="Open Personal Best"></a>
   <div class="plate"><canvas data-plate="personal-best" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -336,7 +338,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-19</dd></div>
-        <div><dt>Page weight</dt><dd>74 KB</dd></div>
+        <div><dt>Page weight</dt><dd>75 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3 + pandas, quantile payload with DNF-as-slowest ranking, vanilla JS, canvas, real-time LCD race</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -345,7 +347,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/personal-best/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/personal-best">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-six-more-weeks">
+<article class="card" id="p-six-more-weeks" data-visits="six-more-weeks">
   <a class="hit" href="https://tnriley.github.io/six-more-weeks/" aria-label="Open Six More Weeks"></a>
   <div class="plate"><canvas data-plate="six-more-weeks" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -357,7 +359,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-16</dd></div>
-        <div><dt>Page weight</dt><dd>270 KB</dd></div>
+        <div><dt>Page weight</dt><dd>271 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3 stdlib, nearest-complete-station selection, coin-field Monte Carlo, year-block bootstrap, vanilla JS, canvas, inline SVG</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -366,7 +368,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/six-more-weeks/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/six-more-weeks">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-request-denied">
+<article class="card" id="p-request-denied" data-visits="request-denied">
   <a class="hit" href="https://tnriley.github.io/request-denied/" aria-label="Open Request Denied"></a>
   <div class="plate"><canvas data-plate="request-denied" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -378,7 +380,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-16</dd></div>
-        <div><dt>Page weight</dt><dd>46 KB</dd></div>
+        <div><dt>Page weight</dt><dd>47 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3 (standard library), stdlib xlsx reader, pdftotext -raw / -layout, OCR table extraction, vanilla JS, inline SVG, node DOM-stub page test</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -387,7 +389,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/request-denied/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/request-denied">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-brick-by-brick">
+<article class="card" id="p-brick-by-brick" data-visits="brick-by-brick">
   <a class="hit" href="https://tnriley.github.io/brick-by-brick/" aria-label="Open Brick by Brick"></a>
   <div class="plate"><canvas data-plate="brick-by-brick" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -408,7 +410,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/brick-by-brick/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/brick-by-brick">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-last-visited">
+<article class="card" id="p-last-visited" data-visits="last-visited">
   <a class="hit" href="https://tnriley.github.io/last-visited/" aria-label="Open Last Visited"></a>
   <div class="plate"><canvas data-plate="last-visited" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -420,7 +422,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-12</dd></div>
-        <div><dt>Page weight</dt><dd>251 KB</dd></div>
+        <div><dt>Page weight</dt><dd>252 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3, OCR line-break repair, pdftotext -layout, threaded liveness checking, curl fallback for fingerprint-blocked hosts, Wayback availability lookups, vanilla JS, canvas, node DOM-stub page test</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -429,7 +431,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/last-visited/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/last-visited">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-momentum">
+<article class="card" id="p-momentum" data-visits="momentum">
   <a class="hit" href="https://tnriley.github.io/momentum/" aria-label="Open Momentum"></a>
   <div class="plate"><canvas data-plate="momentum" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -441,7 +443,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-11</dd></div>
-        <div><dt>Page weight</dt><dd>187 KB</dd></div>
+        <div><dt>Page weight</dt><dd>188 KB</dd></div>
         <div><dt>Built with</dt><dd>python 3, numpy, memoryless match simulator, Mantel-Haenszel conditional test, vanilla JS, canvas, in-browser simulation, node canvas-geometry test</dd></div>
         <div><dt>Source</dt><dd class="ok">full pipeline</dd></div>
       </dl>
@@ -450,7 +452,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/momentum/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/momentum">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-right-of-way">
+<article class="card" id="p-right-of-way" data-visits="right-of-way">
   <a class="hit" href="https://tnriley.github.io/right-of-way/" aria-label="Open Right of Way"></a>
   <div class="plate"><canvas data-plate="right-of-way" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -471,7 +473,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/right-of-way/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/right-of-way">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-narrow-year">
+<article class="card" id="p-narrow-year" data-visits="narrow-year">
   <a class="hit" href="https://tnriley.github.io/narrow-year/" aria-label="Open Narrow Year"></a>
   <div class="plate"><canvas data-plate="narrow-year" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -492,7 +494,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/narrow-year/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/narrow-year">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-redline">
+<article class="card" id="p-redline" data-visits="redline">
   <a class="hit" href="https://tnriley.github.io/redline/" aria-label="Open Redline"></a>
   <div class="plate"><canvas data-plate="redline" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -513,7 +515,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/redline/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/redline">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-broke-ground">
+<article class="card" id="p-broke-ground" data-visits="broke-ground">
   <a class="hit" href="https://tnriley.github.io/broke-ground/" aria-label="Open Broke Ground"></a>
   <div class="plate"><canvas data-plate="broke-ground" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -534,7 +536,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/broke-ground/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/broke-ground">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-ahead-of-season">
+<article class="card" id="p-ahead-of-season" data-visits="ahead-of-season">
   <a class="hit" href="https://tnriley.github.io/ahead-of-season/" aria-label="Open Ahead of Season"></a>
   <div class="plate"><canvas data-plate="ahead-of-season" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -555,7 +557,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/ahead-of-season/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/ahead-of-season">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-unforced">
+<article class="card" id="p-unforced" data-visits="unforced">
   <a class="hit" href="https://tnriley.github.io/unforced/" aria-label="Open Unforced Error"></a>
   <div class="plate"><canvas data-plate="unforced" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -576,7 +578,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/unforced/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/unforced">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-thirty-seven">
+<article class="card" id="p-thirty-seven" data-visits="thirty-seven">
   <a class="hit" href="https://tnriley.github.io/thirty-seven/" aria-label="Open Thirty-Seven Waves"></a>
   <div class="plate"><canvas data-plate="thirty-seven" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -597,7 +599,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/thirty-seven/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/thirty-seven">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-headwaters">
+<article class="card" id="p-headwaters" data-visits="headwaters">
   <a class="hit" href="https://tnriley.github.io/headwaters/" aria-label="Open Headwaters"></a>
   <div class="plate"><canvas data-plate="headwaters" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -618,7 +620,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/headwaters/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/headwaters">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-still-cited">
+<article class="card" id="p-still-cited" data-visits="still-cited">
   <a class="hit" href="https://tnriley.github.io/still-cited/" aria-label="Open Still Cited"></a>
   <div class="plate"><canvas data-plate="still-cited" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -639,7 +641,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/still-cited/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/still-cited">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-at-large">
+<article class="card" id="p-at-large" data-visits="at-large">
   <a class="hit" href="https://tnriley.github.io/at-large/" aria-label="Open At Large"></a>
   <div class="plate"><canvas data-plate="at-large" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -660,7 +662,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/at-large/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/at-large">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-overhead">
+<article class="card" id="p-overhead" data-visits="overhead">
   <a class="hit" href="https://tnriley.github.io/overhead/" aria-label="Open Overhead"></a>
   <div class="plate"><canvas data-plate="overhead" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -672,7 +674,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-04</dd></div>
-        <div><dt>Page weight</dt><dd>185 KB</dd></div>
+        <div><dt>Page weight</dt><dd>186 KB</dd></div>
         <div><dt>Built with</dt><dd>vanilla JS, canvas, hand-written Keplerian propagator</dd></div>
         <div><dt>Source</dt><dd class="warn">page only</dd></div>
       </dl>
@@ -681,7 +683,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/overhead/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/overhead">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-daybook">
+<article class="card" id="p-daybook" data-visits="daybook">
   <a class="hit" href="https://tnriley.github.io/daybook/" aria-label="Open Daybook"></a>
   <div class="plate"><canvas data-plate="daybook" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -702,7 +704,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/daybook/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/daybook">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-mermaid-medic">
+<article class="card" id="p-mermaid-medic" data-visits="mermaid-medic">
   <a class="hit" href="https://tnriley.github.io/mermaid-medic/" aria-label="Open Mermaid Medic"></a>
   <div class="plate"><canvas data-plate="mermaid-medic" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -714,7 +716,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-03</dd></div>
-        <div><dt>Page weight</dt><dd>24 KB</dd></div>
+        <div><dt>Page weight</dt><dd>25 KB</dd></div>
         <div><dt>Built with</dt><dd>vanilla JS, mermaid.js 10.9.1 (cdnjs)</dd></div>
         <div><dt>Source</dt><dd class="ok">HTML is the source</dd></div>
       </dl>
@@ -723,7 +725,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/mermaid-medic/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/mermaid-medic">Repository</a></div>
   </div>
 </article>
-<article class="card" id="p-goat-synthesis">
+<article class="card" id="p-goat-synthesis" data-visits="goat-synthesis">
   <a class="hit" href="https://tnriley.github.io/goat-synthesis/" aria-label="Open GOAT Synthesis"></a>
   <div class="plate"><canvas data-plate="goat-synthesis" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -735,7 +737,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
       <div class="k">Card</div>
       <dl>
         <div><dt>First published</dt><dd>2026-09-03</dd></div>
-        <div><dt>Page weight</dt><dd>26 KB</dd></div>
+        <div><dt>Page weight</dt><dd>27 KB</dd></div>
         <div><dt>Built with</dt><dd>vanilla JS, no dependencies</dd></div>
         <div><dt>Source</dt><dd class="ok">HTML is the source</dd></div>
       </dl>
@@ -1728,6 +1730,70 @@ let saved = "auto";
 try{ saved = JSON.parse(localStorage.getItem("quickprojects.theme") || '"auto"'); }catch(e){}
 setTheme(saved);
 if (REDUCED) draw(0); else raf = requestAnimationFrame(loop);
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var API = "https://abacus.jasoncameron.dev", NS = "tnriley-shelf-e76198";
+  var live = /\.github\.io$/i.test(location.hostname);
+  var fmt = function(n){ return n.toLocaleString("en-US"); };
+  var read = function(url){
+    return fetch(url, {cache: "no-store"})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){ return (d && typeof d.value === "number") ? d.value : null; })
+      .catch(function(){ return null; });
+  };
+
+  /* this page's own visits, next to the masthead label */
+  var lbl = document.getElementById("mastLbl");
+  if (lbl) read(API + "/" + (live ? "hit" : "get") + "/" + NS + "/catalog").then(function(v){
+    if (v === null) return;
+    var s = document.createElement("span");
+    s.className = "visits";
+    s.textContent = fmt(v) + (v === 1 ? " visit" : " visits");
+    lbl.appendChild(document.createTextNode(" · "));
+    lbl.appendChild(s);
+  });
+
+  /* One count per card, read (never incremented) as the card comes into view.
+     Abacus allows 30 requests per IP per 10 seconds and the shelf is bigger
+     than that, so these go one at a time with a gap rather than all at once. */
+  var queue = [], busy = false;
+  function pump(){
+    if (busy || !queue.length) return;
+    busy = true;
+    var card = queue.shift();
+    read(API + "/get/" + NS + "/" + card.getAttribute("data-visits")).then(function(v){
+      if (v !== null) {
+        var dl = card.querySelector(".meta dl");
+        if (dl) {
+          var row = document.createElement("div");
+          row.innerHTML = "<dt>Visits</dt><dd></dd>";
+          row.lastChild.textContent = fmt(v);
+          dl.appendChild(row);
+        }
+      }
+      busy = false;
+      setTimeout(pump, 500);   /* 2/s; the ceiling is 3/s sustained */
+    });
+  }
+
+  var cards = [].slice.call(document.querySelectorAll(".card[data-visits]"));
+  if (window.IntersectionObserver) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);      /* once per session, never re-read on scroll back */
+        queue.push(e.target); pump();
+      });
+    }, {rootMargin: "250px"});
+    cards.forEach(function(c){ io.observe(c); });
+  } else {
+    cards.forEach(function(c){ queue.push(c); });
+    pump();
+  }
+})();
 </script>
 
 </body>

@@ -315,6 +315,54 @@ pushing the catalog never leaves a dead link behind.
 
 ---
 
+## 5b. The visit counter
+
+Every page counts its own visits. The catalog shows its own figure beside the masthead
+label and a **Visits** row on each card; each project page shows its own at the right-hand
+end of the breadcrumb bar.
+
+**There is nothing to do when you add a project.** The counter rides inside the breadcrumb
+bar that `add_catalog_link.py` already injects, so a new project picks it up from the
+normal four-step run, and an injector that ends with `add_catalog_link.py` (they all do)
+keeps it through every rebuild. The namespace and both scripts live in one file,
+`tools/visit_counter.py`.
+
+**GitHub cannot supply these numbers**, which is worth writing down because it is the
+obvious first idea. `/repos/{owner}/{repo}/traffic/views` counts people browsing the
+*repository on github.com*, not visitors to the Pages site; it needs a write-scoped token
+that cannot go in a public page; and it keeps only fourteen days. Checked 2026-09-27:
+every project repo read zero views with no popular paths while its Pages site was live,
+and the only path GitHub had recorded across the whole account was `/TNRiley/quick-projects`
+("Overview"). There is no GitHub Pages analytics of any kind.
+
+So the counter is [Abacus](https://abacus.jasoncameron.dev), a bare hit counter with no
+account and no dashboard: `GET /hit/<ns>/<key>` increments and returns `{"value": n}`,
+`GET /get/<ns>/<key>` reads without incrementing. Four things to know:
+
+- **The numbers are not evidence.** The namespace is in the page source and the service
+  has no accounts, so anyone who looks can inflate any counter. They are interesting, not
+  auditable. The random suffix on the namespace is there to avoid *colliding* with someone
+  else's `quick-projects`, not to hide anything.
+- **30 requests per IP per 10 seconds.** The shelf is bigger than that, so the catalog
+  reads card counts lazily as cards scroll into view, one at a time, 500ms apart. Do not
+  lower that gap: the ceiling works out at three a second sustained, and a 220ms gap
+  (4.5/s) is over it. The limit is real, it was hit while seeding the test counters.
+- **Nothing is rendered until a number comes back.** Every figure is created by script on
+  success; none of it exists in the HTML. When Abacus is slow, blocked by a tracker
+  blocker, rate-limiting or gone for good, no element is created and the pages look exactly
+  as they did before any of this existed. If it ever does go away, deleting
+  `visit_counter.py` and re-running steps 4 is the whole removal.
+- **Keys expire after six months of no access**, refreshed on every access. A project
+  nobody opens for half a year loses its count.
+
+Local previews do not count. The snippet only increments when the hostname ends in
+`.github.io`; opened from a file or a local server it reads the count instead.
+
+Because the pages now fetch one thing at load, the dek's "nothing fetched while you read"
+gained "except the visit count". If the counter is ever removed, put that sentence back.
+
+---
+
 ## 6. Licensing
 
 Code is MIT. Data keeps its source's licence, recorded in `meta.json`, repeated in the generated
