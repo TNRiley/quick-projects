@@ -256,6 +256,65 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "coffee-last"(g, w, h, t){
+    /* the page's own motif: a menu card whose lines start jumbled and settle
+       into one order, top first, the way the fit pulls a single bill of fare
+       out of a million click positions. Ink runs oyster-teal at the top of the
+       card to coffee-brown at the foot, and a line carries its true colour the
+       whole time - so while it is scrambled the card is confetti, and the
+       gradient only appears once the order does. */
+    const r = rng("coffee-last");
+    /* mid-tone inks, so the card reads on the dark shelf and on paper, and the
+       same hue ramp the page uses: teal at the oysters, olive through the middle
+       of the meal, brown at the coffee. Interpolating these two through RGB
+       instead would send the middle of the menu through grey. */
+    const H0 = 191, H1 = 28, S0 = 48, S1 = 60, L0 = 47, L1 = 47;
+    const ink = u => `hsl(${(H0 + (H1 - H0) * u).toFixed(1)} ` +
+      `${(S0 + (S1 - S0) * u).toFixed(0)}% ${(L0 + (L1 - L0) * u).toFixed(0)}%)`;
+    /* runs at 285x80 on a card and about 40x130 in the hero strip, so the line
+       count keys off height and the rule weight off both */
+    const n = Math.max(5, Math.min(22, Math.round(h / 6.2)));
+    const padY = h * 0.09, step = (h - padY * 2) / Math.max(1, n - 1);
+    const lw = Math.max(1.6, Math.min(3.4, step * 0.34));
+    const x0 = w * 0.09, avail = w * 0.82;
+    /* a fixed scramble, and a per-line settle that sweeps down the card */
+    const perm = [];
+    for (let k = 0; k < n; k++) perm.push(k);
+    for (let k = n - 1; k > 0; k--){
+      const j = Math.floor(r() * (k + 1));
+      const tmp = perm[k]; perm[k] = perm[j]; perm[j] = tmp;
+    }
+    const len = [];
+    for (let k = 0; k < n; k++) len.push(0.42 + r() * 0.5);
+    const ease = u => u < 0 ? 0 : u > 1 ? 1 : u * u * (3 - 2 * u);
+    /* one cycle: scrambled, settling top-down, held, then back */
+    const cyc = REDUCED ? 0.62 : ((t / 7200) % 1);
+    const sweep = cyc < 0.52 ? cyc / 0.52 * 1.35 : cyc < 0.82 ? 1.35
+                : 1.35 - (cyc - 0.82) / 0.18 * 1.35;
+    g.lineCap = "round";
+    for (let k = 0; k < n; k++){
+      const u = ease((sweep - k / n) * 2.6);
+      const y = padY + step * (perm[k] * (1 - u) + k * u);
+      const wide = avail * len[k];
+      g.strokeStyle = ink(n === 1 ? 0 : k / (n - 1));
+      g.globalAlpha = 0.5 + 0.48 * u;
+      g.lineWidth = lw;
+      g.beginPath(); g.moveTo(x0, y); g.lineTo(x0 + wide, y); g.stroke();
+      /* the price at the right margin, once there is room for it to read */
+      if (w > 140 && step > 4.5){
+        g.globalAlpha = 0.34 + 0.4 * u;
+        g.lineWidth = Math.max(1.2, lw * 0.75);
+        g.beginPath();
+        g.moveTo(x0 + avail * 0.9, y); g.lineTo(x0 + avail, y); g.stroke();
+      }
+    }
+    g.globalAlpha = 1;
+    /* the rule under the head of the card */
+    g.strokeStyle = ink(0.5); g.globalAlpha = 0.62;
+    g.lineWidth = Math.max(1, lw * 0.6);
+    g.beginPath(); g.moveTo(x0, padY * 0.5); g.lineTo(x0 + avail, padY * 0.5); g.stroke();
+    g.globalAlpha = 1;
+  },
   "every-bell-once"(g, w, h, t){
     /* eight ropes plaiting: one lead of Plain Bob Major, rung out here from its
        own place notation rather than drawn by hand, with the treble in red and
