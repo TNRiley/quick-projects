@@ -49,9 +49,9 @@
       "title": "Coffee Last",
       "favicon": "☕",
       "built": "2026-09-27",
-      "published": false,
+      "published": true,
       "tagline": "Volunteers transcribing 45,000 old restaurant menus left behind the spot on the page they clicked. Sorted by that one number, the American bill of fare turns out to be a single order that almost nobody broke.",
-      "blurb": "The New York Public Library's menu collection, transcribed dish by dish between 2011 and 2019, recorded an (x, y) click position for every one of its 1,335,245 dish appearances. Sort a page by the y and the courses fall out in sequence, though no volunteer ever labelled a course. Treat every within-page pair as a contest — was the celery printed above the Camembert? — and fit the 10 million resulting contests the way you would rank chess players, and 1,276 dishes collapse onto one line: raw oysters named by the bed they came from, then soup, fish, game, the roast, vegetables, salad, pastry, ices, cheese, and coffee. It is one order, not many: across 1.17 million sampled triples, \"printed above\" is transitive 98.9% of the time, a single ranking calls 88.5% of well-observed pairs correctly, and the median real menu page correlates with it at 0.66 against 0.02 for a shuffled control. Blue Points beat coffee on all 457 cards carrying both, without one exception. The order is rigid but not frozen — grapefruit walked from 0.76 down the card to 0.15, dessert fruit to opening course, while sherry and port went the other way and the relish trio of celery, olives and radishes never moved at all. Includes the reconstructed bill of fare, a head-to-head oracle over any two of the 1,276 dishes, and five real cards redrawn at the coordinates they were transcribed at.",
+      "blurb": "The New York Public Library's menu collection, transcribed dish by dish between 2011 and 2019, recorded an (x, y) click position for every one of its 1,335,245 dish appearances. Sort a page by the y and the courses fall out in sequence, though no volunteer ever labelled a course. Treat every within-page pair as a contest (was the celery printed above the Camembert?) and fit the 10 million resulting contests the way you would rank chess players, and 1,276 dishes collapse onto one line: raw oysters named by the bed they came from, then soup, fish, game, the roast, vegetables, salad, pastry, ices, cheese, and coffee. It is one order, not many: across 1.17 million sampled triples, \"printed above\" is transitive 98.9% of the time, a single ranking calls 88.5% of well-observed pairs correctly, and the median real menu page correlates with it at 0.66 against 0.02 for a shuffled control. Blue Points beat coffee on all 457 cards carrying both, without one exception. The order is rigid but not frozen: grapefruit walked from 0.76 down the card to 0.15, dessert fruit to opening course, while sherry and port went the other way and the relish trio of celery, olives and radishes never moved at all. Includes the reconstructed bill of fare, a head-to-head oracle over any two of the 1,276 dishes, and five real cards redrawn at the coordinates they were transcribed at.",
       "tags": [
         "menus",
         "food history",
@@ -79,8 +79,8 @@
       ],
       "hasSource": true,
       "bytes": 2460841,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/coffee-last",
+      "live": "https://tnriley.github.io/coffee-last/"
     },
     {
       "slug": "every-bell-once",
@@ -88,8 +88,8 @@
       "favicon": "🔔",
       "built": "2026-09-25",
       "published": true,
-      "tagline": "Every named change-ringing method there is, rung in the browser from its place notation. Across 661,509 changes no bell ever moves more than one place — and 77% of the eight-bell library draws the identical treble line.",
-      "blurb": "The Central Council of Church Bell Ringers' complete method collection: 25,094 named ways to ring a tower of bells, from a first performance in 1684 to one this month. Each method is a short string of place notation; the page ships nothing but those strings and re-rings every lead in your browser, change by change, so the drawings cannot drift from the data. Two findings carry it. First, the rule the whole tradition rests on holds absolutely — rung out in full, across 661,509 changes and 5.4 million bell positions, the largest distance any bell moves in any change is exactly 1, with no exceptions anywhere in the library. Second, the library is enormous and its frame is tiny: all 25,094 methods use only 1,370 distinct hunt-bell paths between them, and on eight bells a single treble path accounts for 8,347 of the 8,480 Surprise, Delight and Treble Bob methods ever named — Cambridge and Bristol, the two methods ringers argue about most, draw the identical red line and differ only in what the other seven bells do behind it. A searchable explorer covers all 25,094 with their notation, symmetry, lead head and first peal; one canvas overlays every treble-dodging Major method at once, shaded by how many took each line. Along the way: no two methods in the library ring an identical lead, but 5,712 of them are identical until the final change, and the single busiest naming day on record is a band on Guernsey ringing 35 new methods in one go and naming them all after Billie Eilish songs.",
+      "tagline": "Every named change-ringing method there is, rung in the browser from its place notation. Across 661,509 changes no bell ever moves more than one place, and 77% of the eight-bell library draws the identical treble line.",
+      "blurb": "The Central Council of Church Bell Ringers' complete method collection: 25,094 named ways to ring a tower of bells, from a first performance in 1684 to one this month. Each method is a short string of place notation; the page ships nothing but those strings and re-rings every lead in your browser, change by change, so the drawings cannot drift from the data. Two findings carry it. First, the rule the whole tradition rests on holds absolutely: rung out in full, across 661,509 changes and 5.4 million bell positions, the largest distance any bell moves in any change is exactly 1, with no exceptions anywhere in the library. Second, the library is enormous and its frame is tiny: all 25,094 methods use only 1,370 distinct hunt-bell paths between them, and on eight bells a single treble path accounts for 8,347 of the 8,480 Surprise, Delight and Treble Bob methods ever named. Cambridge and Bristol, the two methods ringers argue about most, draw the identical red line and differ only in what the other seven bells do behind it. A searchable explorer covers all 25,094 with their notation, symmetry, lead head and first peal; one canvas overlays every treble-dodging Major method at once, shaded by how many took each line. Along the way: no two methods in the library ring an identical lead, but 5,712 of them are identical until the final change, and the single busiest naming day on record is a band on Guernsey ringing 35 new methods in one go and naming them all after Billie Eilish songs.",
       "tags": [
         "change ringing",
         "bell ringing",
@@ -102,7 +102,7 @@
       ],
       "sources": [
         {
-          "name": "Central Council of Church Bell Ringers, Methods Library — the full XML export of all classes and stages (25,094 methods), plus the separate jump-method collection (28), generated 12 September 2026",
+          "name": "Central Council of Church Bell Ringers, Methods Library: the full XML export of all classes and stages (25,094 methods), plus the separate jump-method collection (28), generated 12 September 2026",
           "url": "https://methods.cccbr.org.uk/",
           "licence": "© Central Council of Church Bell Ringers. Published by the Council for use in spreadsheets and computer programs; used here in derived form (names, place notation and performance records) with attribution. The raw export is not redistributed."
         }
@@ -180,8 +180,8 @@
       "favicon": "🦊",
       "built": "2026-09-22",
       "published": true,
-      "tagline": "Every species the Endangered Species Act has ever listed, delisted or reclassified, verified live against both agencies' own databases — plus who the money actually goes to. NOAA Fisheries leads 7% of the list and absorbs two-thirds of the spending.",
-      "blurb": "The Fish and Wildlife Service's ECOSphere database and NOAA Fisheries' own ESA directory, queried live and merged with four years of the spending report Congress is sent: 2,478 currently listed entities, 141 ever delisted, 950 critical habitat designations, 1,596 five-year status reviews, and $734 million of reported FY2022 expenditure parsed out of a PDF that has no machine-readable release. Two findings carry the page. First, of 141 delisted entities only 85 (60%) were removed because they recovered — 32 went extinct first and 24 were never validly listed. Second, NOAA Fisheries leads 167 of 2,478 listing entities and takes 64% of every dollar reported spent, because recovering a Columbia Basin salmon run means operating a hydroelectric system: the three most expensive species in the country are all salmon or steelhead. Alongside them sits the North Atlantic right whale, whose sustainable human-caused death limit is 0.73 animals a year against 14.8 actually killed — one of 15 Atlantic marine mammal stocks dying faster than NOAA's own arithmetic allows. A searchable explorer covers every entity with its spending history; a second table covers NOAA's 105 species with their recovery-plan status, global NatureServe rank and live Federal Register document counts; and a state choropleth, a critical-habitat ranking and a live rulemaking feed round it out.",
+      "tagline": "Every species the Endangered Species Act has ever listed, delisted or reclassified, verified live against both agencies' own databases, plus who the money actually goes to. NOAA Fisheries leads 7% of the list and absorbs two-thirds of the spending.",
+      "blurb": "The Fish and Wildlife Service's ECOSphere database and NOAA Fisheries' own ESA directory, queried live and merged with four years of the spending report Congress is sent: 2,478 currently listed entities, 141 ever delisted, 950 critical habitat designations, 1,596 five-year status reviews, and $734 million of reported FY2022 expenditure parsed out of a PDF that has no machine-readable release. Two findings carry the page. First, of 141 delisted entities only 85 (60%) were removed because they recovered: 32 went extinct first and 24 were never validly listed. Second, NOAA Fisheries leads 167 of 2,478 listing entities and takes 64% of every dollar reported spent, because recovering a Columbia Basin salmon run means operating a hydroelectric system: the three most expensive species in the country are all salmon or steelhead. Alongside them sits the North Atlantic right whale, whose sustainable human-caused death limit is 0.73 animals a year against 14.8 actually killed, one of 15 Atlantic marine mammal stocks dying faster than NOAA's own arithmetic allows. A searchable explorer covers every entity with its spending history; a second table covers NOAA's 105 species with their recovery-plan status, global NatureServe rank and live Federal Register document counts; and a state choropleth, a critical-habitat ranking and a live rulemaking feed round it out.",
       "tags": [
         "endangered species",
         "conservation",
@@ -196,32 +196,32 @@
       ],
       "sources": [
         {
-          "name": "U.S. Fish & Wildlife Service, ECOSphere (Environmental Conservation Online System) — species listings, delistings, reclassifications, five-year reviews, critical habitat and recovery plans, fetched live at build time via undocumented report endpoints",
+          "name": "U.S. Fish & Wildlife Service, ECOSphere (Environmental Conservation Online System): species listings, delistings, reclassifications, five-year reviews, critical habitat and recovery plans, fetched live at build time via undocumented report endpoints",
           "url": "https://ecos.fws.gov/ecp/",
           "licence": "US Government public domain"
         },
         {
-          "name": "NOAA Fisheries, ESA Species Directory — the agency's own list of the 105 species and 258 listed entities it leads, with region, recovery plan status and critical habitat status, taken from the directory's JSON export",
+          "name": "NOAA Fisheries, ESA Species Directory: the agency's own list of the 105 species and 258 listed entities it leads, with region, recovery plan status and critical habitat status, taken from the directory's JSON export",
           "url": "https://www.fisheries.noaa.gov/species-directory/threatened-endangered",
           "licence": "US Government public domain"
         },
         {
-          "name": "U.S. Fish & Wildlife Service, Federal and State Endangered and Threatened Species Expenditures — Reports to Congress, fiscal years 2019–2022; per-entity spending parsed from Table 2 of each PDF",
+          "name": "U.S. Fish & Wildlife Service, Federal and State Endangered and Threatened Species Expenditures: Reports to Congress, fiscal years 2019–2022; per-entity spending parsed from Table 2 of each PDF",
           "url": "https://www.fws.gov/library/collections/endangered-and-threatened-species-expenditures-reports",
           "licence": "US Government public domain"
         },
         {
-          "name": "NOAA Fisheries, 2024 U.S. Atlantic and Gulf of America Marine Mammal Stock Assessments — abundance, Potential Biological Removal and human-caused mortality for 116 stocks, parsed from the report's Table 1",
+          "name": "NOAA Fisheries, 2024 U.S. Atlantic and Gulf of America Marine Mammal Stock Assessments: abundance, Potential Biological Removal and human-caused mortality for 116 stocks, parsed from the report's Table 1",
           "url": "https://www.fisheries.noaa.gov/national/marine-mammal-protection/marine-mammal-stock-assessment-reports",
           "licence": "US Government public domain"
         },
         {
-          "name": "Office of the Federal Register, Federal Register API — ESA rulemaking counts by agency, type and year, per-species document counts, and a live feed of each agency's most recent filings",
+          "name": "Office of the Federal Register, Federal Register API: ESA rulemaking counts by agency, type and year, per-species document counts, and a live feed of each agency's most recent filings",
           "url": "https://www.federalregister.gov/developers/documentation/api/v1",
           "licence": "US Government public domain"
         },
         {
-          "name": "NatureServe Explorer — global (G1–G5) and US national conservation ranks for every NOAA-managed species, via the public species search API",
+          "name": "NatureServe Explorer: global (G1–G5) and US national conservation ranks for every NOAA-managed species, via the public species search API",
           "url": "https://explorer.natureserve.org/",
           "licence": "NatureServe Network Biodiversity Location Data, used under NatureServe's terms for non-commercial reference"
         },
@@ -255,7 +255,7 @@
       "built": "2026-09-22",
       "published": true,
       "tagline": "Every lead and supporting acting Emmy nomination since 1979, and who never got the envelope. 72.5% never won it. Of the ones who did, 68% won on their first try.",
-      "blurb": "A 2026 Emmy CSV compiled by a fan project, regrouped into twelve lead/supporting × actor/actress × drama/comedy/limited-series categories — 1,573 acting careers, 1979 through the 78th Emmys on September 14, 2026. The news said Matthew Rhys became the first person to win two lead-actor Emmys in one year; checked against the full history, that's true only because it says ‘lead’ — James Earl Jones (1991) and Stockard Channing (2002) each won two of these categories in a single year too, just not two Lead ones. The bigger pattern: 72.5% of everyone ever nominated in these categories since 1979 never won, and of the 27% who did, 68% won on their very first nomination — a second or third try barely moves the odds. Angela Lansbury holds the all-time drought record, twelve straight Lead Actress–Drama nominations for Murder, She Wrote with zero wins, nearly double the next-longest streak. Every person's nomination history is browsable by category, dot for dot, win or loss.",
+      "blurb": "A 2026 Emmy CSV compiled by a fan project, regrouped into twelve lead/supporting × actor/actress × drama/comedy/limited-series categories: 1,573 acting careers, 1979 through the 78th Emmys on September 14, 2026. The news said Matthew Rhys became the first person to win two lead-actor Emmys in one year; checked against the full history, that's true only because it says ‘lead’. James Earl Jones (1991) and Stockard Channing (2002) each won two of these categories in a single year too, just not two Lead ones. The bigger pattern: 72.5% of everyone ever nominated in these categories since 1979 never won, and of the 27% who did, 68% won on their very first nomination, and a second or third try barely moves the odds. Angela Lansbury holds the all-time drought record, twelve straight Lead Actress–Drama nominations for Murder, She Wrote with zero wins, nearly double the next-longest streak. Every person's nomination history is browsable by category, dot for dot, win or loss.",
       "tags": [
         "awards shows",
         "television",
@@ -327,7 +327,7 @@
       "built": "2026-09-16",
       "published": true,
       "tagline": "Every Groundhog Day forecast on record, graded against the six weeks that followed. A groundhog that never came out of its burrow would win.",
-      "blurb": "1,442 Groundhog Day forecasts from 93 prognosticators — live groundhogs and marmots, ten taxidermied ones, people in suits, and also a lobster, an alligator, a largemouth bass, a golf club cover and a plastic flamingo — each graded against the literal six more weeks, February 3 to March 16, at the nearest long-running NOAA GHCN-Daily station. They were right 54.1% of the time. That beats a coin, but not a forecaster who stays in the burrow: the climate warms faster than a thirty-year normal can catch up, so a spring beats its own trailing normal 64% of the time, and 76% in the 2020s. Calling early spring every year would have scored 64%. Called at their own rates at random, the forecasters would have scored 51.7%, so their entire edge over chance is about 34 forecasts. Punxsutawney Phil calls winter 81% of the time and is right 43 times in 100. The only perfect record over five years belongs to Featherstone the Flamingo, a plastic lawn ornament in Massachusetts, which has never seen its shadow. The page carries two controls because one is not enough. The top of the table, an Alabama opossum right 13 times in 14, beats the best of 54 fair coins in 98% of replays, yet it sees its shadow in two years of fourteen in a place where spring is usually early, and calling at that rate at random would already score 70%. Matching every forecast since 1940 to ERA5 reanalysis of the sky over its burrow shows that someone really does look: shadows are called on 60% of sunny mornings and 29% of overcast ones. The taxidermied forecasters respond to the sky even more sharply than the live ones, so the handlers are the ones looking. The measurement they take is also useless: six weeks after a sunny Groundhog Day ran +0.75 °F warmer than after an overcast one, the opposite of the Candlemas rhyme, with an interval that straddles zero.",
+      "blurb": "1,442 Groundhog Day forecasts from 93 prognosticators (live groundhogs and marmots, ten taxidermied ones, people in suits, and also a lobster, an alligator, a largemouth bass, a golf club cover and a plastic flamingo), each graded against the literal six more weeks, February 3 to March 16, at the nearest long-running NOAA GHCN-Daily station. They were right 54.1% of the time. That beats a coin, but not a forecaster who stays in the burrow: the climate warms faster than a thirty-year normal can catch up, so a spring beats its own trailing normal 64% of the time, and 76% in the 2020s. Calling early spring every year would have scored 64%. Called at their own rates at random, the forecasters would have scored 51.7%, so their entire edge over chance is about 34 forecasts. Punxsutawney Phil calls winter 81% of the time and is right 43 times in 100. The only perfect record over five years belongs to Featherstone the Flamingo, a plastic lawn ornament in Massachusetts, which has never seen its shadow. The page carries two controls because one is not enough. The top of the table, an Alabama opossum right 13 times in 14, beats the best of 54 fair coins in 98% of replays, yet it sees its shadow in two years of fourteen in a place where spring is usually early, and calling at that rate at random would already score 70%. Matching every forecast since 1940 to ERA5 reanalysis of the sky over its burrow shows that someone really does look: shadows are called on 60% of sunny mornings and 29% of overcast ones. The taxidermied forecasters respond to the sky even more sharply than the live ones, so the handlers are the ones looking. The measurement they take is also useless: six weeks after a sunny Groundhog Day ran +0.75 °F warmer than after an overcast one, the opposite of the Candlemas rhyme, with an interval that straddles zero.",
       "tags": [
         "folklore",
         "forecast verification",
@@ -339,7 +339,7 @@
       ],
       "sources": [
         {
-          "name": "groundhog-day.com API — prognosticators and their recorded shadow calls, each record citing its own source",
+          "name": "groundhog-day.com API: prognosticators and their recorded shadow calls, each record citing its own source",
           "url": "https://groundhog-day.com/api/v1/groundhogs",
           "licence": "public API; forecast records are compiled facts, each forecaster links its original source"
         },
@@ -375,7 +375,7 @@
       "built": "2026-09-16",
       "published": true,
       "tagline": "What states won't let you put on a license plate, and how they decide. California reads the worst meaning into a birthday ending in 13.",
-      "blurb": "Personalized-plate decisions from California, New York, Texas and a dozen states' 2012 ban lists, set side by side. California asks applicants what a plate means, then reads it the worst way it can: of 23,430 flagged applications in 2015–16, 80% were denied, and a flagged plate ending in 13 (read as a gang number) was approved 7% of the time, down from 11% in 2012–13. New York issued 741 plates ending in 13 over four years. Thirty denials are quoted as the DMV recorded them — a union member's local numbers, a Tesla golfing pun, a mother of eight — and seven of those exact plates were issued in New York. The 2012 lists, pulled out of scanned public-records responses, turn out not to be independent judgements: 71% of Arkansas's banned list is on Vermont's, OLDFART is on all twelve large lists, and Maine's list is mostly Alaska's. Utah's list overlaps least with the others and is the only one that gives a reason for every plate. Texas doesn't consider intent at all but dates every request, so its 2025 rejections follow the news: all seven plates naming Elon Musk were requested between March 25 and June 17. Built around a trap: pdftotext's layout mode silently pairs about 84 of Texas's 1,951 plates with a neighbour's date.",
+      "blurb": "Personalized-plate decisions from California, New York, Texas and a dozen states' 2012 ban lists, set side by side. California asks applicants what a plate means, then reads it the worst way it can: of 23,430 flagged applications in 2015–16, 80% were denied, and a flagged plate ending in 13 (read as a gang number) was approved 7% of the time, down from 11% in 2012–13. New York issued 741 plates ending in 13 over four years. Thirty denials are quoted as the DMV recorded them (a union member's local numbers, a Tesla golfing pun, a mother of eight), and seven of those exact plates were issued in New York. The 2012 lists, pulled out of scanned public-records responses, turn out not to be independent judgements: 71% of Arkansas's banned list is on Vermont's, OLDFART is on all twelve large lists, and Maine's list is mostly Alaska's. Utah's list overlaps least with the others and is the only one that gives a reason for every plate. Texas doesn't consider intent at all but dates every request, so its 2025 rejections follow the news: all seven plates naming Elon Musk were requested between March 25 and June 17. Built around a trap: pdftotext's layout mode silently pairs about 84 of Texas's 1,951 plates with a neighbour's date.",
       "tags": [
         "censorship",
         "public records",
@@ -465,7 +465,7 @@
       "built": "2026-09-12",
       "published": true,
       "tagline": "Every URL the Supreme Court has ever cited, fetched again. Fewer than half still resolve to what the Justices read.",
-      "blurb": "1,382 web citations pulled out of 529 Supreme Court opinions — the whole run, from the first URL the Court ever cited in 1996 to the current term — then fetched again and looked up in the Internet Archive. Of the 1,185 addresses that give a definite answer, 44.6% still resolve to the document that was cited; 158 hosts have stopped resolving altogether, the publisher gone rather than the page. The failure is graded by age, which is what separates rot from noise: citations first made between 2005 and 2009 are 88% gone, those from 2015 onward mostly fine. Named for the Bluebook parenthetical, and built around two things that are easy to get wrong. The first is that roughly half the corpus is OCR of printed reporters, where a scanning error yields an address that was never real and looks identical to a rotted one — so every URL is also checked against the Wayback Machine, and rot is reported separately on the 696 addresses the archive can vouch for. The second is the measuring instrument itself: every one of the Court's own perma.cc links returned 403, not because of the user-agent but because the refusal keys on the HTTP client fingerprint, and re-fetching through curl changed 166 verdicts. The page also reads the Court's own answer to the problem out of the opinions: a blanket visitation note through the 2010s, a copy filed with the Clerk of Court, and then — in OT2025 and essentially never before — 73 citations carrying \"(archived at https://perma.cc/…)\", which makes perma.cc the most-cited host in the corpus. Those links work: 53 of the 54 that answer.",
+      "blurb": "1,382 web citations pulled out of 529 Supreme Court opinions (the whole run, from the first URL the Court ever cited in 1996 to the current term), then fetched again and looked up in the Internet Archive. Of the 1,185 addresses that give a definite answer, 44.6% still resolve to the document that was cited; 158 hosts have stopped resolving altogether, the publisher gone rather than the page. The failure is graded by age, which is what separates rot from noise: citations first made between 2005 and 2009 are 88% gone, those from 2015 onward mostly fine. Named for the Bluebook parenthetical, and built around two things that are easy to get wrong. The first is that roughly half the corpus is OCR of printed reporters, where a scanning error yields an address that was never real and looks identical to a rotted one, so every URL is also checked against the Wayback Machine, and rot is reported separately on the 696 addresses the archive can vouch for. The second is the measuring instrument itself: every one of the Court's own perma.cc links returned 403, not because of the user-agent but because the refusal keys on the HTTP client fingerprint, and re-fetching through curl changed 166 verdicts. The page also reads the Court's own answer to the problem out of the opinions: a blanket visitation note through the 2010s, a copy filed with the Clerk of Court, and then, in OT2025 and essentially never before, 73 citations carrying \"(archived at https://perma.cc/…)\", which makes perma.cc the most-cited host in the corpus. Those links work: 53 of the 54 that answer.",
       "tags": [
         "link rot",
         "Supreme Court",
@@ -477,14 +477,14 @@
       ],
       "sources": [
         {
-          "name": "Caselaw Access Project bulk data — U.S. Reports vols. 500–572 and Supreme Court Reporter vols. 134–140",
+          "name": "Caselaw Access Project bulk data: U.S. Reports vols. 500–572 and Supreme Court Reporter vols. 134–140",
           "url": "https://static.case.law/",
-          "licence": "CC0 1.0 — public domain dedication"
+          "licence": "CC0 1.0, public domain dedication"
         },
         {
           "name": "Slip opinions, Supreme Court of the United States, OT2020–OT2025",
           "url": "https://www.supremecourt.gov/opinions/slipopinion/25",
-          "licence": "Public domain — a work of the United States Government"
+          "licence": "Public domain, a work of the United States Government"
         },
         {
           "name": "Internet Archive Wayback Availability API, used to establish whether each cited address was ever captured",
@@ -514,8 +514,8 @@
       "favicon": "🎾",
       "built": "2026-09-11",
       "published": true,
-      "tagline": "Six things commentators say about momentum, tested on 11,452 charted matches — and tested again on tennis played by coins, which says the same thing.",
-      "blurb": "Every point of 11,452 professional matches from the Match Charting Project, rebuilt from the score counters up, and used to test the six things commentators say about momentum: serving for the set, serving to stay in it, the game after a break, wasted break points, the hot hand, and winning the first set. All six are true as plainly stated — servers do hold 80.4% of the games they serve for the set against 75.8% of their others. The page exists because a plain comparison cannot tell you anything here, and neither can a careful one: hold the player fixed and compare him with himself inside one set, and serving for the set swings from +4.3 per 100 games to −14.8. So every test is run again on the same matches played as independent coin flips, with the same players, the same formats and serve strengths calibrated to reproduce the real distribution of scorelines. Memoryless tennis produces −14.8 too, because winning a game ends the set and so decides how many baseline games exist. Nothing survives: the largest gap between real tennis and coins is within its own confidence interval. The hot hand comes closest, and dies on a scoring detail — two points played at 30–15 have identical win-loss counts and differ only in order, and compared that way the effect is +0.04 ± 0.11 per 100 points. You can run the control yourself: the page replays all 11,452 matches in your browser.",
+      "tagline": "Six things commentators say about momentum, tested on 11,452 charted matches, and tested again on tennis played by coins, which says the same thing.",
+      "blurb": "Every point of 11,452 professional matches from the Match Charting Project, rebuilt from the score counters up, and used to test the six things commentators say about momentum: serving for the set, serving to stay in it, the game after a break, wasted break points, the hot hand, and winning the first set. All six are true as plainly stated: servers do hold 80.4% of the games they serve for the set against 75.8% of their others. The page exists because a plain comparison cannot tell you anything here, and neither can a careful one: hold the player fixed and compare him with himself inside one set, and serving for the set swings from +4.3 per 100 games to −14.8. So every test is run again on the same matches played as independent coin flips, with the same players, the same formats and serve strengths calibrated to reproduce the real distribution of scorelines. Memoryless tennis produces −14.8 too, because winning a game ends the set and so decides how many baseline games exist. Nothing survives: the largest gap between real tennis and coins is within its own confidence interval. The hot hand comes closest, and dies on a scoring detail. Two points played at 30–15 have identical win-loss counts and differ only in order, and compared that way the effect is +0.04 ± 0.11 per 100 points. You can run the control yourself: the page replays all 11,452 matches in your browser.",
       "tags": [
         "tennis",
         "hot hand",
@@ -529,7 +529,7 @@
         {
           "name": "The Tennis Abstract Match Charting Project, crowdsourced shot-by-shot data (Jeff Sackmann and the 192 volunteer charters credited in these files)",
           "url": "https://github.com/JeffSackmann/tennis_MatchChartingProject",
-          "licence": "CC BY-NC-SA 4.0 — attribution, non-commercial, share-alike; no point-level data is redistributed here, and the derived aggregates on the page carry the same licence"
+          "licence": "CC BY-NC-SA 4.0, attribution, non-commercial, share-alike; no point-level data is redistributed here, and the derived aggregates on the page carry the same licence"
         }
       ],
       "stack": [
@@ -553,8 +553,8 @@
       "favicon": "🛬",
       "built": "2026-09-10",
       "published": true,
-      "tagline": "Reported collisions between American aircraft and American wildlife rose eightfold since 1990 — counted six ways, almost all of the growth is reports of nothing happening.",
-      "blurb": "Every civil aircraft-wildlife collision reported in the United States since 1990 — 354,874 of them, harvested a month at a time from the FAA's own public export — counted six ways. The raw number of reports rises 687%, and the page exists to take that number apart: dividing by air-carrier departures only brings it down to 355%, because flying did not grow anything like eightfold, but counting only the strikes that damaged the aircraft brings it to 92%. Put the other way round, damage was indicated on 15.8% of reports in the first five years and 3.8% in the last five, so nearly every extra report is a report of nothing happening — and the reporting channel was rebuilt underneath the count in exactly that period, the paper form giving way to an electronic one that now carries four fifths of everything filed. The strictest series does fall by two thirds, and rather than bank the win the page shows you why not to trust it: the FAA re-grades damaging strikes from 'substantial' to 'minor, uncertain' around 2016, which is visible as a step in its own chart. Two other fields that looked like recoding-proof severity measures were tested and rejected on the same grounds. The species board is the other surprise: the most-struck animal in the file, the mourning dove, damages an aircraft 1.8% of the time; a white-tailed deer does it 81.7% of the time.",
+      "tagline": "Reported collisions between American aircraft and American wildlife rose eightfold since 1990. Counted six ways, almost all of the growth is reports of nothing happening.",
+      "blurb": "Every civil aircraft-wildlife collision reported in the United States since 1990, 354,874 of them, harvested a month at a time from the FAA's own public export, counted six ways. The raw number of reports rises 687%, and the page exists to take that number apart: dividing by air-carrier departures only brings it down to 355%, because flying did not grow anything like eightfold, but counting only the strikes that damaged the aircraft brings it to 92%. Put the other way round, damage was indicated on 15.8% of reports in the first five years and 3.8% in the last five, so nearly every extra report is a report of nothing happening, and the reporting channel was rebuilt underneath the count in exactly that period, the paper form giving way to an electronic one that now carries four fifths of everything filed. The strictest series does fall by two thirds, and rather than bank the win the page shows you why not to trust it: the FAA re-grades damaging strikes from 'substantial' to 'minor, uncertain' around 2016, which is visible as a step in its own chart. Two other fields that looked like recoding-proof severity measures were tested and rejected on the same grounds. The species board is the other surprise: the most-struck animal in the file, the mourning dove, damages an aircraft 1.8% of the time; a white-tailed deer does it 81.7% of the time.",
       "tags": [
         "aviation safety",
         "reporting bias",
@@ -568,7 +568,7 @@
         {
           "name": "FAA Wildlife Strike Database (public export endpoint behind wildlife.faa.gov/search)",
           "url": "https://wildlife.faa.gov/search",
-          "licence": "work of the United States government — public domain"
+          "licence": "work of the United States government, public domain"
         },
         {
           "name": "World Bank indicator IS.AIR.DPRT, US registered air carrier departures (source: ICAO)",
@@ -595,8 +595,8 @@
       "favicon": "🪵",
       "built": "2026-09-08",
       "published": true,
-      "tagline": "2,474 tree-ring chronologies asked which years the world's trees all had a bad time at once — and whether those were the years the history books would predict.",
-      "blurb": "A tree ring is a date, because trees hundreds of miles apart put down the same pattern of fat and starved years. This draws real chronologies from the International Tree-Ring Data Bank as cross-sections you can read ring by ring, gives you the crossdating instrument itself — slide one site against another and watch the correlation lock at the true offset — and then pools all 2,474 sites into one series: the share of the world's trees that recorded an unusually narrow ring each year from 925 to 2006, with the wide-year share carried underneath as a control. The result is a null. Across the 42 largest eruptions whose dates come from someone writing them down at the time, the narrow share lifts by 1.3 points, from 8.9% to 10.1%; 1816, the year without a summer, comes in below average narrow worldwide. The explanation is about the archive rather than about trees: 1,167 of the 2,474 sites stand in western North America, where 1816 was a superb growing season — 1.4% of sites narrow against 32.7% wide — so the one region that did record it, eastern North America at 13.9% narrow, is averaged into silence. Samalas in 1257 is the counter-example that proves the method works, reaching 36.6% narrow against 2.4% wide in the western sites the year after it erupted.",
+      "tagline": "2,474 tree-ring chronologies asked which years the world's trees all had a bad time at once, and whether those were the years the history books would predict.",
+      "blurb": "A tree ring is a date, because trees hundreds of miles apart put down the same pattern of fat and starved years. This draws real chronologies from the International Tree-Ring Data Bank as cross-sections you can read ring by ring, gives you the crossdating instrument itself (slide one site against another and watch the correlation lock at the true offset), and then pools all 2,474 sites into one series: the share of the world's trees that recorded an unusually narrow ring each year from 925 to 2006, with the wide-year share carried underneath as a control. The result is a null. Across the 42 largest eruptions whose dates come from someone writing them down at the time, the narrow share lifts by 1.3 points, from 8.9% to 10.1%; 1816, the year without a summer, comes in below average narrow worldwide. The explanation is about the archive rather than about trees: 1,167 of the 2,474 sites stand in western North America, where 1816 was a superb growing season, 1.4% of sites narrow against 32.7% wide, so the one region that did record it, eastern North America at 13.9% narrow, is averaged into silence. Samalas in 1257 is the counter-example that proves the method works, reaching 36.6% narrow against 2.4% wide in the western sites the year after it erupted.",
       "tags": [
         "dendrochronology",
         "paleoclimate",
@@ -645,8 +645,8 @@
       "favicon": "✒️",
       "built": "2026-09-07",
       "published": true,
-      "tagline": "Every federal rule, diffed against the version its agency first proposed — what public comment actually changed.",
-      "blurb": "American rulemaking promises that the public gets to comment and the agency may change its mind. Whether that second step moves the text is an empirical question nobody answers, because answering it means diffing two documents for every rule. This pairs 13,626 final rules from the Federal Register with the proposals they came from and diffs the regulatory text of 3,685 of them word by word — the part that enters the Code of Federal Regulations, not the preamble around it. The median rule is enacted with an eighth of its regulatory text new, and that median is the least interesting number on the page: a third of rules barely move and a quarter arrive at least a quarter new. Agencies differ tenfold, from the FCC above 50% to Agriculture near 5% — though neither end is a scoreboard, since an agency that reissues whole sections measures as heavily revised on identical substance. Pairing is the hard part and no field does it: a RIN can be a standing class covering 4,346 documents, an FCC docket is a proceeding spanning years, and requiring CFR-part agreement threw out 8,582 candidate pairings the other keys accepted. Routine short rules are carried as a control and revise too, at about 5%.",
+      "tagline": "Every federal rule, diffed against the version its agency first proposed: what public comment actually changed.",
+      "blurb": "American rulemaking promises that the public gets to comment and the agency may change its mind. Whether that second step moves the text is an empirical question nobody answers, because answering it means diffing two documents for every rule. This pairs 13,626 final rules from the Federal Register with the proposals they came from and diffs the regulatory text of 3,685 of them word by word: the part that enters the Code of Federal Regulations, not the preamble around it. The median rule is enacted with an eighth of its regulatory text new, and that median is the least interesting number on the page: a third of rules barely move and a quarter arrive at least a quarter new. Agencies differ tenfold, from the FCC above 50% to Agriculture near 5%, though neither end is a scoreboard, since an agency that reissues whole sections measures as heavily revised on identical substance. Pairing is the hard part and no field does it: a RIN can be a standing class covering 4,346 documents, an FCC docket is a proceeding spanning years, and requiring CFR-part agreement threw out 8,582 candidate pairings the other keys accepted. Routine short rules are carried as a control and revise too, at about 5%.",
       "tags": [
         "regulation",
         "federal register",
@@ -659,7 +659,7 @@
         {
           "name": "Federal Register API (documents, metadata and full text), US National Archives / GPO",
           "url": "https://www.federalregister.gov/developers/documentation/api/v1",
-          "licence": "US Government work — public domain; the full-text endpoint rate-limits and answers 429"
+          "licence": "US Government work, public domain; the full-text endpoint rate-limits and answers 429"
         }
       ],
       "stack": [
@@ -682,7 +682,7 @@
       "favicon": "🏘️",
       "built": "2026-09-07",
       "published": true,
-      "tagline": "Every parcel in Montgomery County, placed by the year its building went up — drag the year and watch a county fill in.",
+      "tagline": "Every parcel in Montgomery County, placed by the year its building went up. Drag the year and watch a county fill in.",
       "blurb": "Maryland's tax roll carries a four-character column called YEARBLT. This page takes all 348,669 Montgomery County parcels, sorts them by it, and draws them: scrub from 1700 to 2025 and the county assembles itself, buildings appearing where and when they actually went up. Click any dot for its address, what the assessor calls it, its floor area and lot, and a link straight through to the state's own record. Where the Maryland Historical Trust has surveyed a building, the page joins its scanned survey form to the parcel. Three findings fall out of it: the building line moved from 6.6 miles out of Washington in the 1920s to 18.4 by the 1990s and then stopped dead; new construction inside what became the Agricultural Reserve fell 62% in the 1980s while the rest of the county had its biggest building decade ever; and the median new detached house went from 1,382 square feet in the 1950s to 3,809 today.",
       "tags": [
         "hyperlocal",
@@ -696,12 +696,12 @@
         {
           "name": "MDProperty View parcel points (SDAT assessment attributes), Maryland iMAP",
           "url": "https://mdgeodata.md.gov/imap/rest/services/PlanningCadastre/MD_PropertyData/MapServer/0",
-          "licence": "Maryland open data — public record, attribution requested"
+          "licence": "Maryland open data, public record, attribution requested"
         },
         {
           "name": "Maryland Inventory of Historic Properties, Maryland Historical Trust",
           "url": "https://mdgeodata.md.gov/imap/rest/services/Historic/MD_InventoryHistoricProperties/MapServer/0",
-          "licence": "Maryland open data — public record, attribution requested"
+          "licence": "Maryland open data, public record, attribution requested"
         },
         {
           "name": "Agricultural Reserve zone boundary, Montgomery County MC Atlas",
@@ -738,8 +738,8 @@
       "favicon": "🐦",
       "built": "2026-09-07",
       "published": true,
-      "tagline": "Twenty-five springs of bird sightings against the temperature each spring actually had — with two birds that never migrate carried along as a lie detector.",
-      "blurb": "Do migrants arrive earlier in warm springs? This lines up 1.9 million GBIF sighting records — 13 species across Washington, Boston and Atlanta, 2000 to 2024 — against Open-Meteo's ERA5 temperature history for the same ground, and lets you re-sort the twenty-five years by warmth instead of by number to see whether the arrival dates fall into line. Because sightings measure birdwatchers as much as birds, every count is divided by all bird records logged in the same box on the same day, and two year-round residents are run through the identical pipeline as controls: a Northern Cardinal cannot arrive in spring, so whatever shift the method reports for it is the method's own drift. In Washington that drift is −0.13 days/°C and the Baltimore Oriole's 0.65 days per degree stands; in Boston the residents drift +0.70 and the page flags the entire city rather than report it. The Ruby-throated Hummingbird shows nothing anywhere — it winters in Central America and departs on daylength, unable to perceive a warm North American spring, which is the mechanism behind phenological mismatch.",
+      "tagline": "Twenty-five springs of bird sightings against the temperature each spring actually had, with two birds that never migrate carried along as a lie detector.",
+      "blurb": "Do migrants arrive earlier in warm springs? This lines up 1.9 million GBIF sighting records (13 species across Washington, Boston and Atlanta, 2000 to 2024) against Open-Meteo's ERA5 temperature history for the same ground, and lets you re-sort the twenty-five years by warmth instead of by number to see whether the arrival dates fall into line. Because sightings measure birdwatchers as much as birds, every count is divided by all bird records logged in the same box on the same day, and two year-round residents are run through the identical pipeline as controls: a Northern Cardinal cannot arrive in spring, so whatever shift the method reports for it is the method's own drift. In Washington that drift is −0.13 days/°C and the Baltimore Oriole's 0.65 days per degree stands; in Boston the residents drift +0.70 and the page flags the entire city rather than report it. The Ruby-throated Hummingbird shows nothing anywhere: it winters in Central America and departs on daylength, unable to perceive a warm North American spring, which is the mechanism behind phenological mismatch.",
       "tags": [
         "phenology",
         "biodiversity",
@@ -752,7 +752,7 @@
         {
           "name": "GBIF occurrence records (species and all-bird effort denominator)",
           "url": "https://api.gbif.org/v1/occurrence/search",
-          "licence": "per-record CC0 / CC-BY / CC-BY-NC — honour each record's own licence"
+          "licence": "per-record CC0 / CC-BY / CC-BY-NC, honour each record's own licence"
         },
         {
           "name": "Open-Meteo ERA5 reanalysis archive (daily 2 m max/min temperature)",
@@ -779,7 +779,7 @@
       "built": "2026-09-06",
       "published": true,
       "tagline": "19,203 app-store reviews of racquet-sport apps, screened and coded like a systematic review.",
-      "blurb": "Every app in the racquet-sport corner of the App Store and Google Play, found by keyword, screened against a published rule, and its reviews coded by a codebook you can edit on the page — change a regular expression and all 19,203 reviews recode. The finding: nothing that costs an app stars is a feature. Login, price, crashes and ads sit up to two stars below the corpus mean, while the topics that turn up in the happiest reviews are the ones a product manager files as complaints — doubles support, a watch app, a CSV export. People ask you for features at four and five stars. They leave one star over a login that will not take. Half the build failed and is documented: Apple 403'd its review feed and four other routes to the same text were tried and closed.",
+      "blurb": "Every app in the racquet-sport corner of the App Store and Google Play, found by keyword, screened against a published rule, and its reviews coded by a codebook you can edit on the page: change a regular expression and all 19,203 reviews recode. The finding: nothing that costs an app stars is a feature. Login, price, crashes and ads sit up to two stars below the corpus mean, while the topics that turn up in the happiest reviews are the ones a product manager files as complaints: doubles support, a watch app, a CSV export. People ask you for features at four and five stars. They leave one star over a login that will not take. Half the build failed and is documented: Apple 403'd its review feed and four other routes to the same text were tried and closed.",
       "tags": [
         "app store",
         "text mining",
@@ -796,7 +796,7 @@
         {
           "name": "Apple customer-reviews RSS feed",
           "url": "https://itunes.apple.com/us/rss/customerreviews/",
-          "licence": "Apple public endpoint — returned 403 throughout this build; no review text retrieved"
+          "licence": "Apple public endpoint, returned 403 throughout this build; no review text retrieved"
         },
         {
           "name": "Google Play store listings and PlayStoreUi batchexecute RPC",
@@ -823,7 +823,7 @@
       "built": "2026-09-06",
       "published": true,
       "tagline": "Every US tide gauge taken apart into the 37 waves it is made of, and put back together in the browser.",
-      "blurb": "NOAA publishes, for each of its tide gauges, the amplitude and phase of thirty-seven waves — the moon twice a day, the sun, the moon's elliptical orbit, the tilt of the earth, and ten shallow-water distortions that are not astronomy at all. Add them up and you have the tide, for any date, with no measurement of the ocean. This page ships those coefficients for 1,303 gauges and does the adding itself: a map with no coastline in it, where the country appears because the gauges are on the water; an instrument that switches the waves on one at a time so you can watch the tide assemble; and eight days when the sum was wrong, where subtracting the moon from the record leaves the storm — Isabel putting 7.9 ft of unexpected water into the Potomac at Washington, Sandy 9.3 ft at the Battery, Ian pulling 5.8 ft out of Tampa Bay. The model agrees with NOAA's own tide tables to about a minute and a hundredth of a foot, but it did not start there: it was right in 2026 and 90 minutes wrong in 2003, and finding out why meant measuring NOAA's node factors across a full 18.6-year cycle and discovering a single mis-remembered astronomical constant.",
+      "blurb": "NOAA publishes, for each of its tide gauges, the amplitude and phase of thirty-seven waves: the moon twice a day, the sun, the moon's elliptical orbit, the tilt of the earth, and ten shallow-water distortions that are not astronomy at all. Add them up and you have the tide, for any date, with no measurement of the ocean. This page ships those coefficients for 1,303 gauges and does the adding itself: a map with no coastline in it, where the country appears because the gauges are on the water; an instrument that switches the waves on one at a time so you can watch the tide assemble; and eight days when the sum was wrong, where subtracting the moon from the record leaves the storm: Isabel putting 7.9 ft of unexpected water into the Potomac at Washington, Sandy 9.3 ft at the Battery, Ian pulling 5.8 ft out of Tampa Bay. The model agrees with NOAA's own tide tables to about a minute and a hundredth of a foot, but it did not start there: it was right in 2026 and 90 minutes wrong in 2003, and finding out why meant measuring NOAA's node factors across a full 18.6-year cycle and discovering a single mis-remembered astronomical constant.",
       "tags": [
         "tides",
         "NOAA",
@@ -861,7 +861,7 @@
       "title": "Headwaters",
       "favicon": "💧",
       "built": "2026-09-06",
-      "tagline": "2,374 datasets worth working with, and the 54 sources they come from — classified, searchable, probed.",
+      "tagline": "2,374 datasets worth working with, and the 54 sources they come from: classified, searchable, probed.",
       "blurb": "Two catalogues in one. The dataset layer holds 2,374 published datasets, all but three drawn from two aggregations that select for very different things - every TidyTuesday week since April 2018, which is tidy and teachable and comes with 8,575 column names, and ten years of Data Is Plural, which is odd and specific and global. Each record carries the curator's own pitch, the upstream publisher and the article that prompted it, classified by subject, publisher and place so you can browse for something to work with rather than search for something you already know exists; the 30 datasets both aggregations surfaced are one record with two sightings, and a facet filters on how a dataset was found. The source layer holds 54 endpoints you can query repeatedly, each described well enough to use from a shell and carrying small real requests that a weekly job re-runs to prove the endpoint still works. Building it turned up failures nothing else documents, including data.gov's CKAN API 404ing on every documented path while its gateway authenticates your key and redirects you to the dead origin, SEC EDGAR refusing any User-Agent that contains the string github.com while accepting the same header with any other domain, and ProPublica's Congress API being retired outright while its documentation site still serves 200.",
       "tags": [
         "open data",
@@ -902,7 +902,7 @@
       ],
       "hasSource": true,
       "keepReadme": true,
-      "bytes": 3653546,
+      "bytes": 3653362,
       "published": true,
       "repo": "https://github.com/TNRiley/headwaters",
       "live": "https://tnriley.github.io/headwaters/"
@@ -913,7 +913,7 @@
       "favicon": "📄",
       "built": "2026-09-05",
       "tagline": "What the literature did after each paper was withdrawn.",
-      "blurb": "Every retraction Retraction Watch has catalogued — 72,389 notices — joined by DOI to OpenAlex citation histories. A field of 72,000 marks plots each paper's publication date against how long it survived; facets slice by reason, journal, publisher, country and field; any mark opens the paper, its original reason codes and its DOI. Of the 39,030 papers whose full citation history is observable, 69% were cited again after the year they were retracted, and 34% of every citation they ever collected arrived after the notice.",
+      "blurb": "Every retraction Retraction Watch has catalogued, 72,389 notices, joined by DOI to OpenAlex citation histories. A field of 72,000 marks plots each paper's publication date against how long it survived; facets slice by reason, journal, publisher, country and field; any mark opens the paper, its original reason codes and its DOI. Of the 39,030 papers whose full citation history is observable, 69% were cited again after the year they were retracted, and 34% of every citation they ever collected arrived after the notice.",
       "tags": [
         "research integrity",
         "bibliometrics",
@@ -950,7 +950,7 @@
       "built": "2026-09-05",
       "published": true,
       "tagline": "A century of American newspapers reporting animals on the loose.",
-      "blurb": "There is no dataset of animals escaping from zoos, so this builds one out of full-text search over Chronicling America — the Library of Congress archive of digitised American newspapers. 3,413 pages from 20 period phrasings, 1758–1963, filterable by phrase, animal, decade and state, each linking to the scanned page with the term highlighted. The intended plan was to mine the OCR for what escaped and what happened next; that failed, for a reason the page explains and turns into its subject.",
+      "blurb": "There is no dataset of animals escaping from zoos, so this builds one out of full-text search over Chronicling America, the Library of Congress archive of digitised American newspapers. 3,413 pages from 20 period phrasings, 1758–1963, filterable by phrase, animal, decade and state, each linking to the scanned page with the term highlighted. The intended plan was to mine the OCR for what escaped and what happened next; that failed, for a reason the page explains and turns into its subject.",
       "tags": [
         "newspapers",
         "archives",
@@ -962,7 +962,7 @@
         {
           "name": "Chronicling America, Library of Congress",
           "url": "https://www.loc.gov/collections/chronicling-america/",
-          "licence": "US Library of Congress — public domain"
+          "licence": "US Library of Congress, public domain"
         }
       ],
       "stack": [
@@ -1012,7 +1012,7 @@
       "favicon": "🌡️",
       "built": "2026-09-04",
       "tagline": "Eighty-five years of daily weather, drawn as a strip chart and played as sound.",
-      "blurb": "Three NOAA stations within 21 km of one another, one hairline per day from that morning's low to that afternoon's high, inked by departure from normal — and then played out loud. Pitch is temperature, the high voice is the afternoon and the low voice is the overnight, rain is filtered noise and snow a chime. Underneath runs a drone tracking the five-year trailing anomaly: mute everything else and the trend becomes a bass note that climbs across the century. At every station the overnight low rose two to three times faster than the afternoon high.",
+      "blurb": "Three NOAA stations within 21 km of one another, one hairline per day from that morning's low to that afternoon's high, inked by departure from normal, and then played out loud. Pitch is temperature, the high voice is the afternoon and the low voice is the overnight, rain is filtered noise and snow a chime. Underneath runs a drone tracking the five-year trailing anomaly: mute everything else and the trend becomes a bass note that climbs across the century. At every station the overnight low rose two to three times faster than the afternoon high.",
       "tags": [
         "climate",
         "sonification",
@@ -1043,7 +1043,7 @@
       "favicon": "🧜",
       "built": "2026-09-03",
       "tagline": "A linter and live renderer for Mermaid architecture diagrams.",
-      "blurb": "Paste a .mmd file and get it checked against a strict convention set — quoted labels, safe node IDs, balanced subgraph/end, no stray fences — then rendered live. One-click auto-fix repairs violations, including renaming an unsafe ID everywhere it appears across both node definitions and edges, which is the failure that silently breaks a diagram.",
+      "blurb": "Paste a .mmd file and get it checked against a strict convention set (quoted labels, safe node IDs, balanced subgraph/end, no stray fences), then rendered live. One-click auto-fix repairs violations, including renaming an unsafe ID everywhere it appears across both node definitions and edges, which is the failure that silently breaks a diagram.",
       "tags": [
         "developer tool",
         "mermaid",

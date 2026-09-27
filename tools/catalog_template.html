@@ -100,7 +100,6 @@ h2.sec{font-size:clamp(28px,3.2vw,40px)}
 .card a:not(.hit){position:relative;z-index:2}
 .plate{position:relative;background:var(--plate-bg);border-bottom:1px solid var(--rule)}
 .plate canvas{display:block;width:100%;height:132px}
-.glyph{position:absolute;top:11px;right:13px;font-size:20px;line-height:1;opacity:.92}
 .cbody{padding:19px 20px 18px;display:flex;flex-direction:column;gap:11px;flex:1}
 .card h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:27px;letter-spacing:-.028em;line-height:1.05}
 .tag-line{margin:0;font-family:"Courier Prime",monospace;font-size:13px;color:var(--accent);line-height:1.45}
@@ -158,7 +157,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
   <span class="lbl">__OWNER__ &middot; one-session builds, dispatched by hand</span>
   <h1 class="t disp">Quick&nbsp;<em>Projects</em></h1>
   <div class="herorow">
-    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing &mdash; subject, data, interface &mdash; then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read.</p>
+    <p class="dek">A standing experiment: most evenings I hand Claude a blank brief and it picks the whole thing (subject, data, interface), then researches and builds it end to end in a single sitting. Everything here is <b>one self-contained HTML file</b> with its data already inside it. No build step, no server, nothing fetched while you read.</p>
     <div class="tools">
       <div class="seg3" id="themeSeg">
         <button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button>
@@ -181,16 +180,16 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <p class="lede">It is not really about the subjects. It is about <b>tools for thinking through data</b>, interfaces I would never have arrived at on my own, and finding out what a model builds when nobody narrows the brief.</p>
   </div>
   <div class="whycol">
-    <p>I dispatch these by hand rather than on a schedule &mdash; a nightly habit, not a cron job. The brief is deliberately open: <strong>Claude chooses the subject</strong>, working from what it knows of my day job in research libraries and evidence synthesis, the things I build for fun, and whatever it feels like reaching for instead. Some of the best ones have had nothing to do with any of that.</p>
-    <p>Each build gets a real budget &mdash; a serious share of a usage window &mdash; with a standing instruction to spend part of it wrestling data out of somewhere awkward. <strong>A bold attempt that half works is a good outcome</strong> if it comes back with something learned. Several have.</p>
+    <p>I dispatch these by hand rather than on a schedule: a nightly habit, not a cron job. The brief is deliberately open: <strong>Claude chooses the subject</strong>, working from what it knows of my day job in research libraries and evidence synthesis, the things I build for fun, and whatever it feels like reaching for instead. Some of the best ones have had nothing to do with any of that.</p>
+    <p>Each build gets a real budget, a serious share of a usage window, with a standing instruction to spend part of it wrestling data out of somewhere awkward. <strong>A bold attempt that half works is a good outcome</strong> if it comes back with something learned. Several have.</p>
     <p>As they arrive I keep notes on what actually landed: an interaction, a way of laying out numbers, a chart that taught me something. Not to bolt onto the next build, but as <strong>a growing palette to draw on when I am building something real</strong>. Feedback goes back in, so the builds and the brief keep sharpening each other.</p>
-    <p>A few are deliberately inward-facing &mdash; tooling that makes the next one better. <strong>This catalog is one of those</strong>: it and the publishing pipeline behind it were themselves a night's work.</p>
+    <p>A few are deliberately inward-facing: tooling that makes the next one better. <strong>This catalog is one of those</strong>: it and the publishing pipeline behind it were themselves a night's work.</p>
   </div>
 </section>
 
 <section class="blk">
   <h2 class="sec disp">The shelf</h2>
-  <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed &mdash; that part is not optional.</p>
+  <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed. That part is not optional.</p>
   <div class="grid">__CARDS__</div>
 </section>
 
@@ -198,7 +197,7 @@ __SOURCES__
 
 <section class="blk">
   <h2 class="sec disp">How it is put together</h2>
-  <p class="sublede">In case it is useful &mdash; or in case it is me, six months from now, wondering how to add another one.</p>
+  <p class="sublede">In case it is useful, or in case it is me six months from now wondering how to add another one.</p>
   <div class="blocks">
     <section>
       <h3>One repo per project</h3>
@@ -210,7 +209,7 @@ __SOURCES__
     </section>
     <section>
       <h3>Data is gathered at build time</h3>
-      <p>A small pipeline pulls from public sources, reshapes and compresses, and splices the payload into a template. Those scripts live in each repo's <code>src/</code>. Raw downloads are deliberately not committed &mdash; the scripts refetch them.</p>
+      <p>A small pipeline pulls from public sources, reshapes and compresses, and splices the payload into a template. Those scripts live in each repo's <code>src/</code>. Raw downloads are deliberately not committed, because the scripts refetch them.</p>
     </section>
     <section>
       <h3>Statistics are computed in the page</h3>
@@ -222,13 +221,13 @@ __SOURCES__
     </section>
     <section>
       <h3>Licensing</h3>
-      <p>Code is MIT. Data keeps whatever licence its source carries &mdash; mostly CC0 or US Government public domain, listed per dataset above. Where a source's redistribution terms are unclear, the project ships the derived page rather than the raw file.</p>
+      <p>Code is MIT. Data keeps whatever licence its source carries, mostly CC0 or US Government public domain, listed per dataset above. Where a source's redistribution terms are unclear, the project ships the derived page rather than the raw file.</p>
     </section>
   </div>
 </section>
 
 <footer>
-  Generated __GENERATED__ by <span class="mono">tools/build_catalog.py</span> from each project's meta.json &mdash; not hand-edited.<br>
+  Generated __GENERATED__ by <span class="mono">tools/build_catalog.py</span> from each project's meta.json, not hand-edited.<br>
   Built with Claude Code. Code MIT; data under the licences listed above. Go to the sources before citing any of it.
 </footer>
 </div>
@@ -1104,7 +1103,7 @@ function setHover(i){
     /* An unpublished project has no live page, so its plate goes to its own
        card on this page instead of nowhere. */
     a.href = p.u || ("#p-" + p.s);
-    a.title = p.t + (p.u ? "" : " — not published yet");
+    a.title = p.t + (p.u ? "" : " (not published yet)");
     a.setAttribute("aria-label", a.title);
     a.addEventListener("pointerenter", () => setHover(i));
     a.addEventListener("pointerleave", () => setHover(-1));

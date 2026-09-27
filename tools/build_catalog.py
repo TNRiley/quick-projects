@@ -9,7 +9,7 @@ means dropping a meta.json next to its index.html and re-running this.
 import json, os, glob, datetime, html, re, sys
 
 def _workspace_root(start):
-    """Walk up until we find the directory holding projects/ — so these scripts work
+    """Walk up until we find the directory holding projects/, so these scripts work
     wherever they are moved to, rather than assuming a fixed depth."""
     d = os.path.abspath(start)
     while d != os.path.dirname(d):
@@ -51,12 +51,12 @@ SRC_LABEL = {True: ("full pipeline", "ok"), "html-is-source": ("HTML is the sour
 
 def card(m):
     tags = "".join(f'<span class="tag">{esc(t)}</span>' for t in m.get("tags", []))
-    lab, cls = SRC_LABEL.get(m.get("hasSource"), ("—", ""))
+    lab, cls = SRC_LABEL.get(m.get("hasSource"), ("not recorded", ""))
     srcs = "".join(
         f'<li><a href="{esc(s["url"])}" target="_blank" rel="noopener noreferrer">{esc(s["name"])}</a>'
         f'<span class="lic">{esc(s["licence"])}</span></li>' for s in m.get("sources", []))
     srcblock = f'<div class="k">Data</div><ul class="srcs">{srcs}</ul>' if srcs else \
-               '<div class="k">Data</div><p class="none">No external data — the page is the whole thing.</p>'
+               '<div class="k">Data</div><p class="none">No external data. The page is the whole thing.</p>'
     if m["published"]:
         hit = f'<a class="hit" href="{esc(m["live"])}" aria-label="Open {esc(m["title"])}"></a>'
         acts = (f'<a class="btn primary" href="{esc(m["live"])}">Open&nbsp;&rarr;</a>'
@@ -66,8 +66,7 @@ def card(m):
         acts = ('<span class="btn pending">Not published yet</span>')
     return f"""<article class="card{'' if m['published'] else ' unpublished'}" id="p-{esc(m['slug'])}">
   {hit}
-  <div class="plate"><canvas data-plate="{esc(m['slug'])}" aria-hidden="true"></canvas>
-    <span class="glyph" aria-hidden="true">{esc(m['favicon'])}</span></div>
+  <div class="plate"><canvas data-plate="{esc(m['slug'])}" aria-hidden="true"></canvas></div>
   <div class="cbody">
     <h2>{esc(m['title'])}</h2>
     <p class="tag-line">{esc(m['tagline'])}</p>
@@ -112,13 +111,20 @@ def sources_table(ms):
 
 def build():
     ms = load()
-    total = sum(m["bytes"] for m in ms)
-    dates = [m["built"] for m in ms]
+    dates = sorted(m["built"] for m in ms)
     live = sum(1 for m in ms if m["published"])
-    stats = [(f"{live} / {len(ms)}", "projects published so far, each built end to end in a single session"),
-             (human(total), "of self-contained HTML — no build step, no server, no runtime network"),
-             (f"{len({s['name'] for m in ms for s in m.get('sources', [])})}", "public datasets pulled at build time and baked in"),
-             (f"{dates[-1][:7]} – {dates[0][:7]}", "first and latest")]
+    span = (datetime.date.fromisoformat(dates[-1]) - datetime.date.fromisoformat(dates[0])).days + 1
+    # "full pipeline" means the scripts that fetched and shaped the data ship with
+    # the page, so its figures can be regenerated rather than taken on trust.
+    repro = sum(1 for m in ms if m.get("hasSource") is True)
+    datasets = len({s["name"] for m in ms for s in m.get("sources", [])})
+    # A date range was here and collapsed to "2026-09 - 2026-09" once every project
+    # landed in the same month; the elapsed span says the same thing and keeps saying
+    # it. Page weight in MB was here too, and the dek already makes that point better.
+    stats = [(f"{live} / {len(ms)}", "projects published, each researched and built end to end in one sitting"),
+             (f"{span} days", "from the first build to the most recent, roughly one an evening"),
+             (f"{datasets}", "public datasets pulled at build time and baked into the pages"),
+             (f"{repro} of {len(ms)}", "ship the scripts that fetched and shaped their data, so every figure can be regenerated")]
     tpl = open(os.path.join(TOOLS, "catalog_template.html"), encoding="utf-8").read()
 
     # Every project needs its own index plate. The template falls back to another
@@ -147,6 +153,26 @@ def build():
               .replace("__OWNER__", OWNER)
               .replace("__CATALOG_REPO__", CATALOG_REPO)
               .replace("__GENERATED__", datetime.date.today().isoformat()))
+
+    # No em dashes on the catalog page. They read as a tell rather than as
+    # punctuation, and most of them want to be a colon, a comma or a full stop
+    # anyway. Most arrive from a project's own tagline or blurb, so fix them in
+    # that meta.json rather than stripping them here: this page quotes those
+    # fields verbatim and a silent substitution would put words in the project's
+    # mouth. Checked against the rendered page, so it catches both the literal
+    # character and the &mdash; entity wherever they come from.
+    bad = []
+    for i, line in enumerate(out.splitlines(), 1):
+        if "—" in line or "&mdash;" in line:
+            bad.append("  line %d: %s" % (i, line.strip()[:120]))
+    if bad:
+        raise SystemExit(
+            "em dash on the catalog page, in %d line(s):\n%s\n"
+            "Rewrite the sentence at source. If it came from a project, edit that "
+            "project's meta.json tagline or blurb; otherwise it is in "
+            "tools/catalog_template.html or this script."
+            % (len(bad), "\n".join(bad[:12])))
+
     os.makedirs(OUT, exist_ok=True)
     open(os.path.join(OUT, "index.html"), "w", encoding="utf-8", newline="\n").write(out)
     open(os.path.join(OUT, ".nojekyll"), "w", encoding="utf-8", newline="\n").write("")
