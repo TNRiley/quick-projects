@@ -85,11 +85,17 @@ def catalog_script():
   var API = "%(api)s", NS = "%(ns)s";
   var live = %(live)s;
   var fmt = function(n){ return n.toLocaleString("en-US"); };
+  /* The 6s timeout matters more than it looks: the card reads run through a
+     single queue, so one request left hanging would stall every card behind it
+     for good. Aborting turns that into an ordinary miss, which renders nothing. */
   var read = function(url){
-    return fetch(url, {cache: "no-store"})
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = ctl && setTimeout(function(){ ctl.abort(); }, 6000);
+    return fetch(url, {cache: "no-store", signal: ctl ? ctl.signal : undefined})
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(d){ return (d && typeof d.value === "number") ? d.value : null; })
-      .catch(function(){ return null; });
+      .catch(function(){ return null; })
+      .then(function(v){ if (timer) clearTimeout(timer); return v; });
   };
 
   /* this page's own visits, next to the masthead label */
