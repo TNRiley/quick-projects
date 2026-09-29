@@ -1,7 +1,45 @@
 {
-  "generated": "2026-09-27",
+  "generated": "2026-09-29",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "round-trip",
+      "title": "Round Trip",
+      "favicon": "🟩",
+      "built": "2026-09-29",
+      "published": false,
+      "tagline": "Every item in Minecraft, every way it can come to exist, and what it is really made of. The villager economy has seven holes in it: buy the wood, craft, sell it back, and one emerald becomes six.",
+      "blurb": "Minecraft describes most of itself in data rather than code, so its own files can be asked how all 1,658 items in the game come to exist: 1,715 recipes, 1,447 loot tables and 391 villager trades, and nothing else. Two findings carry it. First, the villager economy is not closed. Pricing every item in emeralds using only the trades that sell to you, then asking what a villager will pay, turns up seven items worth more than they cost: five emeralds buy 40 oak logs from a wandering trader, which make 160 planks, which make 32 boats, which a fisherman buys back for 32 emeralds. Sticks and glass panes leak the same way. The loops were not looked for; the first cost model included trades and every price in the game slid towards zero, halving on each pass, and the divergence is what found them. Second, the tech tree everyone imagines is not there. Expanding every recipe down to things the world hands you, in exact fractions because a plank is a quarter of a log, nothing in Minecraft is more than six crafting steps deep, and the two deepest things are a pale grey tile and a pale grey pane of glass, four of whose six steps are spent mixing a colour. A searchable explorer covers all 1,658 items with an exact bill of materials, the full expanded tree and every route in. Along the way: 36% of everything you have to make contains a tree, the stonecutter is cheaper than the crafting table 119 times and never dearer, 66 items cost more to make than to go and find, and 147 items have no door at all.",
+      "tags": [
+        "minecraft",
+        "games",
+        "crafting graph",
+        "bill of materials",
+        "arbitrage",
+        "exact fractions",
+        "vanilla JS"
+      ],
+      "sources": [
+        {
+          "name": "Minecraft 26.3 generated data files (recipes, loot tables, villager trades, item tags, the item registry and the English name table), mirrored by misode/mcmeta, which regenerates the game's own output for every version. Pinned to the stable 26.3 release rather than a snapshot.",
+          "url": "https://github.com/misode/mcmeta",
+          "licence": "Minecraft game data is © Mojang Studios / Microsoft and is not redistributed here. The repository ships derived facts only: recipe relationships, computed material costs and item names. No game assets, textures or data files are copied into the published page, and the raw download is gitignored."
+        }
+      ],
+      "stack": [
+        "python 3 stdlib",
+        "exact Fraction arithmetic throughout, because one log makes four planks",
+        "minimum-cost solve by value iteration over the recipe hypergraph, with the chosen derivations asserted acyclic",
+        "emerald pricing that holds out selling trades, so arbitrage is found rather than assumed",
+        "vanilla JS",
+        "bills of materials computed in the browser from the chosen recipes",
+        "gzip + base64 payload"
+      ],
+      "hasSource": true,
+      "bytes": 105743,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "second-language",
       "title": "Second Language",

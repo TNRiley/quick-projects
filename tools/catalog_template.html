@@ -257,6 +257,70 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "round-trip"(g, w, h, t){
+    /* the page's own chain, bent into a circuit: four crafting cells with a
+       token running left to right and a return sweep underneath, the token
+       fattening at every step the way one emerald becomes six by the time it
+       gets back to where it started. Green is the page's emerald, and the only
+       colour it uses. */
+    const N = 4, GREEN = "#5FC78C", GREY = "#8E887B";
+    const cell = Math.max(12, Math.min(30, h * 0.26));
+    const pad  = Math.max(10, w * 0.05) + cell / 2;
+    const cy   = h * 0.33;
+    const dip  = h * 1.02;                       /* how far under the return sweep hangs */
+    const xs   = [];
+    for (let i = 0; i < N; i++) xs.push(pad + i * (w - 2 * pad) / (N - 1));
+
+    /* the return leg: one cubic from the last cell back to the first */
+    const P0 = [xs[N - 1], cy + cell / 2], P3 = [xs[0], cy + cell / 2];
+    const C1 = [xs[N - 1] + (w - xs[N - 1]) * 0.75, dip];
+    const C2 = [xs[0] * 0.25, dip];
+    const bez = u => {
+      const v = 1 - u, a = v * v * v, b = 3 * v * v * u, c = 3 * v * u * u, d = u * u * u;
+      return [a * P0[0] + b * C1[0] + c * C2[0] + d * P3[0],
+              a * P0[1] + b * C1[1] + c * C2[1] + d * P3[1]];
+    };
+    g.lineCap = "round"; g.lineJoin = "round";
+    g.globalAlpha = 0.8; g.strokeStyle = GREEN; g.lineWidth = 1.8;
+    g.beginPath(); g.moveTo(P0[0], P0[1]);
+    g.bezierCurveTo(C1[0], C1[1], C2[0], C2[1], P3[0], P3[1]); g.stroke();
+
+    /* the hops along the top, and an arrowhead on each */
+    g.globalAlpha = 0.7; g.strokeStyle = GREY; g.lineWidth = 1.2;
+    for (let i = 0; i < N - 1; i++){
+      const a = xs[i] + cell / 2 + 3, b = xs[i + 1] - cell / 2 - 3;
+      g.beginPath(); g.moveTo(a, cy); g.lineTo(b, cy); g.stroke();
+      g.beginPath(); g.moveTo(b - 3.5, cy - 2.6); g.lineTo(b, cy); g.lineTo(b - 3.5, cy + 2.6); g.stroke();
+    }
+
+    /* the cells themselves */
+    for (let i = 0; i < N; i++){
+      const x = xs[i] - cell / 2, y = cy - cell / 2;
+      g.globalAlpha = 0.22; g.fillStyle = "#FFFFFF"; g.fillRect(x, y, cell, cell);
+      g.globalAlpha = 0.85; g.strokeStyle = i ? GREY : GREEN; g.lineWidth = 1.2;
+      g.strokeRect(x + 0.5, y + 0.5, cell - 1, cell - 1);
+    }
+
+    /* the token: one lap is three hops then the sweep home */
+    const lap = REDUCED ? 0.42 : (t / 4200) % 1;
+    let px, py, grow;
+    if (lap < 0.72){                              /* along the top */
+      const s = lap / 0.72 * (N - 1), i = Math.min(N - 2, Math.floor(s)), f = s - i;
+      px = xs[i] + (xs[i + 1] - xs[i]) * f; py = cy; grow = s;
+    } else {                                      /* and back underneath */
+      const u = (lap - 0.72) / 0.28;
+      [px, py] = bez(u); grow = (N - 1) * (1 - u * 0.55);
+    }
+    /* a stack of pips, more of them the further round it has got */
+    const pips = 1 + Math.round(grow), r = Math.max(2, cell * 0.13);
+    g.globalAlpha = 0.95; g.fillStyle = GREEN;
+    for (let k = 0; k < pips; k++){
+      const ang = k * 2.39996, rad = r * 1.5 * Math.sqrt(k);
+      g.fillRect(px + Math.cos(ang) * rad - r, py + Math.sin(ang) * rad - r, r * 2, r * 2);
+    }
+    g.globalAlpha = 1;
+  },
+
   "coffee-last"(g, w, h, t){
     /* the page's own motif: a menu card whose lines start jumbled and settle
        into one order, top first, the way the fit pulls a single bill of fare
