@@ -7,7 +7,7 @@
       "title": "Bold Claim",
       "favicon": "🅱️",
       "built": "2026-10-05",
-      "published": false,
+      "published": true,
       "tagline": "Every type family on Google Fonts, measured off its own outlines. Pick a bold and a regular from two different families and one time in eight the bold is the lighter of the two.",
       "blurb": "font-weight: 700 is a number in your stylesheet, and it turns out not to be a quantity. All 1,950 families on Google Fonts were fetched as subset fonts and measured directly from their outlines, with no rasteriser involved: a scanline across the bowl of the o gives the stroke, another through the middle gives the thin, and cap height and x-height come from the top of the H and the x. The faces labelled Regular run from a stroke of 10 to 487 units of a 1000-unit em, the ones labelled Bold overlap them heavily, and 1,084 families ship a single weight that they all call 400 regardless of what it weighs. Pick any family and the page draws the lines it was actually measured on, swap two families at the same nominal weight and watch the stroke move, or sort the whole catalogue from hairline to slab.",
       "tags": [
@@ -48,8 +48,8 @@
       ],
       "hasSource": true,
       "bytes": 2951511,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/bold-claim",
+      "live": "https://tnriley.github.io/bold-claim/"
     },
     {
       "slug": "round-trip",
