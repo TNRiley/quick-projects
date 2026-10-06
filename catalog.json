@@ -1,7 +1,56 @@
 {
-  "generated": "2026-09-29",
+  "generated": "2026-10-05",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "bold-claim",
+      "title": "Bold Claim",
+      "favicon": "🅱️",
+      "built": "2026-10-05",
+      "published": false,
+      "tagline": "Every type family on Google Fonts, measured off its own outlines. Pick a bold and a regular from two different families and one time in eight the bold is the lighter of the two.",
+      "blurb": "font-weight: 700 is a number in your stylesheet, and it turns out not to be a quantity. All 1,950 families on Google Fonts were fetched as subset fonts and measured directly from their outlines, with no rasteriser involved: a scanline across the bowl of the o gives the stroke, another through the middle gives the thin, and cap height and x-height come from the top of the H and the x. The faces labelled Regular run from a stroke of 10 to 487 units of a 1000-unit em, the ones labelled Bold overlap them heavily, and 1,084 families ship a single weight that they all call 400 regardless of what it weighs. Pick any family and the page draws the lines it was actually measured on, swap two families at the same nominal weight and watch the stroke move, or sort the whole catalogue from hairline to slab.",
+      "tags": [
+        "typography",
+        "type design",
+        "measurement",
+        "font metrics",
+        "explorable"
+      ],
+      "sources": [
+        {
+          "name": "Google Fonts catalogue metadata - 1,950 families with designer, category, date added, popularity rank, subsets, variable axes and Google's own thickness and width buckets, read 2026-10-05",
+          "url": "https://fonts.google.com/metadata/fonts",
+          "licence": "Catalogue metadata, published openly by Google Fonts at an unauthenticated endpoint"
+        },
+        {
+          "name": "Google Fonts CSS API - 5,977 upright faces, each requested with text=Hamburgenox so that gstatic returns a subset font of only the eleven letters measured here",
+          "url": "https://fonts.googleapis.com/css2",
+          "licence": "The font files themselves: SIL Open Font Licence 1.1 (1,910 families), Apache 2.0 (35), Ubuntu Font Licence 1.0 (5)"
+        },
+        {
+          "name": "google/fonts - which of the three licence directories each family is filed under",
+          "url": "https://github.com/google/fonts",
+          "licence": "Repository under Apache 2.0; each family keeps its own licence, recorded per family on the page"
+        },
+        {
+          "name": "fontTools - used to read the outlines. The scanline measurement built on top of it is this project's own, in src/glyphmetrics.py",
+          "url": "https://github.com/fonttools/fonttools",
+          "licence": "MIT"
+        }
+      ],
+      "stack": [
+        "Python",
+        "fontTools",
+        "vanilla JS",
+        "inline SVG glyph outlines",
+        "gzipped base64 payload"
+      ],
+      "hasSource": true,
+      "bytes": 2951511,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "round-trip",
       "title": "Round Trip",

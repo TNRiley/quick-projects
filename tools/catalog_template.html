@@ -257,6 +257,58 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "bold-claim"(g, w, h, t){
+    /* the page's own measuring bench, reduced to its essentials: a row of stems
+       growing in weight, a dashed scanline laid across them, and a vermilion
+       mark that steps from stem to stem reading each one's width. The stems are
+       not monotonic - two of them sit out of order, which is the whole finding.
+       Vermilion only ever means "this is the thing being measured", exactly as
+       on the page. */
+    const MARK = "#F1724A", INK = "#CFC9BC";
+    const widths = [0.16, 0.30, 0.22, 0.45, 0.58, 0.40, 0.74, 1.00];
+    const N = widths.length;
+    const pad  = Math.max(8, w * 0.05);
+    const band = (w - 2 * pad) / N;
+    const unit = Math.max(1.4, Math.min(band * 0.52, h * 0.085));
+    const base = h * 0.80, top = h * 0.22;
+    const scan = (base + top) / 2;
+
+    /* which stem is being read right now: one at a time, with a pause on each */
+    const step = REDUCED ? 6 : Math.floor((t / 900) % N);
+
+    /* the stems. The one under the scanline lifts out of the row. */
+    g.lineCap = "butt";
+    const xs = [], ws = [];
+    for (let i = 0; i < N; i++){
+      const bw = Math.max(1.2, widths[i] * unit * 2.2);
+      const x  = pad + band * (i + 0.5) - bw / 2;
+      xs.push(x); ws.push(bw);
+      g.globalAlpha = i === step ? 0.95 : 0.6; g.fillStyle = INK;
+      g.fillRect(x, top, bw, base - top);
+    }
+
+    /* the baseline the stems all stand on */
+    g.globalAlpha = 0.28; g.strokeStyle = INK; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(pad * 0.5, base + 0.5);
+    g.lineTo(w - pad * 0.5, base + 0.5); g.stroke();
+
+    /* the scanline */
+    g.globalAlpha = 0.5; g.strokeStyle = MARK; g.lineWidth = 1.1;
+    g.setLineDash([4, 4]);
+    g.beginPath(); g.moveTo(pad * 0.5, scan); g.lineTo(w - pad * 0.5, scan); g.stroke();
+    g.setLineDash([]);
+
+    /* the caliper: a rule across the stem being read, with a tick at each edge.
+       Kept thin, because a thick one reads as a highlight rather than a reading. */
+    const tick = Math.max(4, (base - top) * 0.16);
+    const a = xs[step], b = xs[step] + ws[step];
+    g.globalAlpha = 1; g.strokeStyle = MARK; g.lineWidth = Math.max(1.6, unit * 0.16);
+    g.beginPath(); g.moveTo(a, scan); g.lineTo(b, scan); g.stroke();
+    for (const x of [a, b]){
+      g.beginPath(); g.moveTo(x, scan - tick); g.lineTo(x, scan + tick); g.stroke();
+    }
+  },
+
   "round-trip"(g, w, h, t){
     /* the page's own chain, bent into a circuit: four crafting cells with a
        token running left to right and a return sweep underneath, the token
