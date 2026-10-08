@@ -9,6 +9,67 @@ listed in a generated catalog. Nothing in the catalog is hand-maintained.
 
 ---
 
+## The standing brief (wave two onward)
+
+Every build from 2026-10-06 on works to this brief. These are requirements, not suggestions. The
+numbered list between the two `brief` markers below is **printed verbatim on the catalog page**
+(`build_catalog.py` reads it from here), so edit it here and nowhere else, keep it free of em
+dashes, and expect the public to read it. The pipeline notes after the closing marker are for
+sessions only.
+
+<!-- brief:start -->
+1. **One crisp finding.** The build must produce a headline that survives as a single sentence.
+   If the data will not give you one, pivot the subject rather than padding the page. The
+   meta.json tagline is the finding, not the topic.
+2. **What is your cardinal?** Design a control that would catch the method lying, before you
+   trust the result. If the control drifts, flag it; do not report the result.
+3. **Hunt the instrument.** Measurement artifacts and tooling surprises are first-class findings.
+   Document them like findings.
+4. **Nulls are publishable.** A clean null with a good control beats a mushy positive.
+5. **Corroborate inside the build.** Keep two independent measures that never get averaged; let
+   their agreement or disagreement do verification work.
+6. **Failures stay documented.** A documented failed half builds more trust than a smooth story.
+7. **Keep the awkward-data instruction.** Spend part of the budget wrestling data out of
+   somewhere awkward: undocumented endpoints, PDFs, scanned sources.
+8. **The page does not pitch the shelf.** No mention of the AI experiment, no virality chasing,
+   no authorial throat-clearing on project pages. The finding earns the click; the catalog
+   breadcrumb handles discovery.
+9. **Subject heuristics.** The brief stays open, but prefer subjects with two of three: (a) a
+   complete public dataset, (b) a folk belief or null to test against, (c) an awkward source. If
+   nothing qualifies after reasonable scouting, say so instead of forcing a build.
+<!-- brief:end -->
+
+What that means for the pipeline, on top of everything below:
+
+- One repo at `github.com/TNRiley/<slug>`: a single self-contained `index.html` with the data
+  baked in (base64 typed arrays), no backend, works offline.
+- `src/` holds the fetch-and-shape pipeline; raw downloads go under `src/raw/` and are not
+  committed. Statistics are computed in the page from the shipped arrays, not precomputed into
+  HTML.
+- `meta.json` is the only hand-written file (§2), and its `tagline` states the finding.
+- `REBUILD.md` (§3) must include the expected-values table, the control and what it showed, and
+  the failed half.
+- The page carries a **methods panel**: every source with its licence, what was measured and
+  how, an explicit *what this does not say* list, and the failed-half documentation.
+
+## Waves
+
+The catalog splits the shelf into **waves**: phases of the experiment, not quality tiers.
+
+- **Wave one** is every project built under the original open brief: the 28 builds from
+  2026-09-03 to 2026-10-05.
+- **Wave two** is everything built under the standing brief above: any project whose `built`
+  date is **after 2026-10-05**.
+
+The cutoff is one constant, `WAVE1_END = "2026-10-05"` in `tools/build_catalog.py`, and a
+project's wave is derived from its `meta.json` `built` date against it (`<=` is wave one). There is
+**no `wave` field in meta.json**; do not add one. The Wave two section always renders, with an
+empty-shelf line when it has no projects yet. If a wave three ever starts, add a second cutoff
+constant beside the first rather than rewriting `built` dates. The intro copy for each wave lives
+in `tools/catalog_template.html`; the brief is the block above.
+
+---
+
 ## 0. Where things are
 
 Everything lives under `~/Development/Claude Quick Projects/`:

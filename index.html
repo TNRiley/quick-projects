@@ -79,7 +79,7 @@ canvas#hero{display:block;width:100%;height:224px}
 /* ── stats ────────────────────────────────────────── */
 .strip{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
   border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:38px 0 0}
-@media(min-width:900px){.strip{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:900px){.strip{grid-template-columns:repeat(3,1fr)}}
 .strip>div{background:var(--ground);padding:18px 20px 20px}
 .strip .v{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:32px;letter-spacing:-.03em;line-height:1.05}
 .strip .k{font-size:12.5px;color:var(--ink2);margin-top:6px;line-height:1.45;max-width:32ch}
@@ -99,6 +99,22 @@ section.blk{margin-top:64px}
 h2.sec{font-size:clamp(28px,3.2vw,40px)}
 .sublede{color:var(--ink2);font-size:16px;max-width:68ch;margin-top:10px}
 .grid{display:grid;gap:22px;grid-template-columns:1fr;margin-top:26px}
+/* waves are phases of the experiment, not tiers: same cards, a ruled header each */
+.wave{margin-top:44px;padding-top:22px;border-top:1px solid var(--rule)}
+.wavehd{display:flex;align-items:baseline;gap:14px}
+.wavenum{font-family:"Courier Prime",monospace;font-size:12px;letter-spacing:.18em;color:var(--accent)}
+.wave h3{font-size:clamp(22px,2.4vw,30px)}
+.wave .empty{margin:22px 0 0;padding:22px 20px;border:1px dashed var(--rule);border-radius:3px;
+  background:var(--sunk);color:var(--ink3);font-size:14px}
+.briefbox{margin-top:20px;border:1px solid var(--rule);border-radius:3px;background:var(--panel)}
+.briefbox summary{cursor:pointer;padding:12px 18px;font-family:"Courier Prime",monospace;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink3)}
+.briefbox summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+ol.brief{margin:0;padding:4px 20px 18px 42px;display:grid;gap:9px 40px;grid-template-columns:1fr;
+  color:var(--ink2);font-size:14px;line-height:1.6}
+@media(min-width:1000px){ol.brief{grid-template-columns:repeat(2,minmax(0,1fr))}}
+ol.brief li::marker{font-family:"Courier Prime",monospace;color:var(--ink4)}
+ol.brief b{color:var(--ink);font-weight:600}
 @media(min-width:780px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(min-width:1300px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .card{position:relative;background:var(--panel);border:1px solid var(--rule);border-radius:3px;
@@ -182,7 +198,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
   </div>
 </header>
 
-<div class="strip"><div><div class="v">28 / 28</div><div class="k">projects published, each researched and built end to end in one sitting</div></div><div><div class="v">33 days</div><div class="k">from the first build to the most recent, roughly one an evening</div></div><div><div class="v">66</div><div class="k">public datasets pulled at build time and baked into the pages</div></div><div><div class="v">25 of 28</div><div class="k">ship the scripts that fetched and shaped their data, so every figure can be regenerated</div></div></div>
+<div class="strip"><div><div class="v">28 / 28</div><div class="k">projects published, each researched and built end to end in one sitting</div></div><div><div class="v">33 days</div><div class="k">from the first build to the most recent, roughly one an evening</div></div><div><div class="v">66</div><div class="k">public datasets pulled at build time and baked into the pages</div></div><div><div class="v">25 of 28</div><div class="k">ship the scripts that fetched and shaped their data, so every figure can be regenerated</div></div><div><div class="v">28</div><div class="k">built in wave one, on the open brief, up to 2026-10-05</div></div><div><div class="v">0</div><div class="k">built in wave two, on the sharpened brief, since 2026-10-05</div></div></div>
 
 <section class="why">
   <div>
@@ -199,8 +215,22 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 
 <section class="blk">
   <h2 class="sec disp">The shelf</h2>
-  <p class="sublede">Newest first. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed. That part is not optional.</p>
-  <div class="grid"><article class="card" id="p-bold-claim" data-visits="bold-claim">
+  <p class="sublede">Two waves, newest first within each. Every page carries its own methods panel saying where its numbers came from and where they should not be pushed. That part is not optional.</p>
+
+  <section class="wave" id="wave-two" aria-labelledby="wave-two-h">
+    <div class="wavehd"><span class="wavenum">02</span><h3 id="wave-two-h" class="disp">Wave two</h3></div>
+    <p class="sublede">Wave two builds under a sharpened brief. Wave one ran on an open brief and taught us what lands: one crisp finding, a control designed to catch the method lying, failures documented, nulls published. Those are requirements now. The brief is printed here because the brief is part of the experiment, and it will keep changing.</p>
+    <details class="briefbox" open>
+      <summary>The brief, as it stands</summary>
+      <ol class="brief"><li><b>One crisp finding.</b> The build must produce a headline that survives as a single sentence. If the data will not give you one, pivot the subject rather than padding the page. The meta.json tagline is the finding, not the topic.</li><li><b>What is your cardinal?</b> Design a control that would catch the method lying, before you trust the result. If the control drifts, flag it; do not report the result.</li><li><b>Hunt the instrument.</b> Measurement artifacts and tooling surprises are first-class findings. Document them like findings.</li><li><b>Nulls are publishable.</b> A clean null with a good control beats a mushy positive.</li><li><b>Corroborate inside the build.</b> Keep two independent measures that never get averaged; let their agreement or disagreement do verification work.</li><li><b>Failures stay documented.</b> A documented failed half builds more trust than a smooth story.</li><li><b>Keep the awkward-data instruction.</b> Spend part of the budget wrestling data out of somewhere awkward: undocumented endpoints, PDFs, scanned sources.</li><li><b>The page does not pitch the shelf.</b> No mention of the AI experiment, no virality chasing, no authorial throat-clearing on project pages. The finding earns the click; the catalog breadcrumb handles discovery.</li><li><b>Subject heuristics.</b> The brief stays open, but prefer subjects with two of three: (a) a complete public dataset, (b) a folk belief or null to test against, (c) an awkward source. If nothing qualifies after reasonable scouting, say so instead of forcing a build.</li></ol>
+    </details>
+    <p class="empty">Nothing on this shelf yet. The first build under this brief lands here.</p>
+  </section>
+
+  <section class="wave" id="wave-one" aria-labelledby="wave-one-h">
+    <div class="wavehd"><span class="wavenum">01</span><h3 id="wave-one-h" class="disp">Wave one</h3></div>
+    <p class="sublede">Wave one: the open brief. Twenty-eight builds from September 3 to October 5, 2026, the subject chosen fresh each night. This is where the format learned what it could do.</p>
+    <div class="grid"><article class="card" id="p-bold-claim" data-visits="bold-claim">
   <a class="hit" href="https://tnriley.github.io/bold-claim/" aria-label="Open Bold Claim"></a>
   <div class="plate"><canvas data-plate="bold-claim" aria-hidden="true"></canvas></div>
   <div class="cbody">
@@ -788,6 +818,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
     <div class="acts"><a class="btn primary" href="https://tnriley.github.io/goat-synthesis/">Open&nbsp;&rarr;</a><a class="btn" href="https://github.com/TNRiley/goat-synthesis">Repository</a></div>
   </div>
 </article></div>
+  </section>
 </section>
 
 <section class="blk">
@@ -831,7 +862,7 @@ try{ const t=JSON.parse(localStorage.getItem("quickprojects.theme")||'"auto"');
 </section>
 
 <footer>
-  Generated 2026-10-05 by <span class="mono">tools/build_catalog.py</span> from each project's meta.json, not hand-edited.<br>
+  Generated 2026-10-07 by <span class="mono">tools/build_catalog.py</span> from each project's meta.json, not hand-edited.<br>
   Built with Claude Code. Code MIT; data under the licences listed above. Go to the sources before citing any of it.
 </footer>
 </div>

@@ -27,6 +27,20 @@ CATALOG_REPO = "quick-projects"
 OUT = os.path.join(ROOT, "catalog")
 esc = lambda s: html.escape(str(s), quote=True)
 
+# The shelf is split into waves, which are phases of the experiment rather than
+# quality tiers. Wave one ran on the original open brief; wave two runs on the
+# sharpened brief kept in PUBLISHING.md. A project's wave is derived from its
+# meta.json "built" date and never stored, so there is nothing to keep in sync.
+WAVE1_END = "2026-10-05"
+
+def wave(m):
+    return 1 if m["built"] <= WAVE1_END else 2
+
+# The standing brief lives once, in PUBLISHING.md between these markers, and the
+# catalog prints it from there so the published brief and the one sessions work
+# to cannot drift apart.
+BRIEF_START, BRIEF_END = "<!-- brief:start -->", "<!-- brief:end -->"
+
 def load():
     ms = []
     for f in sorted(glob.glob(os.path.join(ROOT, "projects", "*", "meta.json"))):
@@ -112,8 +126,41 @@ def sources_table(ms):
   </table></div>
 </section>"""
 
+def brief():
+    """The numbered items of the standing brief, as an <ol>. Each item in the
+    source is `N. **Title.** body`, possibly wrapped over several lines."""
+    src = open(os.path.join(OUT, "PUBLISHING.md"), encoding="utf-8").read()
+    try:
+        block = src.split(BRIEF_START, 1)[1].split(BRIEF_END, 1)[0]
+    except IndexError:
+        raise SystemExit("no standing brief in PUBLISHING.md: expected a block between "
+                         "%s and %s" % (BRIEF_START, BRIEF_END))
+    items, cur = [], None
+    for line in block.splitlines():
+        hit = re.match(r"^\d+\.\s+(.*)", line)
+        if hit:
+            cur = [hit.group(1)]; items.append(cur)
+        elif cur is not None and line.strip():
+            cur.append(line.strip())
+        elif not line.strip():
+            cur = None
+    if not items:
+        raise SystemExit("the standing brief in PUBLISHING.md has no numbered items")
+    def inline(t):
+        t = esc(" ".join(t))
+        t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+        return re.sub(r"`(.+?)`", r"<code>\1</code>", t)
+    return '<ol class="brief">' + "".join(f"<li>{inline(i)}</li>" for i in items) + "</ol>"
+
+def shelf(ms):
+    if not ms:
+        return '<p class="empty">Nothing on this shelf yet. The first build under this brief lands here.</p>'
+    return '<div class="grid">' + "\n".join(card(m) for m in ms) + "</div>"
+
 def build():
     ms = load()
+    w1 = [m for m in ms if wave(m) == 1]
+    w2 = [m for m in ms if wave(m) == 2]
     dates = sorted(m["built"] for m in ms)
     live = sum(1 for m in ms if m["published"])
     span = (datetime.date.fromisoformat(dates[-1]) - datetime.date.fromisoformat(dates[0])).days + 1
@@ -127,7 +174,9 @@ def build():
     stats = [(f"{live} / {len(ms)}", "projects published, each researched and built end to end in one sitting"),
              (f"{span} days", "from the first build to the most recent, roughly one an evening"),
              (f"{datasets}", "public datasets pulled at build time and baked into the pages"),
-             (f"{repro} of {len(ms)}", "ship the scripts that fetched and shaped their data, so every figure can be regenerated")]
+             (f"{repro} of {len(ms)}", "ship the scripts that fetched and shaped their data, so every figure can be regenerated"),
+             (f"{len(w1)}", f"built in wave one, on the open brief, up to {WAVE1_END}"),
+             (f"{len(w2)}", f"built in wave two, on the sharpened brief, since {WAVE1_END}")]
     tpl = open(os.path.join(TOOLS, "catalog_template.html"), encoding="utf-8").read()
 
     # Every project needs its own index plate. The template falls back to another
@@ -143,7 +192,9 @@ def build():
             "(signature `\"<slug>\"(g, w, h, t){ ... }`), echoing that project's own "
             "visual language. Without one the card silently reuses another project's "
             "plate and two cards look identical." % ", ".join(missing))
-    out = (tpl.replace("__CARDS__", "\n".join(card(m) for m in ms))
+    out = (tpl.replace("__WAVE1__", shelf(w1))
+              .replace("__WAVE2__", shelf(w2))
+              .replace("__BRIEF__", brief())
               .replace("__SOURCES__", sources_table(ms))
               .replace("__STATS__", "".join(
                   f'<div><div class="v">{esc(v)}</div><div class="k">{esc(k)}</div></div>' for v, k in stats))
@@ -157,6 +208,11 @@ def build():
               .replace("__CATALOG_REPO__", CATALOG_REPO)
               .replace("__GENERATED__", datetime.date.today().isoformat())
               .replace("__COUNTER__", visit_counter.catalog_script()))
+    # A placeholder the template gained but this script never fills ships as
+    # literal text, and the page still renders, so the gap is easy to miss.
+    left = sorted(set(re.findall(r"__[A-Z0-9_]+__", out)))
+    if left:
+        raise SystemExit("unfilled placeholder(s) in the catalog page: %s" % ", ".join(left))
 
     # No em dashes on the catalog page. They read as a tell rather than as
     # punctuation, and most of them want to be a colon, a comma or a full stop
@@ -186,7 +242,8 @@ def build():
     sys.path.insert(0, TOOLS)
     import wrap_for_pages
     wrap_for_pages.wrap(os.path.join(OUT, "index.html"))
-    print(f"catalog/index.html  {os.path.getsize(os.path.join(OUT,'index.html')):,} bytes  ({len(ms)} projects)")
+    print(f"catalog/index.html  {os.path.getsize(os.path.join(OUT,'index.html')):,} bytes  "
+          f"({len(ms)} projects: wave one {len(w1)}, wave two {len(w2)})")
 
 if __name__ == "__main__":
     build()
