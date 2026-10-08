@@ -3,6 +3,42 @@
   "owner": "TNRiley",
   "projects": [
     {
+      "slug": "out-of-the-hat",
+      "title": "Out of the Hat",
+      "favicon": "🎤",
+      "built": "2026-10-07",
+      "published": false,
+      "tagline": "In the fifty Eurovision finals whose running order was drawn by lot, songs drawn into the last third finished about one and a half places higher than songs drawn into the first.",
+      "blurb": "From 1957 to 2006 Eurovision drew its running order out of a hat, which makes half a century of finals an experiment nobody had to design. Every result table was extracted from each contest's own Wikipedia article, and the late-slot advantage shows up twice, on two measures kept apart: finishing place in the drawn finals, and qualification from the drawn semi-finals (38% of the first third got through, 66% of the last). A control checks that the draw was clean by testing slot against each country's earlier results, and the page withholds its headline if that ever drifts. The famous curse of slot two turns out to be chance: replay history with random winners and some regular slot goes winless two times in three, and slot sixteen has never won either.",
+      "tags": [
+        "Eurovision",
+        "natural experiment",
+        "permutation test",
+        "folk belief",
+        "running order"
+      ],
+      "sources": [
+        {
+          "name": "English Wikipedia, the articles Eurovision Song Contest 1957 to Eurovision Song Contest 2025: result tables and each article's account of how its running order was set, read through the MediaWiki parse API on 2026-10-07 with revision ids recorded",
+          "url": "https://en.wikipedia.org/wiki/Eurovision_Song_Contest",
+          "licence": "CC BY-SA 4.0"
+        }
+      ],
+      "stack": [
+        "Python",
+        "BeautifulSoup",
+        "MediaWiki parse API",
+        "vanilla JS",
+        "SVG",
+        "base64 typed-array payload",
+        "in-page permutation tests"
+      ],
+      "hasSource": true,
+      "bytes": 75490,
+      "repo": null,
+      "live": null
+    },
+    {
       "slug": "bold-claim",
       "title": "Bold Claim",
       "favicon": "🅱️",

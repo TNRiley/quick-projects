@@ -288,6 +288,51 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "out-of-the-hat"(g, w, h, t){
+    /* the running order as the page draws it: a row of lottery balls, slate
+       for the first third of the night and gold for the last, drawn out of the
+       hat one at a time. Behind each ball a bar shows how well that part of the
+       running order finished, rising toward the end, which is the finding.
+       Ball two is never gold and never tall: the curse, which is only chance.
+       Lies along whichever axis is longer, so it reads at 285x132 on a card and
+       40x130 in the hero strip. */
+    const LATE = "#F2B33D", EARLY = "#8FA8DC", INK = "#CFC9BC";
+    const vert = h > w * 1.25;
+    const L = vert ? h : w, A = vert ? w : h;
+    const N = vert ? 8 : 12;
+    const pad = Math.max(5, L * 0.05);
+    const step = (L - pad * 2) / N;
+    const r = Math.max(2.2, Math.min(step * 0.34, A * 0.11));
+    const put = (u, v) => vert ? [v, u] : [u, v];
+    /* the late-slot advantage, gently: finish improves along the night */
+    const lift = k => 0.32 + 0.5 * Math.pow(k / (N - 1), 1.6) + 0.06 * Math.sin(k * 2.3);
+    /* one ball drawn every 450ms, a full night every N draws, then a pause */
+    const cyc = REDUCED ? N : Math.floor((t / 450) % (N + 4));
+    const ballAt = A * 0.80, barBase = ballAt - r * 1.6, barTop = A * 0.10;
+    for (let k = 0; k < N; k++){
+      const u = pad + step * (k + 0.5);
+      const col = k < N / 3 ? EARLY : k >= N * 2 / 3 ? LATE : INK;
+      const drawn = k < cyc;
+      /* the bar: how far up the scoreboard this slot tended to finish */
+      const hgt = (barBase - barTop) * lift(k);
+      g.globalAlpha = drawn ? 0.5 : 0.12; g.fillStyle = col;
+      const bw = Math.max(1.2, r * 0.7);
+      const p0 = put(u - bw / 2, barBase - hgt);
+      if (vert) g.fillRect(barBase - hgt, u - bw / 2, hgt, bw);
+      else g.fillRect(p0[0], p0[1], bw, hgt);
+      /* the ball itself */
+      const c = put(u, ballAt);
+      g.globalAlpha = drawn ? 1 : 0.3;
+      g.lineWidth = Math.max(1, r * 0.3); g.strokeStyle = col;
+      g.beginPath(); g.arc(c[0], c[1], r, 0, Math.PI * 2); g.stroke();
+      if (drawn && k === cyc - 1 && !REDUCED){
+        g.globalAlpha = 0.35; g.fillStyle = col;
+        g.beginPath(); g.arc(c[0], c[1], r * 0.55, 0, Math.PI * 2); g.fill();
+      }
+    }
+    g.globalAlpha = 1;
+  },
+
   "bold-claim"(g, w, h, t){
     /* the page's own measuring bench, reduced to its essentials: a row of stems
        growing in weight, a dashed scanline laid across them, and a vermilion
