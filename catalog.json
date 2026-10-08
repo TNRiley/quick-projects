@@ -7,7 +7,7 @@
       "title": "Off the Shelf",
       "favicon": "🖼️",
       "built": "2026-10-08",
-      "published": false,
+      "published": true,
       "tagline": "Half the French paintings of 1840 to 1929 in two American museums sit within a centimetre of a colourman's numbered stock canvas. Shrink or stretch that catalogue by four per cent and they stop fitting.",
       "blurb": "Paris colourmen sold primed canvas ready-stretched in sixty numbered sizes, in three shapes called figure, paysage and marine. Every painting on canvas at the Met and the Art Institute of Chicago was measured against that grid, each museum kept apart: 49% and 47% of the French paintings fit, against 7% for decoy catalogues a few per cent too big or small, and a New York price list of about 1900 catches them only at the decoy level while catching a quarter of the American paintings. Bonnard, who cut his pictures from a roll pinned to the wall, scores none of sixteen. The shape names turn out not to name subjects: the near-square figure held most seascapes in both museums.",
       "tags": [
@@ -50,8 +50,8 @@
       ],
       "hasSource": true,
       "bytes": 377813,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/off-the-shelf",
+      "live": "https://tnriley.github.io/off-the-shelf/"
     },
     {
       "slug": "out-of-the-hat",
