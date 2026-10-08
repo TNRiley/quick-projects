@@ -288,6 +288,58 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "off-the-shelf"(g, w, h, t){
+    /* the page's control, as a motif: the colourman's three stock shapes side by
+       side, figure in terracotta, paysage in green, marine in blue, each drawn as
+       nested rectangles from one corner, with paintings scattered at their
+       measured corners. The catalogue breathes larger and smaller, and the
+       paintings only light up as it passes through its true scale: the spike in
+       the page's sweep chart. Lies along whichever axis is longer, so it reads at
+       285x132 on a card and 40x130 in the hero strip. */
+    const COL = ["#E27F62", "#93C278", "#77A9DA"], INK = "#EFE8DA";
+    const vert = h > w * 1.25;
+    const Lx = vert ? h : w, Ay = vert ? w : h;
+    const pad = Math.max(3, Math.min(Lx, Ay) * 0.07);
+    const SIZES = [[22,16,14,12],[27,22,19,16],[33,24,22,19],[41,33,27,24],[46,38,33,27],
+                   [55,46,38,33],[61,50,46,38],[65,54,50,46],[73,60,54,50],[81,65,60,54],
+                   [92,73,65,60],[100,81,73,65]];
+    const cell = (Lx - pad * 4) / 3;
+    const s = Math.min(cell / 104, (Ay - pad * 2) / 84);
+    const used = 104 * s * 3 + pad * 2, lead = (Lx - used) / 2;
+    /* u along the long axis, v across it, in centimetres from shape c's corner */
+    const put = (c, u, v) => {
+      const a = lead + c * (104 * s + pad) + u * s, b = Ay - pad - v * s;
+      return vert ? [b - (Ay - pad * 2 - 84 * s) / 2, h - a] : [a, b - (Ay - pad * 2 - 84 * s) / 2];
+    };
+    /* the catalogue's scale: x0.92 to x1.08 and back every nine seconds */
+    const k = REDUCED ? 1 : 1 + 0.08 * Math.sin(t / 9000 * Math.PI * 2);
+    const near = Math.max(0, 1 - Math.abs(k - 1) / 0.03);
+    g.lineWidth = 1;
+    for (let c = 0; c < 3; c++){
+      g.strokeStyle = COL[c]; g.globalAlpha = 0.2 + 0.4 * near;
+      for (const z of SIZES){
+        const a = put(c, 0, 0), b = put(c, z[0] * k, z[1 + c] * k);
+        g.strokeRect(Math.min(a[0], b[0]) + 0.5, Math.min(a[1], b[1]) + 0.5,
+                     Math.abs(b[0] - a[0]), Math.abs(b[1] - a[1]));
+      }
+    }
+    /* paintings: about half sit on a stock corner, the rest anywhere nearby */
+    const r = rng("off-the-shelf");
+    const dot = Math.max(1.1, Math.min(2.2, s * 1.4));
+    for (let i = 0; i < 54; i++){
+      const c = i % 3, z = SIZES[1 + Math.floor(r() * (SIZES.length - 1))];
+      const onGrid = r() < 0.5, S = z[1 + c];
+      const L = onGrid ? z[0] + (r() - 0.5) * 1.4 : z[0] * (0.88 + r() * 0.24);
+      const V = onGrid ? S + (r() - 0.5) * 1.4 : S * (0.88 + r() * 0.24);
+      const fits = Math.max(Math.abs(L - z[0] * k), Math.abs(V - S * k)) <= 1;
+      const p = put(c, L, V);
+      g.globalAlpha = fits ? 0.95 : 0.3;
+      g.fillStyle = fits ? INK : "#8F8676";
+      g.beginPath(); g.arc(p[0], p[1], fits ? dot * 1.2 : dot, 0, Math.PI * 2); g.fill();
+    }
+    g.globalAlpha = 1;
+  },
+
   "out-of-the-hat"(g, w, h, t){
     /* the running order as the page draws it: a row of lottery balls, slate
        for the first third of the night and gold for the last, drawn out of the
