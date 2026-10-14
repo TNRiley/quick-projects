@@ -1331,6 +1331,97 @@ const PLATES = {
         g.fillStyle = nc; g.fillRect(x + pad, y + pad, sz, sz);
       }
     }
+  },
+
+  "last-orders"(g, w, h, t){
+    /* the finding, animated: the rails are lifted and the sign stays where it
+       is. Green is a line trains still run on and oxblood dashed is a trackbed,
+       the same two meanings the page uses. The live end retreats along the
+       motif, the dead section grows behind it, sleepers are left as ghosts -
+       and the hanging sign above the old junction never moves, which is the
+       whole result. Runs at about 285x80 on a card and 40x130 in the hero
+       strip, so it lies along whichever axis is longer. */
+    const LIVE = "#5AA08B", DEAD = "#E4714F", INK = "#CFC9BC";
+    const vert = h > w * 1.25;
+    const L = vert ? h : w, A = vert ? w : h;
+    const pad = Math.max(5, L * 0.06);
+    const span = L - pad * 2;
+    const axis = A * 0.66;                       /* where the rail sits across */
+    /* u runs 0..1 along the motif, v is an offset across it, in pixels */
+    const put = (u, v) => vert ? [axis + v, pad + span * u]
+                               : [pad + span * u, axis + v];
+    const move = (u, v) => { const p = put(u, v); g.moveTo(p[0], p[1]); };
+    const to   = (u, v) => { const p = put(u, v); g.lineTo(p[0], p[1]); };
+
+    const ease = x => x < 0 ? 0 : x > 1 ? 1 : x * x * (3 - 2 * x);
+    /* one lift every seven seconds, held at the end so the result can be read */
+    const cyc = REDUCED ? 0.62 : ((t / 7000) % 1);
+    const uLive = 1 - 0.92 * ease(Math.min(1, cyc / 0.72));
+    const uSign = 0.46;
+
+    const gauge = Math.max(2, Math.min(A * 0.085, L * 0.022));
+    const lw = Math.max(1.3, Math.min(2.4, gauge * 0.8));
+
+    /* sleepers: still there under the live rail, ghosts where it has gone */
+    const n = Math.max(6, Math.min(26, Math.round(span / (gauge * 2.6))));
+    g.lineCap = "butt";
+    for (let k = 0; k < n; k++){
+      const u = (k + 0.5) / n;
+      const dead = u > uLive;
+      g.strokeStyle = dead ? DEAD : LIVE;
+      g.globalAlpha = dead ? 0.26 : 0.5;
+      g.lineWidth = Math.max(1, lw * 0.85);
+      g.beginPath(); move(u, -gauge); to(u, gauge); g.stroke();
+    }
+    g.globalAlpha = 1;
+
+    /* the two rails: solid where they remain, dashed trackbed where they do not */
+    for (const side of [-1, 1]){
+      g.strokeStyle = LIVE; g.lineWidth = lw; g.setLineDash([]);
+      g.beginPath(); move(0, side * gauge * 0.62); to(uLive, side * gauge * 0.62); g.stroke();
+    }
+    g.strokeStyle = DEAD; g.lineWidth = lw * 1.1;
+    g.setLineDash([gauge * 1.3, gauge * 1.1]);
+    g.beginPath(); move(uLive, 0); to(1, 0); g.stroke();
+    g.setLineDash([]);
+
+    /* the sign: a post beside the line, a bracket, and a board that sways */
+    const sway = REDUCED ? 0 : Math.sin(t / 1100) * 0.07;
+    const off = -A * 0.30;                        /* how far off the line it stands */
+    const postTop = off - A * 0.06;
+    g.strokeStyle = INK; g.lineWidth = Math.max(1, lw * 0.9);
+    g.beginPath(); move(uSign, off + A * 0.26); to(uSign, postTop); g.stroke();
+    const armLen = span * 0.085;
+    g.beginPath(); move(uSign, postTop); to(uSign + armLen / span, postTop); g.stroke();
+
+    /* board, hung from the end of the arm and rocking about that point */
+    const bw = span * 0.115, bh = A * 0.17;
+    const hu = uSign + armLen / span, hv = postTop;
+    const hinge = put(hu, hv);
+    g.save();
+    g.translate(hinge[0], hinge[1]);
+    g.rotate(sway);
+    g.beginPath(); g.moveTo(0, 0); g.lineTo(0, Math.max(3, A * 0.035)); g.stroke();
+    const bx = vert ? -bh / 2 : -bw / 2, by = Math.max(3, A * 0.035);
+    const bbw = vert ? bh : bw, bbh = vert ? bw * 0.78 : bh;
+    g.strokeStyle = INK; g.lineWidth = Math.max(1, lw * 0.9);
+    g.strokeRect(bx, by, bbw, bbh);
+    /* two painted lines on the board, oxblood: it is a name, and the name is the finding */
+    g.strokeStyle = DEAD; g.globalAlpha = 0.85;
+    g.lineWidth = Math.max(1, bbh * 0.12);
+    for (const f of [0.36, 0.64]){
+      g.beginPath();
+      g.moveTo(bx + bbw * 0.18, by + bbh * f);
+      g.lineTo(bx + bbw * (f < 0.5 ? 0.82 : 0.6), by + bbh * f);
+      g.stroke();
+    }
+    g.globalAlpha = 1;
+    g.restore();
+
+    /* the pub itself, at the foot of the post */
+    const foot = put(uSign, off + A * 0.26);
+    g.fillStyle = DEAD;
+    g.beginPath(); g.arc(foot[0], foot[1], Math.max(1.6, lw * 1.2), 0, 6.283185); g.fill();
   }
 };
 const SLUGS = __SLUGS__;
