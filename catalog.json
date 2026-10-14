@@ -7,7 +7,7 @@
       "title": "Place Settings",
       "favicon": "🪑",
       "built": "2026-10-13",
-      "published": false,
+      "published": true,
       "tagline": "Four in five IKEA rugs on sale in Britain in 2022 were named after a Danish town. Of the 136 rugs launched since, thirteen are.",
       "blurb": "The famous IKEA naming rulebook (beds after Norwegian places, rugs after Danish ones, sofas after Swedish towns, curtains after girls, desks after boys) tested rule by rule on all 4,110 product names IKEA has sold in Britain since July 2022, read from its own sitemaps and the Internet Archive's copies of them. Sofas, bathrooms and garden furniture still obey. Rugs do not: the Danish towns stopped during 2023, and since 2024 one new rug in 95 has a Danish name. The replacements are ordinary Swedish nouns, many of them railway and road words: JÄRNVÄG, TIDTABELL, VÄXELFEL. Every instrument (two gazetteers, Statistics Sweden's name register, a Swedish lexicon) was calibrated first on a hand-labelled IKEA dictionary from about 2010, which also shows why matching against every Norwegian feature finds a place called almost anything.",
       "tags": [
@@ -66,8 +66,8 @@
       ],
       "hasSource": true,
       "bytes": 236055,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/place-settings",
+      "live": "https://tnriley.github.io/place-settings/"
     },
     {
       "slug": "off-the-shelf",
