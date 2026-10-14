@@ -7,7 +7,7 @@
       "title": "The Eighth Win",
       "favicon": "🤼",
       "built": "2026-10-14",
-      "published": false,
+      "published": true,
       "tagline": "Sumo's 2011 match-fixing purge left no mark on the final day: a wrestler who needed his eighth win beat an opponent who did not 62% of the time in the decade before it and 61% in the eight years after, against about 49% expected.",
       "blurb": "Every top-division bout since 1958 (197,779 of them), rated in the browser, and the famous Freakonomics finding rerun from scratch: it reproduces Duggan and Levitt's published figures almost to the decimal, then follows the final-day 7-7 advantage for 26 more years. Two measures from two sites, one about bouts and one about final records, track each other at r = 0.97; both fell sharply in 2000, when a former wrestler went public, and neither moved when 23 wrestlers were expelled in 2011. What did change things was the schedule: since 2019 most 7-7 wrestlers are drawn against each other. The rematch payback the paper read as proof of trading turns out to show up after ordinary late bouts too, so it is documented as the half that did not work.",
       "tags": [
@@ -50,8 +50,8 @@
       ],
       "hasSource": true,
       "bytes": 785039,
-      "repo": null,
-      "live": null
+      "repo": "https://github.com/TNRiley/eighth-win",
+      "live": "https://tnriley.github.io/eighth-win/"
     },
     {
       "slug": "place-settings",
