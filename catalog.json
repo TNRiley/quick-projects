@@ -1,7 +1,74 @@
 {
-  "generated": "2026-10-08",
+  "generated": "2026-10-13",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "place-settings",
+      "title": "Place Settings",
+      "favicon": "🪑",
+      "built": "2026-10-13",
+      "published": false,
+      "tagline": "Four in five IKEA rugs on sale in Britain in 2022 were named after a Danish town. Of the 136 rugs launched since, thirteen are.",
+      "blurb": "The famous IKEA naming rulebook (beds after Norwegian places, rugs after Danish ones, sofas after Swedish towns, curtains after girls, desks after boys) tested rule by rule on all 4,110 product names IKEA has sold in Britain since July 2022, read from its own sitemaps and the Internet Archive's copies of them. Sofas, bathrooms and garden furniture still obey. Rugs do not: the Danish towns stopped during 2023, and since 2024 one new rug in 95 has a Danish name. The replacements are ordinary Swedish nouns, many of them railway and road words: JÄRNVÄG, TIDTABELL, VÄXELFEL. Every instrument (two gazetteers, Statistics Sweden's name register, a Swedish lexicon) was calibrated first on a hand-labelled IKEA dictionary from about 2010, which also shows why matching against every Norwegian feature finds a place called almost anything.",
+      "tags": [
+        "product names",
+        "place names",
+        "Internet Archive",
+        "gazetteer matching",
+        "instrument calibration",
+        "cohort comparison"
+      ],
+      "sources": [
+        {
+          "name": "IKEA en-GB product sitemaps (prod-en-GB_1 to 6): 28,699 product URLs whose slugs carry each product's name and English description, read 2026-10-13. Facts about what is on sale; no IKEA text or image is reproduced.",
+          "url": "https://www.ikea.com/sitemaps/sitemap.xml",
+          "licence": "Facts; no IKEA content reproduced"
+        },
+        {
+          "name": "Internet Archive Wayback Machine captures of the same sitemaps, one per file per quarter, July 2022 to October 2026 (103 captures)",
+          "url": "https://web.archive.org/web/*/https://www.ikea.com/sitemaps/prod-en-GB_*",
+          "licence": "Archived copies of public pages"
+        },
+        {
+          "name": "GeoNames country dumps for Sweden, Norway, Denmark and Finland",
+          "url": "https://download.geonames.org/export/dump/",
+          "licence": "CC BY 4.0"
+        },
+        {
+          "name": "Wikidata: villages, hamlets, towns, cities, settlements, farms and parishes in the four countries, by SPARQL",
+          "url": "https://query.wikidata.org/",
+          "licence": "CC0"
+        },
+        {
+          "name": "Statistics Sweden (SCB), first names people go by (tilltalsnamn) with at least two bearers, 31 December 2022",
+          "url": "https://www.scb.se/hitta-statistik/statistik-efter-amne/befolkning-och-levnadsforhallanden/ovrigt/namnstatistik/",
+          "licence": "Open data, attribution (SCB)"
+        },
+        {
+          "name": "SALDO, Swedish association lexicon, Språkbanken Text, University of Gothenburg",
+          "url": "https://spraakbanken.gu.se/en/resources/saldo",
+          "licence": "CC BY 4.0"
+        },
+        {
+          "name": "The IKEA Dictionary by Lars Petrus (about 2010): 1,362 names hand-labelled as word, boy, girl or place. Only each name's label is used, never the definitions.",
+          "url": "https://lar5.com/ikea/",
+          "licence": "No licence stated; labels only"
+        }
+      ],
+      "stack": [
+        "Python",
+        "Wayback Machine CDX",
+        "Wikidata SPARQL",
+        "vanilla JS",
+        "SVG",
+        "base64 typed-array payload",
+        "in-page permutation tests"
+      ],
+      "hasSource": true,
+      "bytes": 236055,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "off-the-shelf",
       "title": "Off the Shelf",
