@@ -1,7 +1,58 @@
 {
-  "generated": "2026-10-13",
+  "generated": "2026-10-14",
   "owner": "TNRiley",
   "projects": [
+    {
+      "slug": "eighth-win",
+      "title": "The Eighth Win",
+      "favicon": "🤼",
+      "built": "2026-10-14",
+      "published": false,
+      "tagline": "Sumo's 2011 match-fixing purge left no mark on the final day: a wrestler who needed his eighth win beat an opponent who did not 62% of the time in the decade before it and 61% in the eight years after, against about 49% expected.",
+      "blurb": "Every top-division bout since 1958 (197,779 of them), rated in the browser, and the famous Freakonomics finding rerun from scratch: it reproduces Duggan and Levitt's published figures almost to the decimal, then follows the final-day 7-7 advantage for 26 more years. Two measures from two sites, one about bouts and one about final records, track each other at r = 0.97; both fell sharply in 2000, when a former wrestler went public, and neither moved when 23 wrestlers were expelled in 2011. What did change things was the schedule: since 2019 most 7-7 wrestlers are drawn against each other. The rematch payback the paper read as proof of trading turns out to show up after ordinary late bouts too, so it is documented as the half that did not work.",
+      "tags": [
+        "sumo",
+        "match-fixing",
+        "replication",
+        "Elo",
+        "placebo test",
+        "natural experiment"
+      ],
+      "sources": [
+        {
+          "name": "sumo-api.com, banzuke endpoint: every Makuuchi and Juryo wrestler's day-by-day results and opponents, March 1958 to September 2026 (826 requests, read 2026-10-14)",
+          "url": "https://www.sumo-api.com/",
+          "licence": "No licence stated; match results used as factual records"
+        },
+        {
+          "name": "SumoDB, final-day results page of each tournament: every top-two-division wrestler's fifteen-day win/loss string (413 pages, read 2026-10-14)",
+          "url": "https://sumodb.sumogames.de/",
+          "licence": "No licence stated; match results used as factual records"
+        },
+        {
+          "name": "Japan Sumo Association, hoshitori chart for the September 2026 tournament, read from the endpoint behind its results page as a spot check",
+          "url": "https://www.sumo.or.jp/ResultData/hoshitori/1/1/",
+          "licence": "Copyright Nihon Sumo Kyokai; used only to verify, nothing redistributed"
+        },
+        {
+          "name": "Duggan and Levitt (2002), Winning Isn't Everything: Corruption in Sumo Wrestling, American Economic Review 92(5): the published figures the page reproduces",
+          "url": "https://doi.org/10.1257/000282802762024665",
+          "licence": "Cited, not redistributed"
+        }
+      ],
+      "stack": [
+        "Python",
+        "vanilla JS",
+        "SVG",
+        "gzipped base64 typed-array payload",
+        "DecompressionStream",
+        "in-page Elo and logistic fits"
+      ],
+      "hasSource": true,
+      "bytes": 785039,
+      "repo": null,
+      "live": null
+    },
     {
       "slug": "place-settings",
       "title": "Place Settings",

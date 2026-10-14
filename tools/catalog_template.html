@@ -288,6 +288,47 @@ function rng(s){ let x = seed(s) || 1; return () => (x ^= x << 13, x ^= x >>> 17
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PLATES = {
+  "eighth-win"(g, w, h, t){
+    /* the page's finding as a hoshitori chart: one row per wrestler, each on seven
+       wins and seven losses after fourteen days (hollow rings won, filled dots lost).
+       Day 15 stands apart and resolves one row at a time: vermilion where the man on
+       7-7 got his eighth win, grey where he did not, about six rows in ten vermilion
+       where a fair draw would give five. Lies along the longer axis, so it reads at
+       285x80 or 285x132 on a card and 40x130 in the hero strip. */
+    const SHU = "#E4714F", INK = "#EEEBE3", DIM = "#6B655B";
+    const vert = h > w * 1.25;
+    const L = vert ? h : w, A = vert ? w : h;
+    const pad = Math.max(3, Math.min(L, A) * 0.08);
+    const cell = Math.min((L - pad * 2) / 15.7, (A - pad * 2) / 2);
+    const rows = Math.max(2, Math.floor((A - pad * 2) / cell));
+    const off = (A - rows * cell) / 2;
+    const rad = cell * 0.31, lw = Math.max(0.8, cell * 0.09);
+    const r = rng("eighth-win");
+    const cyc = REDUCED ? 1 : (t / 7000) % 1;
+    const put = (u, v) => vert ? [v, h - u] : [u, v];
+    for (let k = 0; k < rows; k++){
+      const days = [1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0];
+      for (let i = 13; i > 0; i--){ const j = Math.floor(r() * (i + 1)); [days[i], days[j]] = [days[j], days[i]]; }
+      const won = (k * 0.61 + 0.5) % 1 < 0.61;   /* spread evenly, so any few rows show the rate */
+      const v = off + cell * (k + 0.5);
+      for (let d = 0; d < 15; d++){
+        const u = pad + cell * (d + 0.5) + (d === 14 ? cell * 0.7 : 0);
+        const [x, y] = put(u, v);
+        g.beginPath(); g.arc(x, y, rad, 0, Math.PI * 2);
+        if (d < 14){
+          g.globalAlpha = 0.8;
+          if (days[d]){ g.strokeStyle = INK; g.lineWidth = lw; g.stroke(); }
+          else { g.fillStyle = DIM; g.fill(); }
+        } else if (cyc > (k + 1) / (rows + 2)){
+          g.globalAlpha = 1; g.fillStyle = won ? SHU : DIM; g.fill();
+        } else {
+          g.globalAlpha = 0.5; g.setLineDash([Math.max(1, rad * 0.5), Math.max(1, rad * 0.4)]);
+          g.strokeStyle = SHU; g.lineWidth = lw; g.stroke(); g.setLineDash([]);
+        }
+      }
+    }
+    g.globalAlpha = 1;
+  },
   "place-settings"(g, w, h, t){
     /* the page's quarter chart as a field of name tiles: one column per quarter from
        2022 to today, one tile per rug name on sale. Amber tiles are Danish towns,
