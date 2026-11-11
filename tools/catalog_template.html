@@ -329,6 +329,40 @@ const PLATES = {
     }
     g.globalAlpha = 1;
   },
+  "gulf-access"(g, w, h, t){
+    /* a plat of canals seen from above: a comb of blue finger canals open to the sea
+       along one edge, and behind a weir an orange grid held one step higher. A reading
+       dot runs up each blue finger from the sea and stops dead at the weir line. Lies
+       along the longer axis, so it reads on a 285x132 card and a 40x130 hero strip. */
+    const TIDE = "#56B6DA", HELD = "#F08C4E", DIM = "#3D3B35", INK = "#EEEBE3";
+    const vert = h > w * 1.25;
+    const L = vert ? h : w, A = vert ? w : h;
+    const put = (u, v) => vert ? [v, h - u] : [u, v];
+    const seg = (u1, v1, u2, v2) => { const a = put(u1, v1), b = put(u2, v2); g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(b[0], b[1]); g.stroke(); };
+    const pad = Math.max(3, Math.min(L, A) * 0.09), weir = A * 0.52;
+    const n = Math.max(5, Math.round(L / 20)), step = (L - pad * 2) / (n - 1);
+    const r = rng("gulf-access");
+    const lw = Math.max(1.2, Math.min(step * 0.28, A * 0.035));
+    g.lineCap = "butt";
+    /* the sea along the bottom edge */
+    g.globalAlpha = 0.9; g.strokeStyle = TIDE; g.lineWidth = lw * 1.6; seg(pad * 0.4, A - pad, L - pad * 0.4, A - pad);
+    /* the weir line */
+    g.globalAlpha = 0.55; g.strokeStyle = INK; g.lineWidth = 1; g.setLineDash([3, 3]); seg(pad * 0.4, weir, L - pad * 0.4, weir); g.setLineDash([]);
+    const cyc = REDUCED ? 0.999 : (t / 5200) % 1;
+    for (let k = 0; k < n; k++){
+      const u = pad + k * step, len = 0.55 + r() * 0.45, reach = weir + (A - pad - weir) * (1 - len);
+      const top = k % 3 === 1 ? weir : reach;                      /* every third finger reaches the weir */
+      g.globalAlpha = 0.9; g.strokeStyle = TIDE; g.lineWidth = lw; seg(u, A - pad, u, top);
+      const ph = Math.min(1, ((cyc + k * 0.137) % 1) * 1.25), dv = A - pad - (A - pad - top) * ph;
+      const c = put(u, dv); g.globalAlpha = 1; g.fillStyle = INK; g.beginPath(); g.arc(c[0], c[1], lw * 0.75, 0, Math.PI * 2); g.fill();
+    }
+    /* the held grid above the weir: two long canals and cross cuts */
+    g.strokeStyle = HELD; g.lineWidth = lw * 0.85; g.globalAlpha = 0.9;
+    const y1 = weir - (weir - pad) * 0.38, y2 = pad + lw;
+    seg(pad, y1, L - pad, y1); seg(pad + step, y2, L - pad - step * 0.5, y2);
+    for (let k = 0; k < n; k++){ if (r() < 0.45) continue; const u = pad + (k + 0.5) * step; if (u > L - pad) break; seg(u, r() < 0.5 ? y2 : y1, u, weir - lw * 1.4); }
+    g.globalAlpha = 1;
+  },
   "place-settings"(g, w, h, t){
     /* the page's quarter chart as a field of name tiles: one column per quarter from
        2022 to today, one tile per rug name on sale. Amber tiles are Danish towns,
